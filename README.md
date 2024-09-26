@@ -13,4 +13,6 @@ Students App developed in Astro framework for educational purposes.
 | David Pimentel | TBD                                          | TBD                                                        |
 | Juan Ramírez   | TBD                                          | TBD                                                        |
 | Hugo Sánchez   | TBD                                          | TBD                                                        |
+| Jorge Ramírez  | TBD                                          | TBD                                                        |
+| Alejandro Rico | TBD                                          | TBD                                                        |
 | Olga Somalo    | TBD                                          | TBD                                                        |
