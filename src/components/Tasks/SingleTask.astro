@@ -1,0 +1,29 @@
+---
+const { name, id } = Astro.props;
+---
+
+<li class="task-item">
+    <span>{id ? id : ""}</span>
+    <span>{name}</span>
+</li>
+
+<style>
+    .task-item {
+        display: flex;
+        gap: 15px;
+        padding: 0.5rem;
+        border-radius: 3px;
+        background-color: #b8d8dd;
+        border: 1px solid #b8d8dd;
+        transition: all 0.3s ease;
+
+        &:hover {
+            border: 1px solid #6a8fc6;
+            cursor: pointer;
+        }
+    }
+
+    .task-item span {
+        font-size: 1rem;
+    }
+</style>
