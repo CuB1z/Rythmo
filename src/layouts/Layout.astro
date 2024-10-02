@@ -28,6 +28,9 @@ const { title, description } = Astro.props;
     :root {
         /* Colors */
         --bg-color: #f7f7f7;
+        --text-color: #333;
+        --bg-image: url('../public/inspiration-geometry.png');
+        --bg-overlay-color: #fff; /* Darker green with some transparency */
     }
 
     * {
@@ -51,6 +54,9 @@ const { title, description } = Astro.props;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+
+        background-image: var(--bg-image), linear-gradient(var(--bg-overlay-color), var(--bg-overlay-color));
+        background-repeat: repeat;
     }
 
     main {

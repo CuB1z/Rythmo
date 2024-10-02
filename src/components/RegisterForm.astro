@@ -1,6 +1,7 @@
 ---
 import AppleLogo from "./icons/Apple.astro"
 import GoogleLogo from "./icons/Google.astro"
+import GitHubLogo from "./icons/Github.astro"
 ---
 
 <form action="/api/register" method="post">
@@ -15,6 +16,9 @@ import GoogleLogo from "./icons/Google.astro"
         </button>
         <button type="button" class="apple-button">
             <AppleLogo />
+        </button>
+        <button type="button" class="github-button">
+            <GitHubLogo />
         </button>
     </div>
 </form>
@@ -68,18 +72,11 @@ import GoogleLogo from "./icons/Google.astro"
         margin-top: 1rem;
     }
 
-    .google-button {
-        background-color: #4285F4;
+    .google-button, .apple-button, .github-button {
+        width: 75px;
+        height: 75px;
+        background-color: #f0f0f0; /* Blanco roto */
         color: white;
-    }
-
-    .apple-button {
-        background-color: #000000;
-        color: white;
-    }
-
-    .google-button, .apple-button {
-        flex: 1;
         padding: 0.75rem;
         border: none;
         border-radius: 4px;
@@ -92,10 +89,14 @@ import GoogleLogo from "./icons/Google.astro"
     }
 
     .google-button:hover {
-        background-color: #357ae8;
+        background-color: #e0e0e0;
     }
 
     .apple-button:hover {
-        background-color: #333333;
+        background-color: #e0e0e0;
+    }
+
+    .github-button:hover {
+        background-color: #e0e0e0;
     }
 </style>
