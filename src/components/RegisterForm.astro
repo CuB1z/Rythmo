@@ -9,15 +9,15 @@ import GitHubLogo from "./icons/Github.astro"
     <input type="email" id="email" name="email" required>
     <label for="password">Password</label>
     <input type="password" id="password" name="password" required>
-    <button type="submit">Register</button>
+    <button type="submit" class="register-button">Register</button>
     <div class="social-buttons">
-        <button type="button" class="google-button">
+        <button type="button" class="social-button google-button">
             <GoogleLogo />
         </button>
-        <button type="button" class="apple-button">
+        <button type="button" class="social-button apple-button">
             <AppleLogo />
         </button>
-        <button type="button" class="github-button">
+        <button type="button" class="social-button github-button">
             <GitHubLogo />
         </button>
     </div>
@@ -28,75 +28,86 @@ import GitHubLogo from "./icons/Github.astro"
         max-width: 400px;
         margin: 0 auto;
         padding: 2rem;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        background-color: #f9f9f9;
+        border: 1px solid #333; /* Borde más oscuro */
+        border-radius: 12px; /* Bordes más redondeados */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+        background-color: #fff; /* Fondo blanco */
     }
 
     label {
         display: block;
         margin-bottom: 0.5rem;
         font-weight: bold;
+        color: #333; /* Color de texto más oscuro */
     }
 
     input {
         width: 100%;
-        padding: 0.5rem;
+        padding: 0.75rem; /* Padding más grande */
         margin-bottom: 1rem;
         border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el ancho total */
+        border-radius: 8px; /* Bordes más redondeados */
+        box-sizing: border-box;
+        font-size: 1rem; /* Tamaño de fuente más grande */
     }
 
-    button {
+    .register-button {
         width: 100%;
         padding: 0.75rem;
         border: none;
-        border-radius: 4px;
-        background-color: #007bff;
-        color: white;
+        border-radius: 8px; /* Bordes más redondeados */
+        background: linear-gradient(270deg, #ff00ff, #ff69b4, #ff1493, #ff00ff);
+        background-size: 400% 400%;
+        color: white; /* Texto en blanco */
         font-size: 1rem;
         cursor: pointer;
-        box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el ancho total */
+        box-sizing: border-box;
+        transition: background-color 0.3s ease; /* Transición suave */
+        animation: pinkGradient 5s ease infinite;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
-    button:hover {
-        background-color: #0056b3;
+    @keyframes pinkGradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .register-button:hover {
+        background-color: #e64a19; /* Color de hover del botón de Rythmo */
     }
 
     .social-buttons {
         display: flex;
-        flex-direction: row;
+        justify-content: center; /* Centrar los botones */
         gap: 1rem;
         margin-top: 1rem;
     }
 
-    .google-button, .apple-button, .github-button {
+    .social-button {
         width: 75px;
         height: 75px;
-        background-color: #f0f0f0; /* Blanco roto */
+        background-color: #f8f8f8; /* Fondo blanco roto */
         color: white;
         padding: 0.75rem;
         border: none;
-        border-radius: 4px;
+        border-radius: 8px; /* Bordes más redondeados */
         font-size: 1rem;
         cursor: pointer;
         display: flex;
         justify-content: center;
         align-items: center;
-        box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el ancho total */
+        box-sizing: border-box;
+        transition: background-color 0.3s ease; /* Transición suave */
     }
 
-    .google-button:hover {
-        background-color: #e0e0e0;
-    }
-
-    .apple-button:hover {
-        background-color: #e0e0e0;
-    }
-
-    .github-button:hover {
-        background-color: #e0e0e0;
+    .social-button:hover {
+        background-color: #d8d8d8; /* Hover en gris */
     }
 </style>
