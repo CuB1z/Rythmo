@@ -1,4 +1,4 @@
-import styles from "../../styles/Tasks/SingleTask.module.css"
+import styles from "@styles/Tasks/SingleTask.module.css"
 
 export default function SingleTask({ name, tag }) {
     return (
