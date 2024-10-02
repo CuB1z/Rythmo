@@ -1,9 +1,9 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Tasks from "../components/Tasks/Tasks.astro";
+import Layout from "../layouts/Layout.astro"
+import Tasks from "../components/react/Tasks/Tasks.jsx"
 ---
 
 <Layout title="Students App">
 	<h1>Welcome to Students App</h1>
-	<Tasks />
+	<Tasks client:only="react"/>
 </Layout>

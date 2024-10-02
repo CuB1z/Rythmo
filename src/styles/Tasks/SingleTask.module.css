@@ -1,14 +1,4 @@
----
-const { name, id } = Astro.props;
----
-
-<li class="task-item">
-    <span>{id ? id : ""}</span>
-    <span>{name}</span>
-</li>
-
-<style>
-    .task-item {
+    .task_item {
         display: flex;
         gap: 15px;
         padding: 0.5rem;
@@ -23,7 +13,6 @@ const { name, id } = Astro.props;
         }
     }
 
-    .task-item span {
+    .task_item .span {
         font-size: 1rem;
     }
-</style>
