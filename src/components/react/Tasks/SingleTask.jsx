@@ -6,7 +6,7 @@ import Modal from "@components/react/Modal.jsx"
 import TaskForm from "./TaskForm"
 import Button from "@components/react/Button.jsx"
 
-export default function SingleTask({ data, task, parentKey, onDelete, onEdit }) {
+export default function SingleTask({ data, task, parentKey, onDelete, onEdit, onMove }) {
     const [showModal, setShowModal] = useState(false)
     const [modalTitle, setModalTitle] = useState("")
 
@@ -14,6 +14,11 @@ export default function SingleTask({ data, task, parentKey, onDelete, onEdit }) 
     const handleEdit = () => {
         setModalTitle("Edit Task")
         setShowModal(true)
+    }
+
+    // Handle moving a task on click
+    const handleMove = () => {
+        onMove(data, parentKey, task.id)
     }
 
     // Handle deleting a task on click
@@ -36,18 +41,29 @@ export default function SingleTask({ data, task, parentKey, onDelete, onEdit }) 
                     <span className={styles.name}>{task.name}</span>
                 </div>
                 <div className={styles.task_actions}>
-                    <Button
-                        onClick={handleEdit}
-                        customClass="tertiary"
-                    >
-                        <img src="/edit.svg" alt="Edit Icon" />
-                    </Button>
-                    <Button
-                        onClick={handleDelete}
-                        customClass="tertiary"
-                    >
-                        <img src="/trash.svg" alt="Delete Icon" />
-                    </Button>
+                    <div className={styles.inline}>
+                        <Button
+                            onClick={handleEdit}
+                            customClass="tertiary"
+                        >
+                            <img src="/edit.svg" alt="Edit Icon" />
+                        </Button>
+                        <Button
+                            onClick={handleDelete}
+                            customClass="tertiary"
+                        >
+                            <img src="/trash.svg" alt="Delete Icon" />
+                        </Button>
+                    </div>
+                    <div className={styles.inline}>
+                        <Button
+                            onClick={handleMove}
+                            disabled={parentKey === "completed" ? true : false}
+                            customClass={parentKey === "completed" ? "disabled" : "tertiary"}
+                        >
+                            <img src="/done.svg" alt="Done Icon" />
+                        </Button>
+                    </div>
                 </div>
             </li>
             {

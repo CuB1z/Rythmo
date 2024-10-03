@@ -4,7 +4,7 @@ import SingleTask from "@components/react/Tasks/SingleTask.jsx"
 import Modal from "@components/react/Modal.jsx"
 import TaskForm from "@components/react/Tasks/TaskForm.jsx"
 import Button from "@components/react/Button.jsx"
-import { addTask, removeTask, editTask } from "@utils/tasks.js"
+import { addTask, removeTask, editTask, moveTask } from "@utils/tasks.js"
 
 // Fake data
 import { fake_data } from "@utils/fake_data.js"
@@ -60,6 +60,18 @@ export default function Tasks() {
         }
     }
 
+    // Move a task from one list to another ====================================
+    const onMove = (data, fromKey, id) => {
+        const toKey = fromKey === "to_do" ? "ongoing" : "completed"
+        const response = moveTask(data, fromKey, toKey, id)
+
+        if (response.ok) {
+            setData(response.data)
+        } else {
+            console.error("Failed to move a task")
+        }
+    }        
+
     return (
         <>
             <div className={styles.task_container}>
@@ -72,6 +84,7 @@ export default function Tasks() {
                             </h2>
                             <ul className={styles.task_items}>
                                 {
+                                    data[key].tasks.length > 0 ? (
                                     data[key].tasks?.map((task) =>
                                         <SingleTask
                                             key={task.id}
@@ -80,7 +93,14 @@ export default function Tasks() {
                                             data={data}
                                             onDelete={onDelete}
                                             onEdit={onEdit}
+                                            onMove={onMove}
                                         />
+                                    )
+                                    ) : (
+                                        <li className={styles.empty}>
+                                            <p className={styles.empty_text}>No tasks available</p>
+                                                <p className={styles.empty_text}>Click on the button below to add a new task</p>
+                                        </li>
                                     )
                                 }
                             </ul>

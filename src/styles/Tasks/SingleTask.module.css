@@ -29,11 +29,20 @@
 
     .task_actions {
         display: flex;
-        opacity: 0;
-        transition: all 0.1s ease;
+        gap: 20px;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-between;
+        
+        .inline:first-child {
+            display: flex;
+            opacity: 0;
+            justify-content: flex-end;
+            transition: all 0.1s ease;
+        }
     }
 
-    &:hover .task_actions {
+    &:hover .task_actions .inline:first-child {
         opacity: 1;
     }
 }

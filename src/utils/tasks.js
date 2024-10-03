@@ -54,6 +54,7 @@ function removeTask(data, key, taskId) {
  * @param {string} taskId
  * @param {string} name
  * @param {string} tag
+ * @returns {{ ok: boolean, data: object }}
 */
 function editTask(data, key, taskId, name, tag) {
     try {
@@ -74,4 +75,34 @@ function editTask(data, key, taskId, name, tag) {
     }
 }
 
-export { addTask, removeTask, editTask }
+/**
+ * Move a task from one key to another key.
+ * 
+ * @param {object} data
+ * @param {string} sourceKey
+ * @param {string} destinationKey
+ * @param {string} taskId
+ * @returns {{ ok: boolean, data: object }}
+ */
+function moveTask(data, sourceKey, destinationKey, taskId) {
+
+    // Prevent moving a task to the same list
+    if (sourceKey === destinationKey) return { ok: false, data }
+
+    try {
+        const task = data[sourceKey].tasks.find(task => task.id === taskId)
+        const updatedSourceTasks = data[sourceKey].tasks.filter(task => task.id !== taskId)
+        const updatedDestinationTasks = [...data[destinationKey].tasks, task]
+
+        data[sourceKey].tasks = updatedSourceTasks
+        data[destinationKey].tasks = updatedDestinationTasks
+
+        const updatedData = { ...data }
+        return { ok: true, data: updatedData }
+    } catch (error) {
+        console.error(error)
+        return { ok: false, data }
+    }
+}
+
+export { addTask, removeTask, editTask, moveTask }
