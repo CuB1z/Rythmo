@@ -1,10 +1,61 @@
 import styles from "@styles/Tasks/SingleTask.module.css"
 
-export default function SingleTask({ name, tag }) {
+import { useState } from "react"
+
+import Modal from "@components/react/Modal.jsx"
+import TaskForm from "./TaskForm"
+import Button from "@components/react/Button.jsx"
+
+export default function SingleTask({ data, task, parentKey, onDelete, onEdit }) {
+    const [showModal, setShowModal] = useState(false)
+    const [modalTitle, setModalTitle] = useState("")
+
+    // Handle editing a task on click
+    const handleEdit = () => {
+        setModalTitle("Edit Task")
+        setShowModal(true)
+    }
+
+    // Handle deleting a task on click
+    const handleDelete = () => onDelete(data, parentKey, task.id)
+
+    // Handle editing a task
+    const handleSubmit = (data, parentKey, id, taskName, taskTag) => {
+        onEdit(data, parentKey, id, taskName, taskTag)
+        setShowModal(false)
+    }
+
+    // Handle canceling the modal
+    const onCancel = () => setShowModal(false)
+
     return (
-        <li className={styles.task_item}>
-            <span className={styles.span}>{tag ? tag : ""}</span>
-            <span className={styles.span}>{name}</span>
-        </li>
+        <>
+            <li className={styles.task_item}>
+                <div className={styles.task_content}>
+                    <span className={styles.span}>{task.tag ? task.tag : ""}</span>
+                    <span className={styles.span}>{task.name}</span>
+                </div>
+                <div className={styles.task_actions}>
+                    <Button onClick={handleEdit}>Edit</Button>
+                    <Button onClick={handleDelete}>Delete</Button>
+                </div>
+            </li>
+            {
+                showModal &&
+                <Modal
+                    title={modalTitle}
+                    show={showModal}
+                    setShow={setShowModal}
+                >
+                    <TaskForm
+                        data={data}
+                        parentKey={parentKey}
+                        task={task}
+                        onSubmit={handleSubmit}
+                        onCancel={onCancel}
+                    />
+                </Modal>
+            }
+        </>
     )
 }

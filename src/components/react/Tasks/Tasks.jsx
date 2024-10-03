@@ -1,20 +1,31 @@
 import styles from "@styles/Tasks/Tasks.module.css"
 import { useState } from "react"
-
 import SingleTask from "@components/react/Tasks/SingleTask.jsx"
+import Modal from "@components/react/Modal.jsx"
+import TaskForm from "@components/react/Tasks/TaskForm.jsx"
 import Button from "@components/react/Button.jsx"
-import { addTask } from "@utils/tasks.js"
+import { addTask, removeTask, editTask } from "@utils/tasks.js"
 
 // Fake data
 import { fake_data } from "@utils/fake_data.js"
 
 export default function Tasks() {
     const [data, setData] = useState(fake_data)
+    const [parentKey, setParentKey] = useState("")
+    const [showModal, setShowModal] = useState(false)
 
-    const handleClick = (event) => {
+    // Handle onclick event to add a new task ==================================
+    const handleAddTask = (event) => {
         const id = event.target.id
-        const response = addTask(data, id, "New Task", "AD")
-        
+        setParentKey(id)
+        setShowModal(true)
+    }
+
+    // Add a new task to the selected list =====================================
+    const onAdd = (data, parentKey, _, taskName, taskTag) => {
+        const response = addTask(data, _, parentKey, taskName, taskTag)
+        console.log(response)
+
         if (response.ok) {
             setData(response.data)
         } else {
@@ -22,28 +33,81 @@ export default function Tasks() {
         }
     }
 
+    // Handle submit event to add a new task ===================================
+    const handleSubmit = (data, parentKey, _, taskName, taskTag) => {
+        onAdd(data, parentKey, _, taskName, taskTag)
+        setShowModal(false)
+    }
+
+    // Remove a task from the selected list ====================================
+    const onDelete = (data, parentKey, id) => {
+        const response = removeTask(data, parentKey, id)
+
+        if (response.ok) {
+            setData(response.data)
+        } else {
+            console.error("Failed to delete a task")
+        }
+    }
+
+    // Edit a task from the selected list ======================================
+    const onEdit = (data, parentKey, id, taskName, taskTag) => {
+        const response = editTask(data, parentKey, id, taskName, taskTag)
+
+        if (response.ok) {
+            setData(response.data)
+        } else {
+            console.error("Failed to edit a task")
+        }
+    }
+
     return (
-        <div className={styles.task_container}>
+        <>
+            <div className={styles.task_container}>
+                {
+                    Object.keys(data).map((key) => (
+                        <section key={key} className={styles.task_list}>
+                            <h2 className={styles.h2}>
+                                <span className={styles.title}>{data[key].title}</span>
+                                <span className={styles.count}>({data[key].tasks.length})</span>
+                            </h2>
+                            <ul className={styles.task_items}>
+                                {
+                                    data[key].tasks?.map((task) =>
+                                        <SingleTask
+                                            key={task.id}
+                                            task={task}
+                                            parentKey={key}
+                                            data={data}
+                                            onDelete={onDelete}
+                                            onEdit={onEdit}
+                                        />
+                                    )
+                                }
+                            </ul>
+                            <div className={styles.add_task}>
+                                <Button id={key} onClick={(event) => handleAddTask(event)}>Add Task</Button>
+                            </div>
+                        </section>
+                    ))
+                }
+            </div>
             {
-                Object.keys(data).map((key) => (
-                    <section key={key} className={styles.task_list}>
-                        <h2 className={styles.h2}>
-                            <span className={styles.title}>{data[key].title}</span>
-                            <span className={styles.count}>({data[key].tasks.length})</span>
-                        </h2>
-                        <ul className={styles.task_items}>
-                            {
-                                data[key].tasks?.map((task) =>
-                                    <SingleTask key={task.id} name={task.name} tag={task.tag} />
-                                )
-                            }
-                        </ul>
-                        <div className={styles.add_task}>
-                            <Button id={key} onClick={(event) => handleClick(event)}>Add Task</Button>
-                        </div>
-                    </section>
-                ))
+                showModal &&
+                <Modal
+                    title="Add Task"
+                    show={showModal}
+                    setShow={setShowModal}
+                >
+                    <TaskForm
+                        data={data}
+                        parentKey={parentKey}
+                        task={{ name: "", tag: "" }}
+                        onSubmit={handleSubmit}
+                        onCancel={() => setShowModal(false)}
+                    />
+                </Modal>
             }
-        </div>
+        </>
     )
 }
