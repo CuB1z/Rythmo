@@ -1,4 +1,5 @@
 .task_container {
+    height: 450px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -30,6 +31,9 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #333 transparent;
         }
 
         .add_task {

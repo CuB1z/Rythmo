@@ -24,7 +24,6 @@ export default function Tasks() {
     // Add a new task to the selected list =====================================
     const onAdd = (data, parentKey, _, taskName, taskTag) => {
         const response = addTask(data, _, parentKey, taskName, taskTag)
-        console.log(response)
 
         if (response.ok) {
             setData(response.data)

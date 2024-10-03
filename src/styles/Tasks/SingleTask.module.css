@@ -1,18 +1,33 @@
-    .task_item {
-        display: flex;
-        gap: 15px;
-        padding: 0.5rem;
-        border-radius: 3px;
-        background-color: #b8d8dd;
-        border: 1px solid #b8d8dd;
-        transition: all 0.3s ease;
+.task_item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-radius: 3px;
+    background-color: #ecf6f7;
+    border: 1px solid #b8d8dd;
+    transition: all 0.3s ease;
 
-        &:hover {
-            border: 1px solid #6a8fc6;
-            cursor: pointer;
+    .task_content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 10px;
+
+        .tag {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .name {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #666;
         }
     }
 
-    .task_item .span {
-        font-size: 1rem;
+    .task_actions {
+        display: flex;
     }
+}

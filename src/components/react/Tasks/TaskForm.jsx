@@ -1,5 +1,5 @@
 import styles from "@styles/Tasks/TaskForm.module.css"
-import { useRef } from "react"
+import { useRef, useEffect } from "react"
 import Button from "@components/react/Button.jsx"
 
 export default function TaskForm({ data, task, parentKey, onSubmit, onCancel }) {
@@ -7,6 +7,24 @@ export default function TaskForm({ data, task, parentKey, onSubmit, onCancel }) 
     // Create refs for the input fields
     const taskNameRef = useRef(null)
     const taskTagRef = useRef(null)
+
+    // Add keydown event listener to the form
+    const handleKeyDown = (event) => {
+        if (event.key === "Escape") {
+            onCancel()
+        }
+
+        if (event.key === "Enter") {
+            handleSubmit(event)
+        }
+    }
+
+    // Add keydown event listener to the form
+    useEffect(() => {
+        document.addEventListener("keydown", handleKeyDown)
+        return () => document.removeEventListener("keydown", handleKeyDown
+        )
+    }, [])
 
     // Set the default values
     const taskName = task.name || ""
@@ -44,9 +62,9 @@ export default function TaskForm({ data, task, parentKey, onSubmit, onCancel }) 
                     ref={taskTagRef}
                 />
             </div>
-            <div className={styles.form_group}>
+            <div className={styles.form_actions}>
+                <Button onClick={onCancel} customClass="secondary">Cancel</Button>
                 <Button onClick={(event) => handleSubmit(event)}>Save</Button>
-                <Button onClick={onCancel}>Cancel</Button>
             </div>
         </form>
     )

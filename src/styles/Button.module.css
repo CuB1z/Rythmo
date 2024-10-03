@@ -1,18 +1,27 @@
 .button {
+    max-width: 100%;
+    max-height: 30px;
     padding: 2px 6px;
-    border: 1px solid #ff0000;
     border-radius: 3px;
-    background-color: #cf5050;
+    background-color: var(--accent-color);
+    border: 1px solid var(--accent-color);
     color: white;
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
-}
 
-.button:hover {
-    background-color: #ff0000;
-}
+    &.secondary {
+        background-color: #000;
+        border: 1px solid #000;
+        color: #fff;
+    }
 
-.button:active {
-    transform: scale(0.98);
+    &.tertiary {
+        background: none;
+        border: none;
+    }
+
+    &:active, &:focus {
+        outline: none;
+    }
 }

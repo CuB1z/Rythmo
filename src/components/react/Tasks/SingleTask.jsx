@@ -32,12 +32,22 @@ export default function SingleTask({ data, task, parentKey, onDelete, onEdit }) 
         <>
             <li className={styles.task_item}>
                 <div className={styles.task_content}>
-                    <span className={styles.span}>{task.tag ? task.tag : ""}</span>
-                    <span className={styles.span}>{task.name}</span>
+                    <span className={styles.tag}>{task.tag ? task.tag : ""}</span>
+                    <span className={styles.name}>{task.name}</span>
                 </div>
                 <div className={styles.task_actions}>
-                    <Button onClick={handleEdit}>Edit</Button>
-                    <Button onClick={handleDelete}>Delete</Button>
+                    <Button
+                        onClick={handleEdit}
+                        customClass="tertiary"
+                    >
+                        <img src="/edit.svg" alt="Edit Icon" />
+                    </Button>
+                    <Button
+                        onClick={handleDelete}
+                        customClass="tertiary"
+                    >
+                        <img src="/trash.svg" alt="Delete Icon" />
+                    </Button>
                 </div>
             </li>
             {
