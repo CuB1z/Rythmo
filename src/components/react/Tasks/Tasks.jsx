@@ -70,7 +70,7 @@ export default function Tasks() {
         } else {
             console.error("Failed to move a task")
         }
-    }        
+    }
 
     return (
         <>
@@ -85,27 +85,33 @@ export default function Tasks() {
                             <ul className={styles.task_items}>
                                 {
                                     data[key].tasks.length > 0 ? (
-                                    data[key].tasks?.map((task) =>
-                                        <SingleTask
-                                            key={task.id}
-                                            task={task}
-                                            parentKey={key}
-                                            data={data}
-                                            onDelete={onDelete}
-                                            onEdit={onEdit}
-                                            onMove={onMove}
-                                        />
-                                    )
+                                        data[key].tasks?.map((task) =>
+                                            <SingleTask
+                                                key={task.id}
+                                                task={task}
+                                                parentKey={key}
+                                                data={data}
+                                                onDelete={onDelete}
+                                                onEdit={onEdit}
+                                                onMove={onMove}
+                                            />
+                                        )
                                     ) : (
                                         <li className={styles.empty}>
-                                            <p className={styles.empty_text}>No tasks available</p>
+                                            <p className={styles.empty_text}>No tasks {data[key].title.toLowerCase()}</p>
+                                            {
+                                                key === "to_do" &&
                                                 <p className={styles.empty_text}>Click on the button below to add a new task</p>
+                                            }
                                         </li>
                                     )
                                 }
                             </ul>
                             <div className={styles.add_task}>
-                                <Button id={key} onClick={(event) => handleAddTask(event)}>Add Task</Button>
+                                {
+                                    key === "to_do" &&
+                                    <Button id={key} onClick={(event) => handleAddTask(event)}>Add Task</Button>
+                                }
                             </div>
                         </section>
                     ))
