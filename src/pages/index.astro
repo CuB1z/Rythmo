@@ -1,9 +1,13 @@
 ---
 import Layout from "@layouts/Layout.astro"
 import Tasks from "@components/react/Tasks/Tasks.jsx"
+import { fake_data } from "@utils/fake_data"
 ---
 
 <Layout title="Students App">
 	<h1>Welcome to Students App</h1>
-	<Tasks client:load />
+	<Tasks
+		client:load
+		userData={fake_data}
+	/>
 </Layout>

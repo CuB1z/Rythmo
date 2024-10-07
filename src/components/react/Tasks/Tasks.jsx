@@ -1,16 +1,16 @@
 import styles from "@styles/Tasks/Tasks.module.css"
 import { useState } from "react"
+
 import SingleTask from "@components/react/Tasks/SingleTask.jsx"
 import Modal from "@components/react/Modal.jsx"
 import TaskForm from "@components/react/Tasks/TaskForm.jsx"
 import Button from "@components/react/Button.jsx"
+
 import { addTask, removeTask, editTask, moveTask } from "@utils/tasks.js"
 
 // Fake data
-import { fake_data } from "@utils/fake_data.js"
-
-export default function Tasks() {
-    const [data, setData] = useState(fake_data)
+export default function Tasks({ userData }) {
+    const [data, setData] = useState(userData)
     const [parentKey, setParentKey] = useState("")
     const [showModal, setShowModal] = useState(false)
 
