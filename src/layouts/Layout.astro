@@ -28,6 +28,7 @@ const { title, description } = Astro.props;
     :root {
         /* Colors */
         --bg-color: #f7f7f7;
+        --accent-color: #e50a77;
     }
 
     * {
@@ -54,7 +55,8 @@ const { title, description } = Astro.props;
     }
 
     main {
-        width: 700px;
+        width: 100%;
+        max-width: 1300px;
         min-height: 100vh;
         display: flex;
         flex-direction: column;

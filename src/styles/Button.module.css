@@ -1,0 +1,40 @@
+.button {
+    max-width: 100%;
+    max-height: 30px;
+    padding: 2px 6px;
+    border-radius: 5px;
+    background-color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &.secondary {        
+        background-color: #000;
+        border: 1px solid #000;
+        color: #fff;
+    }
+
+    &.tertiary {
+        background: none;
+        border: none;
+        transition: all 0.1s ease;
+
+        &:hover {
+            scale: 1.1;
+        }
+    }
+
+    &.disabled {
+        background: none;
+        border: none;
+        opacity: 0.2;
+        cursor: auto;
+    }
+
+    &:active, &:focus {
+        outline: none;
+    }
+}
