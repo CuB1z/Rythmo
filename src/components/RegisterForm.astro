@@ -5,10 +5,18 @@ import GitHubLogo from "./icons/Github.astro"
 ---
 
 <form action="/api/register" method="post">
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required>
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" required>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+    </div>
     <button type="submit" class="register-button">Register</button>
     <div class="social-buttons">
         <button type="button" class="social-button google-button">
@@ -25,46 +33,50 @@ import GitHubLogo from "./icons/Github.astro"
 
 <style>
     form {
-        max-width: 400px;
-        margin: 0 auto;
+        width: 500px;
+        max-width: 100%;
         padding: 2rem;
-        border: 1px solid #333; /* Borde más oscuro */
-        border-radius: 12px; /* Bordes más redondeados */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
-        background-color: #fff; /* Fondo blanco */
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        border: 1px solid #333;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
     }
 
     label {
         display: block;
         margin-bottom: 0.5rem;
         font-weight: bold;
-        color: #333; /* Color de texto más oscuro */
+        color: #333;
     }
 
     input {
         width: 100%;
-        padding: 0.75rem; /* Padding más grande */
+        padding: 0.75rem;
         margin-bottom: 1rem;
         border: 1px solid #ccc;
-        border-radius: 8px; /* Bordes más redondeados */
+        border-radius: 8px;
         box-sizing: border-box;
-        font-size: 1rem; /* Tamaño de fuente más grande */
+        font-size: 1rem;
     }
 
     .register-button {
         width: 100%;
         padding: 0.75rem;
         border: none;
-        border-radius: 8px; /* Bordes más redondeados */
+        border-radius: 8px;
         background: linear-gradient(270deg, #ff00ff, #ff69b4, #ff1493, #ff00ff);
         background-size: 400% 400%;
-        color: white; /* Texto en blanco */
+        color: white;
         font-size: 1rem;
         cursor: pointer;
-        box-sizing: border-box;
-        transition: background-color 0.3s ease; /* Transición suave */
-        animation: pinkGradient 5s ease infinite;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        transition: all 0.3s ease;
+
+        &:hover {
+            animation: pinkGradient 3s ease infinite;
+        }
     }
 
     @keyframes pinkGradient {
@@ -80,12 +92,12 @@ import GitHubLogo from "./icons/Github.astro"
     }
 
     .register-button:hover {
-        background-color: #e64a19; /* Color de hover del botón de Rythmo */
+        background-color: #e64a19;
     }
 
     .social-buttons {
         display: flex;
-        justify-content: center; /* Centrar los botones */
+        justify-content: center;
         gap: 1rem;
         margin-top: 1rem;
     }
@@ -93,21 +105,21 @@ import GitHubLogo from "./icons/Github.astro"
     .social-button {
         width: 75px;
         height: 75px;
-        background-color: #f8f8f8; /* Fondo blanco roto */
+        background-color: #f8f8f8;
         color: white;
         padding: 0.75rem;
         border: none;
-        border-radius: 8px; /* Bordes más redondeados */
+        border-radius: 8px;
         font-size: 1rem;
         cursor: pointer;
         display: flex;
         justify-content: center;
         align-items: center;
         box-sizing: border-box;
-        transition: background-color 0.3s ease; /* Transición suave */
+        transition: background-color 0.3s ease;
     }
 
     .social-button:hover {
-        background-color: #d8d8d8; /* Hover en gris */
+        background-color: #d8d8d8;
     }
 </style>
