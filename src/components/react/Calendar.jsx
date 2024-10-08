@@ -96,10 +96,22 @@ const handleAddNewEvent = (e) => {
 
     return updatedData;  
   });
-
   // Cerramos el popup y reseteamos el formulario
   setIsPopupVisible(false);
   setNewEvent({ date: '', name: '' });
+};
+
+const handleDeleteEvent = (date, eventId) => {
+  setCalendarData((prevData) => {
+    const updatedData = prevData.map((day) => {
+      if (day.date === date) {
+        const filteredEvents = day.events.filter((event) => event.id !== eventId);
+        return { ...day, events: filteredEvents };
+      }
+      return day;
+    });
+    return updatedData;
+  });
 };
 
 
@@ -117,16 +129,20 @@ const handleAddNewEvent = (e) => {
       {viewMode === 'month' && (
         <div id="calendar-month" className={styles.calendarGrid}>
         {datesForMonth.map((dayData, index) => (
-          <div key={index} className={styles.day}>
-            <span className={styles.dayNumber}>{dayData.day}</span>
-    
+        <div key={index} className={styles.day}>
+           <span className={styles.dayNumber}>{dayData.day}</span>
+
             {dayData.events.map((event, eventIndex) => (
               <div key={eventIndex} className={styles.event}>
-                {event.name}
-              </div>
-            ))}
-          </div>
-        ))}
+                <span>{event.name}</span>
+        <button className={styles.deleteButton} onClick={() => handleDeleteEvent(dayData.date, event.id)}>
+          🗑️
+        </button>
+      </div>
+    ))}
+  </div>
+))}
+
       </div>
       
       )}

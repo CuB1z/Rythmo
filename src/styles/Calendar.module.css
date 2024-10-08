@@ -1,78 +1,99 @@
 .calendarGrid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 columnas para los días de la semana */
-    gap: 10px;
-    margin-top: 20px;
-    position: relative;
-  }
-  
-  .day {
-    border: 1px solid #e0e0e0;
-    padding: 10px;
-    min-height: 100px;
-    position: relative; /* Para que el número del día se posicione relativo a esta celda */
-  }
-  
-  .dayNumber {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    font-weight: bold;
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  .event {
-    background-color: #4caf50;
-    color: white;
-    padding: 5px;
-    margin-top: 20px;
-    border-radius: 4px;
-  }
-  
-  .calendar_buttons{
-    margin-right: 10px; /* Asegurar separación entre los botones */
-    height: 30px; /* Fijar la altura */
-    background-color: var(--accent-color, #007bff) !important; /* Forzar el color de fondo */
-    color: white !important; /* Forzar el color del texto */
-    border-radius: 5px;
-    padding: 5px 15px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    border: 1px solid var(--accent-color, #007bff);
-  }
-  
-  #event-popup form button {
-    margin-top: 10px;
-    margin-right: 10px;
-    height: 30px; /* Fijar la altura */
-    background-color: var(--accent-color, #007bff) !important; /* Forzar el color de fondo */
-    color: white !important; /* Forzar el color del texto */
-    padding: 5px 15px;
-    border-radius: 5px;
-    border: 1px solid var(--accent-color, #007bff);
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-  }
-  
-  #event-popup form button:hover {
-    background-color: #0056b3 !important; /* Un tono más oscuro para el hover */
-  }
-  
-  #event-popup form button.tertiary {
-    background: #f8f8f8 !important;
-    border: 1px solid #ccc !important;
-    color: #333 !important;
-  }
-  
-  #event-popup form button.tertiary:hover {
-    background: #e6e6e6 !important;
-    transform: scale(1.05);
-  }
-  /* Contenedor de la cuadrícula semanal */
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columnas para los días de la semana */
+  gap: 10px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.day {
+  min-height: 150px;  /* Altura mínima de cada celda */
+  padding: 10px;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #fff;
+  position: relative; /* Para que el número del día se posicione relativo a esta celda */
+}
+
+.dayNumber {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.event {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.deleteButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #ff4d4f;
+  font-size: 1.2rem;
+}
+
+.deleteButton:hover {
+  color: #d32f2f;
+}
+
+.calendar_buttons {
+  margin-right: 10px; /* Asegurar separación entre los botones */
+  height: 30px; /* Fijar la altura */
+  background-color: var(--accent-color, #007bff) !important; /* Forzar el color de fondo */
+  color: white !important; /* Forzar el color del texto */
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--accent-color, #007bff);
+}
+
+#event-popup form button {
+  margin-top: 10px;
+  margin-right: 10px;
+  height: 30px; /* Fijar la altura */
+  background-color: var(--accent-color, #007bff) !important; /* Forzar el color de fondo */
+  color: white !important; /* Forzar el color del texto */
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: 1px solid var(--accent-color, #007bff);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+#event-popup form button:hover {
+  background-color: #0056b3 !important; /* Un tono más oscuro para el hover */
+}
+
+#event-popup form button.tertiary {
+  background: #f8f8f8 !important;
+  border: 1px solid #ccc !important;
+  color: #333 !important;
+}
+
+#event-popup form button.tertiary:hover {
+  background: #e6e6e6 !important;
+  transform: scale(1.05);
+}
+
+/* Contenedor de la cuadrícula semanal */
 .calendarGridWeek {
   display: grid;
   grid-template-columns: repeat(7, 1fr);  /* 7 columnas, una para cada día de la semana */
@@ -86,31 +107,4 @@
   background-color: #f0f0f0;
   padding: 10px 0;
   border: 1px solid #ccc;
-}
-
-/* Cada día en la cuadrícula */
-.day {
-  min-height: 150px;  /* Altura mínima de cada celda */
-  padding: 10px;
-  border: 1px solid #ccc;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: #fff;
-}
-
-/* Número del día (parte superior de cada celda) */
-.dayNumber {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-/* Estilo de los eventos */
-.event {
-  background-color: #e0f7fa;
-  padding: 5px;
-  margin-bottom: 5px;
-  border-radius: 4px;
-  font-size: 14px;
 }
