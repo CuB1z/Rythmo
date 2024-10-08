@@ -1,9 +1,14 @@
 ---
-import Layout from "@layouts/Layout.astro"
-import Calendar from "@components/Calendar.astro"
+import Calendar from '../components/react/Calendar';
 ---
 
-<Layout title="Students App">
-	<h1>Welcome to Students App</h1>
-	<Calendar client:load />
-</Layout>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Students App</title>
+</head>
+<body>
+  <Calendar client:load />
+</body>
+</html>

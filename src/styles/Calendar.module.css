@@ -1,160 +1,116 @@
-.calendar {
+.calendarGrid {
     display: grid;
-    gap: 2px;
-    width: 95%;
-    height: 80%;
-}
-
-.hidden {
-    display: none;
-}
-
-#calendar-month {
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: auto;
-    height: 100%;
-}
-
-#calendar-week {
-    grid-template-columns: 100px repeat(7, 1fr);
-    margin-top: 20px;
-    height: 120%;
-    gap: 15px;
-}
-
-.day,
-.hour {
-    border: 1px solid #e0e0e0;
-    text-align: center;
-    background-color: #f8f8f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-    height: 100%;
-    font-size: 1em;
-}
-
-.day {
-    cursor: pointer;
-}
-
-.has-event {
-    background-color: red;
-}
-
-.hours-column {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
-    background-color: #f0f0f0;
-}
-
-.hours-container {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: repeat(7, 1fr); /* 7 columnas para los días de la semana */
     gap: 10px;
-}
-
-.hour {
-    height: 120px;
-    padding: 20px;
-    border-top: 1px solid #ddd;
-    display: flex;
-    align-items: center;
-}
-
-.event {
-    background-color: #7fbc41;
-    color: white;
-    border-radius: 4px;
-    padding: 5px;
-    text-align: center;
-    width: 90%;
-    margin: 10px auto;
-    font-size: 1em;
+    margin-top: 20px;
     position: relative;
-}
-
-.delete-button {
+  }
+  
+  .day {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    min-height: 100px;
+    position: relative; /* Para que el número del día se posicione relativo a esta celda */
+  }
+  
+  .dayNumber {
     position: absolute;
     top: 5px;
     right: 5px;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 0.8em;
-    padding: 2px 5px;
-}
-
-#calendar-view {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
-
-#calendar-buttons {
-    margin: 20px;
-    display: flex;
-    justify-content: space-between;
-    width: 95%;
-}
-
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    transition:
-        background-color 0.3s,
-        transform 0.3s;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    font-size: 1em;
-}
-
-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-3px);
-}
-
-button:active {
-    transform: translateY(0);
-}
-
-.popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 5;
-}
-
-.day-header {
     font-weight: bold;
-    background-color: #f0f0f0;
-    padding: 15px;
-    text-align: center;
-    font-size: 1.2em;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .event {
+    background-color: #4caf50;
+    color: white;
+    padding: 5px;
+    margin-top: 20px;
+    border-radius: 4px;
+  }
+  
+  .calendar_buttons{
+    margin-right: 10px; /* Asegurar separación entre los botones */
+    height: 30px; /* Fijar la altura */
+    background-color: var(--accent-color, #007bff) !important; /* Forzar el color de fondo */
+    color: white !important; /* Forzar el color del texto */
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--accent-color, #007bff);
+  }
+  
+  #event-popup form button {
+    margin-top: 10px;
+    margin-right: 10px;
+    height: 30px; /* Fijar la altura */
+    background-color: var(--accent-color, #007bff) !important; /* Forzar el color de fondo */
+    color: white !important; /* Forzar el color del texto */
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: 1px solid var(--accent-color, #007bff);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  
+  #event-popup form button:hover {
+    background-color: #0056b3 !important; /* Un tono más oscuro para el hover */
+  }
+  
+  #event-popup form button.tertiary {
+    background: #f8f8f8 !important;
+    border: 1px solid #ccc !important;
+    color: #333 !important;
+  }
+  
+  #event-popup form button.tertiary:hover {
+    background: #e6e6e6 !important;
+    transform: scale(1.05);
+  }
+  /* Contenedor de la cuadrícula semanal */
+.calendarGridWeek {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);  /* 7 columnas, una para cada día de la semana */
+  gap: 10px;  /* Espacio entre los días */
+  text-align: center;
+}
+
+/* Cabecera de los días de la semana */
+.calendarDayHeader {
+  font-weight: bold;
+  background-color: #f0f0f0;
+  padding: 10px 0;
+  border: 1px solid #ccc;
+}
+
+/* Cada día en la cuadrícula */
+.day {
+  min-height: 150px;  /* Altura mínima de cada celda */
+  padding: 10px;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #fff;
+}
+
+/* Número del día (parte superior de cada celda) */
+.dayNumber {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Estilo de los eventos */
+.event {
+  background-color: #e0f7fa;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  font-size: 14px;
 }
