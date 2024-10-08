@@ -18,6 +18,7 @@ import GitHubLogo from "./icons/Github.astro"
         <input type="password" id="password" name="password" required>
     </div>
     <button type="submit" class="register-button">Register</button>
+    <hr>
     <div class="social-buttons">
         <button type="button" class="social-button google-button">
             <GoogleLogo />
@@ -61,7 +62,12 @@ import GitHubLogo from "./icons/Github.astro"
         box-sizing: border-box;
         font-size: 1rem;
     }
-
+    hr{
+        border: 0;
+        height: 1px;
+        background: #333;
+        margin: 1rem 0;
+    }
     .register-button {
         width: 100%;
         padding: 0.75rem;
@@ -98,8 +104,8 @@ import GitHubLogo from "./icons/Github.astro"
     .social-buttons {
         display: flex;
         justify-content: center;
-        gap: 1rem;
-        margin-top: 1rem;
+        gap: 2rem;
+        /* margin-top: 1rem; */
     }
 
     .social-button {
