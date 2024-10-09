@@ -230,14 +230,6 @@ export default {
 </script>
 
 <style>
-* {
- letter-spacing: 0;
-}
-
-p {
- font-weight: 400;
-}
-
 .container {
   width: 100%;
   max-width: 900px;
