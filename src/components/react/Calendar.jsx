@@ -3,6 +3,7 @@ import styles from "@styles/Calendar.module.css";
 import buttonStyles from "@styles/Button.module.css";
 import { fake_data as initialData } from "@utils/fake_calendar";
 import stylesm from '@styles/Modal.module.css';  
+import Modal from "@components/react/Modal.jsx"
 
 export default function Calendar() {
   // Convertimos fake_data en un estado
@@ -128,61 +129,50 @@ const handleDeleteEvent = (date, eventId) => {
 
       {viewMode === 'month' && (
         <div id="calendar-month" className={styles.calendarGrid}>
-        {datesForMonth.map((dayData, index) => (
-        <div key={index} className={styles.day}>
-           <span className={styles.dayNumber}>{dayData.day}</span>
+          {datesForMonth.map((dayData, index) => (
+          <div key={index} className={styles.day}>
+            <span className={styles.dayNumber}>{dayData.day}</span>
 
-            {dayData.events.map((event, eventIndex) => (
-              <div key={eventIndex} className={styles.event}>
-                <span>{event.name}</span>
-        <button className={styles.deleteButton} onClick={() => handleDeleteEvent(dayData.date, event.id)}>
-          🗑️
-        </button>
+              {dayData.events.map((event, eventIndex) => (
+                <div key={eventIndex} className={styles.event}>
+                  <span>{event.name}</span>
+                  <button className={styles.deleteButton} onClick={() => handleDeleteEvent(dayData.date, event.id)}>
+                    🗑️
+                  </button>
+                </div>
+              ))}
+          </div>
+          ))}
       </div>
-    ))}
-  </div>
-))}
-
-      </div>
-      
       )}
 
       {viewMode === 'week' && (
         <div id="calendar-week" className={styles.calendarGridWeek}>
-        {['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'].map((day, index) => (
-          <div key={index} className={styles.calendarDayHeader}>
-            {day}
-          </div>
-        ))}
-      
-        {datesForMonth.slice(0, 7).map((dayData, index) => (
-          <div key={index} className={styles.day}>
-            <span className={styles.dayNumber}>{dayData.day}</span>
-            
-            {dayData.events.map((event, eventIndex) => (
-              <div key={eventIndex} className={styles.event}>
-                <span>{event.name}</span>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
+          {['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'].map((day, index) => (
+            <div key={index} className={styles.calendarDayHeader}>
+              {day}
+            </div>
+          ))}
+        
+          {datesForMonth.slice(0, 7).map((dayData, index) => (
+            <div key={index} className={styles.dayWeek}>
+              <span className={styles.dayNumber}>{dayData.day}</span>
+              
+              {dayData.events.map((event, eventIndex) => (
+                <div key={eventIndex} className={styles.event}>
+                  <span>{event.name}</span>
+                  <button className={styles.deleteButton} onClick={() => handleDeleteEvent(dayData.date, event.id)}>
+                    🗑️
+                  </button>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       
       )}
 
-{isPopupVisible && (
-  <div className={styles.overlay}>
-    <div className={styles.modal}>
-      <div className={styles.toolbar}>
-        <div className={styles.title}>Añadir Evento</div>
-        <button className={styles.close} onClick={handleCancelClick}>
-          <span>&times;</span>
-        </button>
-      </div>
-
-      <hr />
-
-      <div className={styles.modal_content}>
+      <Modal title="Añadir Evento" show={isPopupVisible} setShow={setIsPopupVisible}>
         <form onSubmit={handleAddNewEvent}>
           <label htmlFor="event-name">Nombre del evento:</label>
           <input
@@ -206,13 +196,12 @@ const handleDeleteEvent = (date, eventId) => {
           />
           <br /><br />
 
-          <button type="submit" className="btn btn-primary">Añadir</button>
+          <button type="submit" className={`${buttonStyles.button} ${buttonStyles.secondary}`}>Añadir</button>  {/* Aplicando la clase .button */}
+          <button type="button" className={`${buttonStyles.button} ${buttonStyles.tertiary}`} onClick={() => setIsPopupVisible(false)}>Cancelar</button>  {/* Botón Cancelar */}
         </form>
-      </div>
-    </div>
-  </div>
-)}
+      </Modal>
 
+      
     </div>
   );
 }
