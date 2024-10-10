@@ -1,25 +1,19 @@
 ---
-import { AVAILABLE_ROUTES } from "@utils/constants";
-const routes = [
-    AVAILABLE_ROUTES.home,
-    AVAILABLE_ROUTES.subjects,
-    AVAILABLE_ROUTES.profile
-];
-
-const activeRoute = Astro.url.pathname
+import Rythmo from "@components/Rythmo.astro";
+import Button from "@components/Button.astro";
 ---
 
 <nav>
-    <ul>
-        {
-            routes.map((route) => (
-                <li>
-                    <a href={route.path} class={`${activeRoute === route.path ? 'active' : ''}`}>
-                        {route.name}
-                    </a>
-                </li>
-            ))
-        }
+    <a href="/">
+        <Rythmo scale="2rem" />
+    </a>
+    <ul class="nav_links">
+        <li>
+            <Button name="Log in" link="/login" type="primary" />
+        </li>
+        <li>
+            <Button name="Sign up" link="/register" type="secondary" />
+        </li>
     </ul>
 </nav>
 
@@ -30,38 +24,16 @@ const activeRoute = Astro.url.pathname
         position: fixed;
         top: 0;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         color: #333;
         background-color: #fff;
     }
-    
+
     ul {
         display: flex;
         list-style-type: none;
+        gap: 15px;
+        padding-right: 20px;
     }
-    
-    li {
-        margin: 0 1rem;
-    }
-    
-    a {
-        color: inherit;
-        text-decoration: none;
-        font-size: 20px;
-        font-weight: 500;
-        padding: 5px 15px;
-        border-radius: 25px;
-
-        &.active {
-            background: linear-gradient(90deg, #e74694, #f961e0 100%);
-            color: #fff;
-        }
-
-        img {
-            width: 30px;
-            height: 30px;
-        }
-    }
-
 </style>

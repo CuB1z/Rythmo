@@ -1,13 +1,9 @@
 ---
 import Layout from "@layouts/Layout.astro"
-import Tasks from "@components/react/Tasks/Tasks.jsx"
-import { fake_data } from "@utils/fake_data"
+import Rythmo from "@components/Rythmo.astro"
+import { APP_DATA } from "@utils/constants"
 ---
 
-<Layout title="Students App">
-	<h1>Welcome to Students App</h1>
-	<Tasks
-		client:load
-		userData={fake_data}
-	/>
+<Layout title={APP_DATA.name}>
+	<Rythmo text="Welcome to" />
 </Layout>
