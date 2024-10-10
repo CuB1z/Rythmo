@@ -4,6 +4,7 @@ import GoogleLogo from "./icons/Google.astro";
 import GitHubLogo from "./icons/Github.astro";
 import FormGroup from "./forms/FormGroup.astro";
 import SocialButton from "./forms/SocialButton.astro";
+import RelatedLink from "./forms/RelatedLink.astro";
 ---
 
 <form action="/api/login" method="post">
@@ -20,9 +21,7 @@ import SocialButton from "./forms/SocialButton.astro";
         placeholder="Type your password"
     />
     <button type="submit" class="login-button">Login</button>
-    <p class="register-link">
-        aún no tienes cuenta? <a href="./register">regístrate</a>
-    </p>
+    <RelatedLink text1="Don't have an account?" link="./register" text2="Register" />
     <hr />
     <div class="social-buttons">
         <SocialButton>
@@ -110,18 +109,5 @@ import SocialButton from "./forms/SocialButton.astro";
     .login-button:hover {
         background-color: #e64a19;
     }
-    .register-link {
-        text-align: center;
-        font-size: 1em;
-        margin-top: 1%;
-    }
-
-    .register-link a {
-        color: #ff1493;
-        text-decoration: none;
-    }
-
-    .register-link a:hover {
-        text-decoration: underline;
-    }
+    
 </style>

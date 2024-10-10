@@ -4,6 +4,7 @@ import GoogleLogo from "./icons/Google.astro"
 import GitHubLogo from "./icons/Github.astro"
 import FormGroup from "./forms/FormGroup.astro"
 import SocialButton from "./forms/SocialButton.astro"
+import RelatedLink from "./forms/RelatedLink.astro"
 ---
 
 <form action="/api/register" method="post">
@@ -11,6 +12,7 @@ import SocialButton from "./forms/SocialButton.astro"
     <FormGroup label="Username" type="text" id="username" placeholder="Type your username" />
     <FormGroup label="Password" type="password" id="password" placeholder="Type your password" />
     <button type="submit" class="register-button">Register</button>
+    <RelatedLink text1="Already have an account?" link="./login" text2="Login" />
     <hr>
     <div class="social-buttons">
         <SocialButton>
