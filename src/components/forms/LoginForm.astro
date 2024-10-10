@@ -1,19 +1,28 @@
 ---
-import AppleLogo from "./icons/Apple.astro"
-import GoogleLogo from "./icons/Google.astro"
-import GitHubLogo from "./icons/Github.astro"
-import FormGroup from "./forms/FormGroup.astro"
-import SocialButton from "./forms/SocialButton.astro"
-import RelatedLink from "./forms/RelatedLink.astro"
+import AppleLogo from "@components/icons/Apple.astro"
+import GoogleLogo from "@components/icons/Google.astro"
+import GitHubLogo from "@components/icons/Github.astro"
+import FormGroup from "@components/forms/FormGroup.astro"
+import SocialButton from "@components/forms/SocialButton.astro"
+import RelatedLink from "@components/forms/RelatedLink.astro"
 ---
 
-<form action="/api/register" method="post">
-    <FormGroup label="Email" type="email" id="email" placeholder="Type your mail" />
-    <FormGroup label="Username" type="text" id="username" placeholder="Type your username" />
-    <FormGroup label="Password" type="password" id="password" placeholder="Type your password" />
-    <button type="submit" class="register-button">Register</button>
-    <RelatedLink text1="Already have an account?" link="./login" text2="Login" />
-    <hr>
+<form action="/api/login" method="post">
+    <FormGroup
+        label="Email"
+        type="email"
+        id="email"
+        placeholder="Type your email"
+    />
+    <FormGroup
+        label="Password"
+        type="password"
+        id="password"
+        placeholder="Type your password"
+    />
+    <button type="submit" class="login-button">Login</button>
+    <RelatedLink text1="Don't have an account?" link="./register" text2="Register" />
+    <hr />
     <div class="social-buttons">
         <SocialButton>
             <GoogleLogo />
@@ -22,7 +31,7 @@ import RelatedLink from "./forms/RelatedLink.astro"
             <AppleLogo />
         </SocialButton>
         <SocialButton>
-            <GitHubLogo />  
+            <GitHubLogo />
         </SocialButton>
     </div>
 </form>
@@ -57,19 +66,18 @@ import RelatedLink from "./forms/RelatedLink.astro"
         box-sizing: border-box;
         font-size: 1rem;
     }
-    hr{
+    hr {
         border: 0;
         height: 1px;
         background: #333;
         margin: 1rem 0;
     }
     .social-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    /* margin-top: 1rem; */
-}
-    .register-button {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .login-button {
         width: 100%;
         padding: 0.75rem;
         border: none;
@@ -98,9 +106,8 @@ import RelatedLink from "./forms/RelatedLink.astro"
         }
     }
 
-    .register-button:hover {
+    .login-button:hover {
         background-color: #e64a19;
     }
-
     
 </style>
