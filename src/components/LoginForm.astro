@@ -1,16 +1,29 @@
 ---
-import AppleLogo from "./icons/Apple.astro"
-import GoogleLogo from "./icons/Google.astro"
-import GitHubLogo from "./icons/Github.astro"
-import FormGroup from "./forms/FormGroup.astro"
-import SocialButton from "./forms/SocialButton.astro"
+import AppleLogo from "./icons/Apple.astro";
+import GoogleLogo from "./icons/Google.astro";
+import GitHubLogo from "./icons/Github.astro";
+import FormGroup from "./forms/FormGroup.astro";
+import SocialButton from "./forms/SocialButton.astro";
 ---
 
 <form action="/api/login" method="post">
-    <FormGroup label="Email" type="email" id="email" placeholder="Type your email" />
-    <FormGroup label="Password" type="password" id="password" placeholder="Type your password" />
+    <FormGroup
+        label="Email"
+        type="email"
+        id="email"
+        placeholder="Type your email"
+    />
+    <FormGroup
+        label="Password"
+        type="password"
+        id="password"
+        placeholder="Type your password"
+    />
     <button type="submit" class="login-button">Login</button>
-    <hr>
+    <p class="register-link">
+        aún no tienes cuenta? <a href="./register">regístrate</a>
+    </p>
+    <hr />
     <div class="social-buttons">
         <SocialButton>
             <GoogleLogo />
@@ -19,7 +32,7 @@ import SocialButton from "./forms/SocialButton.astro"
             <AppleLogo />
         </SocialButton>
         <SocialButton>
-            <GitHubLogo />  
+            <GitHubLogo />
         </SocialButton>
     </div>
 </form>
@@ -54,7 +67,7 @@ import SocialButton from "./forms/SocialButton.astro"
         box-sizing: border-box;
         font-size: 1rem;
     }
-    hr{
+    hr {
         border: 0;
         height: 1px;
         background: #333;
@@ -96,5 +109,19 @@ import SocialButton from "./forms/SocialButton.astro"
 
     .login-button:hover {
         background-color: #e64a19;
+    }
+    .register-link {
+        text-align: center;
+        font-size: 1em;
+        margin-top: 1%;
+    }
+
+    .register-link a {
+        color: #ff1493;
+        text-decoration: none;
+    }
+
+    .register-link a:hover {
+        text-decoration: underline;
     }
 </style>
