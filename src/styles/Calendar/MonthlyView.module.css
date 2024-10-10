@@ -1,0 +1,35 @@
+.monthlyView {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.day {
+    position: relative;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 150px;
+    min-width: 150px;
+    box-sizing: border-box
+}
+
+.date {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.event {
+    background-color: #e50a77;
+    border: 1px solid white;
+    color:white;
+    border-radius: 4px;
+    padding: 5px;
+    margin-top: 5px;
+    width: 100%;
+    text-align: center;
+}

@@ -23,7 +23,7 @@
   right: 5px;
   font-weight: bold;
   font-size: 18px;
-  color: #333;
+  color: black;
 }
 
 .event {
@@ -65,4 +65,34 @@
   justify-content: flex-start;
   background-color: #fff;
   position: relative;
+}
+.calendarButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.calendarButton {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.calendarButton.secondary {
+  background-color: black;
+}
+
+.calendarButton:hover {
+  background-color: black;
+  color: #fff;
+}
+
+.calendarButton.secondary:hover {
+  background-color: #5a6268;
+  color: #fff;
 }
