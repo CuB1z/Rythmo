@@ -1,0 +1,26 @@
+---
+const { text1 , link , text2 } = Astro.props
+---
+
+
+<p class="register-link">
+    {text1} <a href={link}>{text2}</a>
+</p>
+
+
+<style>
+.register-link {
+    text-align: center;
+    font-size: 1em;
+    margin-top: 1%;
+}
+
+.register-link a {
+    color: #ff1493;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+</style>

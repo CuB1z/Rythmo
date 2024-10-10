@@ -1,0 +1,113 @@
+---
+import AppleLogo from "./icons/Apple.astro";
+import GoogleLogo from "./icons/Google.astro";
+import GitHubLogo from "./icons/Github.astro";
+import FormGroup from "./forms/FormGroup.astro";
+import SocialButton from "./forms/SocialButton.astro";
+import RelatedLink from "./forms/RelatedLink.astro";
+---
+
+<form action="/api/login" method="post">
+    <FormGroup
+        label="Email"
+        type="email"
+        id="email"
+        placeholder="Type your email"
+    />
+    <FormGroup
+        label="Password"
+        type="password"
+        id="password"
+        placeholder="Type your password"
+    />
+    <button type="submit" class="login-button">Login</button>
+    <RelatedLink text1="Don't have an account?" link="./register" text2="Register" />
+    <hr />
+    <div class="social-buttons">
+        <SocialButton>
+            <GoogleLogo />
+        </SocialButton>
+        <SocialButton>
+            <AppleLogo />
+        </SocialButton>
+        <SocialButton>
+            <GitHubLogo />
+        </SocialButton>
+    </div>
+</form>
+
+<style>
+    form {
+        width: 500px;
+        max-width: 100%;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        border: 1px solid #333;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    input {
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 1rem;
+    }
+    hr {
+        border: 0;
+        height: 1px;
+        background: #333;
+        margin: 1rem 0;
+    }
+    .social-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .login-button {
+        width: 100%;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(270deg, #ff00ff, #ff69b4, #ff1493, #ff00ff);
+        background-size: 400% 400%;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            animation: pinkGradient 3s ease infinite;
+        }
+    }
+
+    @keyframes pinkGradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .login-button:hover {
+        background-color: #e64a19;
+    }
+    
+</style>

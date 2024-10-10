@@ -1,0 +1,32 @@
+---
+const { name , link } = Astro.props
+---
+
+<button class="btn">
+    <a href={link}>{name}</a>
+    <style>
+        .btn {
+            padding: 1rem 2rem;
+            background-color: #ff69b4; /* Match the pink gradient theme */
+            color: white;
+            border: none;
+            border-radius: 8px; /* Match the social button border radius */
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 900; /* Match the font weight of Rythmo */
+            transition: background-color 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn:hover {
+            background-color: #ff1493; /* Slightly darker pink for hover effect */
+        }
+
+        .btn a {
+            color: inherit; /* Ensure link text color matches button text color */
+            text-decoration: none;
+        }
+    </style>
