@@ -123,7 +123,7 @@ export default function Calendar() {
               onClick={() => setViewMode('month')}
               customClass="primary"
           >
-            <span>Mensual View</span>
+            <span>Monthly View</span>
           </Button>
           <Button
               onClick={() => setIsPopupVisible(true)}

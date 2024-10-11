@@ -1,4 +1,3 @@
-import styles from "@styles/Tasks/TaskForm.module.css"
 import { useRef, useEffect } from "react"
 import Button from "@components/react/Button.jsx"
 
@@ -39,8 +38,8 @@ export default function TaskForm({ data, task, parentKey, onSubmit, onCancel }) 
     }
 
     return (
-        <form className={styles.form}>
-            <div className={styles.form_group}>
+        <form>
+            <div>
                 <label htmlFor="task_name">Task</label>
                 <input
                     type="text"
@@ -51,7 +50,7 @@ export default function TaskForm({ data, task, parentKey, onSubmit, onCancel }) 
                     ref={taskNameRef}
                 />
             </div>
-            <div className={styles.form_group}>
+            <div>
                 <label htmlFor="task_tag">Tag</label>
                 <input
                     type="text"

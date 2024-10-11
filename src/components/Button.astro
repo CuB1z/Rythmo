@@ -1,16 +1,25 @@
 ---
 interface Props {
     name: string;
-    link: string;
-    type: "primary" | "secondary";
+    link?: string;
+    type?: "primary" | "secondary" | "special";
+    buttonType?: "button" | "submit" | "reset";
 }
 
-const { name, link, type } = Astro.props;
+const { name, link, type, buttonType } = Astro.props;
 ---
 
-<a href={link} class={`btn ${type}`}>
-    {name}
-</a>
+{
+    link ? (
+        <a href={link} class={`btn ${type}`}>
+            {name}
+        </a>
+    ) : (
+        <button type={buttonType} class={`btn ${type}`}>
+            {name}
+        </button>
+    )
+}
 
 <style>
     .btn {
@@ -45,5 +54,34 @@ const { name, link, type } = Astro.props;
 
     .btn.secondary:hover {
         background-color: var(--accent-color-light);
+    }
+
+    .btn.special {
+        width: 100%;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(270deg, #ff00ff, #ff69b4, #ff1493, #ff00ff);
+        background-size: 400% 400%;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn.special:hover {
+        animation: pinkGradient 3s ease infinite;
+    }
+
+    @keyframes pinkGradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
     }
 </style>

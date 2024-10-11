@@ -1,19 +1,39 @@
 ---
-import AppleLogo from "@components/icons/Apple.astro"
-import GoogleLogo from "@components/icons/Google.astro"
-import GitHubLogo from "@components/icons/Github.astro"
-import FormGroup from "@components/forms/FormGroup.astro"
-import SocialButton from "@components/forms/SocialButton.astro"
-import RelatedLink from "@components/forms/RelatedLink.astro"
+import AppleLogo from "@components/icons/Apple.astro";
+import GoogleLogo from "@components/icons/Google.astro";
+import GitHubLogo from "@components/icons/Github.astro";
+import FormGroup from "@components/forms/FormGroup.astro";
+import SocialButton from "@components/forms/SocialButton.astro";
+import Button from "@components/Button.astro";
+import RelatedLink from "@components/forms/RelatedLink.astro";
 ---
 
 <form action="/api/register" method="post">
-    <FormGroup label="Email" type="email" id="email" placeholder="Type your mail" />
-    <FormGroup label="Username" type="text" id="username" placeholder="Type your username" />
-    <FormGroup label="Password" type="password" id="password" placeholder="Type your password" />
-    <button type="submit" class="register-button">Register</button>
-    <RelatedLink text1="Already have an account?" link="./login" text2="Login" />
-    <hr>
+    <FormGroup
+        label="Email"
+        type="email"
+        id="email"
+        placeholder="Type your mail"
+    />
+    <FormGroup
+        label="Username"
+        type="text"
+        id="username"
+        placeholder="Type your username"
+    />
+    <FormGroup
+        label="Password"
+        type="password"
+        id="password"
+        placeholder="Type your password"
+    />
+    <Button type="special" name="Register" buttonType="submit" />
+    <RelatedLink
+        text1="Already have an account?"
+        link="/login"
+        text2="Log in"
+    />
+    <hr />
     <div class="social-buttons">
         <SocialButton>
             <GoogleLogo />
@@ -22,85 +42,29 @@ import RelatedLink from "@components/forms/RelatedLink.astro"
             <AppleLogo />
         </SocialButton>
         <SocialButton>
-            <GitHubLogo />  
+            <GitHubLogo />
         </SocialButton>
     </div>
 </form>
 
 <style>
-    form {
-        width: 500px;
-        max-width: 100%;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        border: 1px solid #333;
-        border-radius: 12px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: bold;
-        color: #333;
-    }
-
-    input {
-        width: 100%;
-        padding: 0.75rem;
-        margin-bottom: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        box-sizing: border-box;
-        font-size: 1rem;
-    }
-    hr{
-        border: 0;
-        height: 1px;
-        background: #333;
-        margin: 1rem 0;
-    }
     .social-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    /* margin-top: 1rem; */
-}
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+    
     .register-button {
-        width: 100%;
-        padding: 0.75rem;
-        border: none;
-        border-radius: 8px;
-        background: linear-gradient(270deg, #ff00ff, #ff69b4, #ff1493, #ff00ff);
-        background-size: 400% 400%;
-        color: white;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
+        
 
         &:hover {
             animation: pinkGradient 3s ease infinite;
         }
     }
 
-    @keyframes pinkGradient {
-        0% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
-    }
+    
 
     .register-button:hover {
         background-color: #e64a19;
     }
-
-    
 </style>
