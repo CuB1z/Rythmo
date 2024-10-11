@@ -13,7 +13,7 @@ const AddEventForm = ({ show, setShow, onAddEvent }) => {
     };
 
     return (
-        <Modal title="Añadir Evento" show={show} setShow={setShow}>
+        <Modal title="New Event" show={show} setShow={setShow}>
             <form>
                 <label>
                     <span>Date</span>
