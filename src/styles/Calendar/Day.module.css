@@ -1,0 +1,67 @@
+.day {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    border: 1px solid transparent;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 150px;
+    min-width: 150px;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+
+    &.week {
+        height: 100%;
+        flex: 1;
+    }
+}
+
+.day:hover {
+    background-color: #ecf6f7;
+    border: 1px solid #b8d8dd;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.date {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.events {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5px;
+    align-items: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+.event {
+    background-color: #f6ffff;
+    border: 1px solid #b8d8dd;
+    transition: all 0.3s ease;
+    color: #333;
+    border-radius: 4px;
+    padding: 1px 2px 1px 10px;
+    width: 100%;
+    font-size: 0.9rem;
+    font-weight: 400;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.deleteIcon {
+    scale: 1;
+    opacity: 0;
+    transition: all 0.1s ease;
+}
+
+.event:hover .deleteIcon {
+    opacity: 1;
+}

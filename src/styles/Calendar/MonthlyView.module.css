@@ -1,61 +1,7 @@
 .monthlyView {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
     margin: 0 auto;
-    max-width: 1200px;
-    padding: 0 20px;
-}
-
-.day {
-    position: relative;
-    background-color:white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: 150px;
-    min-width: 150px;
-    box-sizing: border-box;
-    transition: box-shadow 0.3s ease-in-out;
-
-}
-.day:hover {
-    background-color: #ecf6f7;
-    border: 1px solid #b8d8dd;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.date {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.event {
-    background-color: #e50a77;
-    border: 1px solid white;
-    transition: all 0.3s ease;
-    color: white;
-    border-radius: 4px;
-    padding: 5px;
-    margin-top: 5px;
-    width: 92%;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 400;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.deleteIcon {
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-    margin-left: 10px;
-    background-color: transparent;
-    border: none;
-    display: inline-block;
-    padding: 0;
 }

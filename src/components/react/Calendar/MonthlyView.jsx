@@ -1,36 +1,14 @@
-import React from 'react';
 import styles from '@styles/calendar/MonthlyView.module.css';
+import Day from '@components/react/Calendar/Day.jsx';
 
 const MonthlyView = ({ datesForMonth, handleDayClick, handleDeleteEvent }) => {
     return (
         <div className={styles.monthlyView}>
-            {datesForMonth.map(day => (
-                <div key={day.date} className={styles.day} onClick={() => handleDayClick(day.date)}>
-                    <span className={styles.date}>{day.day}</span>
-                    {day.events.map(event => (
-                        <div key={event.id} className={styles.event}>
-                            {event.name}
-                            <button
-                                className={styles.deleteEvent}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleDeleteEvent(day.date, event.id);
-                                }}
-                            >
-                                <img
-                                    src="/trash.svg"
-                                    alt="Delete Icon"
-                                    className={styles.deleteIcon}
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleDeleteEvent(day.date, event.id);
-                                    }}
-                                />
-                            </button>
-                        </div>
-                    ))}
-                </div>
-            ))}
+            {
+                datesForMonth.map(day => (
+                    <Day key={day.date} day={day} handleDayClick={handleDayClick} handleDeleteEvent={handleDeleteEvent} />
+                ))
+            }
         </div>
     );
 };

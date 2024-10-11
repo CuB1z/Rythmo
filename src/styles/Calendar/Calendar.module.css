@@ -1,101 +1,12 @@
-.calendarGrid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7 columnas para los días de la semana */
-  gap: 10px;
-  margin-top: 20px;
-  position: relative;
+.calendarView {
+  width: 100%;
+  padding: 1rem;
 }
 
-.day {
-  min-height: 150px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: #fff;
-  position: relative;
-}
-
-.dayNumber {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  font-weight: bold;
-  font-size: 18px;
-  color: black;
-}
-
-.event {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f1f1f1;
-  padding: 5px;
-  margin-bottom: 5px;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-
-.calendarGridWeek {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
-  text-align: center;
-  height: 0vh;
-}
-
-.calendarDayHeader {
-  font-weight: bold;
-  background-color: #f0f0f0;
-  padding: 10px 0;
-  border: 1px solid #ccc;
-  height: 50px;
-  text-align: center;
-}
-
-.dayWeek{
-  height: 70vh;
-  padding: 10px;
-  border: 1px solid #ccc;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: #fff;
-  position: relative;
-}
 .calendarButtons {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
   margin-right:10%;
   margin-left:10%;
-}
-
-.calendarButton {
-  background-color:  #e50a77;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-
-
-}
-
-
-.calendarButton.secondary {
-  background-color:  #e50a77;
-}
-
-.calendarButton:hover {
-  background-color: black;
-  color: #fff;
-}
-
-.calendarButton.secondary:hover {
-  background-color: #5a6268;
-  color: #fff;
 }

@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
 import styles from '@styles/calendar/Calendar.module.css';
+import { useState, useEffect } from 'react';
 import { fake_data as initialData } from '@utils/fake_calendar';
-import MonthlyView from './MonthlyView.jsx';
-import WeeklyView from './WeeklyView.jsx';
-import AddEventForm from './AddEventForm';
+import MonthlyView from '@components/react/Calendar/MonthlyView.jsx';
+import WeeklyView from '@components/react/Calendar/WeeklyView.jsx';
+import AddEventForm from '@components/react/Calendar/AddEventForm.jsx';
+import Button from '@components/react/Button.jsx';
+
 
 export default function Calendar() {
   const [calendarData, setCalendarData] = useState(initialData);
@@ -86,6 +88,7 @@ export default function Calendar() {
           events: [{ id: `${new Date().getTime()}`, name: newEvent.name }],
         });
       }
+      console.log(updatedData);
       return updatedData;
     });
     setIsPopupVisible(false);
@@ -116,18 +119,18 @@ export default function Calendar() {
   return (
       <div id="calendar-view" className={styles.calendarView}>
         <div id="calendar-buttons" className={styles.calendarButtons}>
-          <button
+          <Button
               onClick={() => setViewMode('month')}
-              className={`${styles.calendarButton} ${viewMode === 'month' ? styles.secondary : ''}`}
+              customClass="primary"
           >
-            Vista Mensual
-          </button>
-          <button
+            <span>Vista Mensual</span>
+          </Button>
+          <Button
               onClick={() => setIsPopupVisible(true)}
-              className={styles.calendarButton}
+              customClass="primary"
           >
-            Añadir Evento
-          </button>
+            <span>Añadir Evento</span>
+          </Button>
         </div>
         {currentView}
         <AddEventForm

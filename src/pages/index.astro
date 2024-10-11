@@ -1,14 +1,10 @@
 ---
-import Calendar from '../components/react/Calendar/Calendar';
+import Layout from "@layouts/Layout.astro";
+import Calendar from "@components/react/Calendar/Calendar";
+import Tasks from "@components/react/Tasks/Tasks";
 ---
 
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rythmo</title>
-</head>
-<body>
+<Layout title="Rythmo">
+  <Tasks client:load />
   <Calendar client:load />
-</body>
-</html>
+</Layout>
