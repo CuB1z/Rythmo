@@ -123,13 +123,13 @@ export default function Calendar() {
               onClick={() => setViewMode('month')}
               customClass="primary"
           >
-            <span>Vista Mensual</span>
+            <span>Mensual View</span>
           </Button>
           <Button
               onClick={() => setIsPopupVisible(true)}
               customClass="primary"
           >
-            <span>Añadir Evento</span>
+            <span>Add Event</span>
           </Button>
         </div>
         {currentView}

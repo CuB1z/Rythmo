@@ -25,24 +25,25 @@ const { name, link, type } = Astro.props;
         font-weight: 500;
         line-height: 1.25rem;
         min-height: 38px;
+        transition: all 0.2s ease;
     }
 
     .btn.primary {
-        background-color: #ff69b4;
+        background-color: var(--accent-color);
         color: #fff;
     }
 
     .btn.primary:hover {
-        background-color: #dd1a82;
+        background-color: var(--accent-color-hover);
     }
 
     .btn.secondary {
-        border: 1px solid #ff69b4;
+        border: 1px solid var(--accent-color);
         background-color: transparent;
-        color: #ff69b4;
+        color: var(--accent-color);
     }
 
     .btn.secondary:hover {
-        background-color: #ff69b40f;
+        background-color: var(--accent-color-light);
     }
 </style>

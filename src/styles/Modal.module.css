@@ -57,7 +57,10 @@
         width: 100%;
         padding: 0px 20px;
         overflow: hidden;
-
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     hr {

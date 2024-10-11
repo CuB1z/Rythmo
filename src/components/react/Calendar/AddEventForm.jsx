@@ -14,9 +14,9 @@ const AddEventForm = ({ show, setShow, onAddEvent }) => {
 
     return (
         <Modal title="Añadir Evento" show={show} setShow={setShow}>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <label>
-                    Fecha:
+                    <span>Date</span>
                     <input
                         type="date"
                         value={newEvent.date}
@@ -25,7 +25,7 @@ const AddEventForm = ({ show, setShow, onAddEvent }) => {
                     />
                 </label>
                 <label>
-                    Evento:
+                    <span>Event</span>
                     <input
                         type="text"
                         value={newEvent.name}
@@ -33,7 +33,9 @@ const AddEventForm = ({ show, setShow, onAddEvent }) => {
                         required
                     />
                 </label>
-                <Button type="submit" style={{ display: 'block' }}>Añadir</Button>
+                <Button onClick={(e) => handleSubmit(e)}>
+                    <span>Add</span>
+                </Button>
             </form>
         </Modal>
     );

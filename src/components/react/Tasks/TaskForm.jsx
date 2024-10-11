@@ -62,10 +62,7 @@ export default function TaskForm({ data, task, parentKey, onSubmit, onCancel }) 
                     ref={taskTagRef}
                 />
             </div>
-            <div className={styles.form_actions}>
-                <Button onClick={onCancel} customClass="secondary">Cancel</Button>
-                <Button onClick={(event) => handleSubmit(event)}>Save</Button>
-            </div>
+            <Button onClick={(event) => handleSubmit(event)}>Save</Button>
         </form>
     )
 }

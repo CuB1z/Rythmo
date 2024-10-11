@@ -27,7 +27,9 @@ const { title, description } = Astro.props;
         /* Colors */
         --bg-color: #f7f7f7;
         --text-color: #333;
-        --accent-color: #ff69b4;
+        --accent-color: #e50a77;
+        --accent-color-hover: #ff69b4;
+        --accent-color-light: #ff69b40f;
         --bg-image: url('/inspiration-geometry.png');
         --bg-overlay-color: #eee;
 
@@ -95,10 +97,8 @@ const { title, description } = Astro.props;
         padding: 2rem;
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
-        border: 1px solid #333;
+        gap: 10px;
         border-radius: 12px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         background-color: #fff;
     }
 
@@ -106,7 +106,7 @@ const { title, description } = Astro.props;
         display: block;
         margin-bottom: 0.5rem;
         font-weight: bold;
-        color: #333;
+        color: #666;
     }
 
     input {
@@ -118,10 +118,11 @@ const { title, description } = Astro.props;
         box-sizing: border-box;
         font-size: 1rem;
     }
+
     hr{
         border: 0;
         height: 1px;
-        background: #333;
-        margin: 1rem 0;
+        background: #666;
+        margin-bottom: 1rem;
     }
 </style>
