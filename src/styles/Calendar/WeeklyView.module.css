@@ -1,0 +1,19 @@
+.weeklyView {    
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    height: 80vh;
+    align-items: stretch;
+    margin: 0 auto;
+}
+
+.day {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    transition: box-shadow 0.3s ease-in-out;
+}

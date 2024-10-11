@@ -1,16 +1,24 @@
 .button {
     max-width: 100%;
     max-height: 30px;
-    padding: 2px 6px;
-    border-radius: 5px;
+    padding: 22px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--accent-color);
-    border: 1px solid var(--accent-color);
+    border: none;
+    border-radius: 5px;
     color: white;
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.15s ease;
     
+    &:hover {
+        background-color: #000;
+        color: #fff;
+    }
+
     &.secondary {        
         background-color: #000;
         border: 1px solid #000;
@@ -18,8 +26,8 @@
     }
 
     &.tertiary {
+        padding: 4px;
         background: none;
-        border: none;
         transition: all 0.1s ease;
 
         &:hover {
@@ -28,6 +36,7 @@
     }
 
     &.disabled {
+        padding: 4px;
         background: none;
         border: none;
         opacity: 0.2;

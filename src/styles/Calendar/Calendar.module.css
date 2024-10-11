@@ -1,0 +1,12 @@
+.calendarView {
+  width: 100%;
+  padding: 1rem;
+}
+
+.calendarButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-right:10%;
+  margin-left:10%;
+}
