@@ -1,0 +1,15 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { APP_DATA } from "@utils/constants";
+import Tasks from "@components/react/Tasks/Tasks";
+import Calendar from "@components/react/Calendar/Calendar";
+import { fake_data } from "@utils/fake_data";
+---
+
+<Layout title={APP_DATA.name}>
+    <Tasks
+        client:load
+        userData={fake_data}
+    />
+    <Calendar client:load />
+</Layout>

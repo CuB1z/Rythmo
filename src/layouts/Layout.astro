@@ -30,6 +30,9 @@ const { title, description } = Astro.props;
         --accent-color: #ff69b4;
         --bg-image: url('/inspiration-geometry.png');
         --bg-overlay-color: #eee;
+
+        /* Sizes */
+        --navbar-height: 60px;
     }
 
     * {
@@ -58,15 +61,15 @@ const { title, description } = Astro.props;
     }
 
     main {
+        width: 100%;
+        max-width: 1300px;
         min-height: 100vh;
+        padding-top: calc(var(--navbar-height) + 20px);
         display: flex;
         flex-direction: column;
         gap: 5rem;
         justify-content: center;
         align-items: center;
-        width: 100%;
-        max-width: 1300px;
-        min-height: 100vh;
     }
 
     img {
