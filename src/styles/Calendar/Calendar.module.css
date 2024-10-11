@@ -7,14 +7,14 @@
 }
 
 .day {
-  min-height: 150px;  /* Altura mínima de cada celda */
+  min-height: 150px;
   padding: 10px;
   border: 1px solid #ccc;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   background-color: #fff;
-  position: relative; /* Para que el número del día se posicione relativo a esta celda */
+  position: relative;
 }
 
 .dayNumber {
@@ -37,27 +37,26 @@
   font-size: 14px;
 }
 
-/* Contenedor de la cuadrícula semanal */
+
 .calendarGridWeek {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);  /* 7 columnas, una para cada día de la semana */
-  gap: 10px;  /* Espacio entre los días */
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
   text-align: center;
-  height: 0vh;  /* Hace que el contenedor ocupe la altura completa de la ventana */
+  height: 0vh;
 }
 
-/* Cabecera de los días de la semana */
 .calendarDayHeader {
   font-weight: bold;
   background-color: #f0f0f0;
   padding: 10px 0;
   border: 1px solid #ccc;
-  height: 50px;  /* Fija la altura de las cabeceras */
+  height: 50px;
   text-align: center;
 }
 
 .dayWeek{
-  height: 70vh;  /* Cada celda ocupará un 20% de la altura de la ventana */
+  height: 70vh;
   padding: 10px;
   border: 1px solid #ccc;
   display: flex;
@@ -70,21 +69,25 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  margin-right:10%;
+  margin-left:10%;
 }
 
 .calendarButton {
-  background-color: black;
+  background-color:  #e50a77;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
+
+
 }
 
 
 .calendarButton.secondary {
-  background-color: black;
+  background-color:  #e50a77;
 }
 
 .calendarButton:hover {

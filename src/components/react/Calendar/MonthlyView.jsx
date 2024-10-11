@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '@styles/calendar/MonthlyView.module.css';
 
-const MonthlyView = ({ datesForMonth, handleDayClick }) => {
+const MonthlyView = ({ datesForMonth, handleDayClick, handleDeleteEvent }) => {
     return (
         <div className={styles.monthlyView}>
             {datesForMonth.map(day => (
@@ -10,6 +10,23 @@ const MonthlyView = ({ datesForMonth, handleDayClick }) => {
                     {day.events.map(event => (
                         <div key={event.id} className={styles.event}>
                             {event.name}
+                            <button
+                                className={styles.deleteEvent}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDeleteEvent(day.date, event.id);
+                                }}
+                            >
+                                <img
+                                    src="/trash.svg"
+                                    alt="Delete Icon"
+                                    className={styles.deleteIcon}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDeleteEvent(day.date, event.id);
+                                    }}
+                                />
+                            </button>
                         </div>
                     ))}
                 </div>

@@ -5,7 +5,6 @@ import MonthlyView from './MonthlyView.jsx';
 import WeeklyView from './WeeklyView.jsx';
 import AddEventForm from './AddEventForm';
 
-
 export default function Calendar() {
   const [calendarData, setCalendarData] = useState(initialData);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -110,6 +109,10 @@ export default function Calendar() {
     }
   };
 
+  const currentView = viewMode === 'month'
+      ? <MonthlyView datesForMonth={datesForMonth} handleDayClick={handleDayClick} handleDeleteEvent={handleDeleteEvent} />
+      : <WeeklyView datesForWeek={datesForWeek} handleDeleteEvent={handleDeleteEvent} />;
+
   return (
       <div id="calendar-view" className={styles.calendarView}>
         <div id="calendar-buttons" className={styles.calendarButtons}>
@@ -121,15 +124,12 @@ export default function Calendar() {
           </button>
           <button
               onClick={() => setIsPopupVisible(true)}
-              className={`${styles.calendarButton} ${styles.secondary}`}
+              className={styles.calendarButton}
           >
             Añadir Evento
           </button>
         </div>
-        {viewMode === 'month' && (
-            <MonthlyView datesForMonth={datesForMonth} handleDayClick={handleDayClick} />
-        )}
-        {viewMode === 'week' && <WeeklyView datesForWeek={datesForWeek} />}
+        {currentView}
         <AddEventForm
             show={isPopupVisible}
             setShow={setIsPopupVisible}
@@ -137,5 +137,4 @@ export default function Calendar() {
         />
       </div>
   );
-};
-
+}
