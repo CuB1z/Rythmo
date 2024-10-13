@@ -1,4 +1,4 @@
-import styles from '@styles/calendar/Calendar.module.css';
+import styles from '@styles/Calendar/Calendar.module.css';
 import { useState, useEffect } from 'react';
 import { fake_data as initialData } from '@utils/fake_calendar';
 import MonthlyView from '@components/react/Calendar/MonthlyView.jsx';

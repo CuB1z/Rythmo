@@ -1,4 +1,4 @@
-import styles from '@styles/calendar/MonthlyView.module.css';
+import styles from '@styles/Calendar/MonthlyView.module.css';
 import Day from '@components/react/Calendar/Day.jsx';
 
 const MonthlyView = ({ datesForMonth, handleDayClick, handleDeleteEvent }) => {

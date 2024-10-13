@@ -1,4 +1,4 @@
-import styles from '@styles/calendar/WeeklyView.module.css';
+import styles from '@styles/Calendar/WeeklyView.module.css';
 import Day from '@components/react/Calendar/Day.jsx';
 
 const WeeklyView = ({ datesForWeek, handleDeleteEvent }) => {
