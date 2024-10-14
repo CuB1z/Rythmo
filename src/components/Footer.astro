@@ -1,0 +1,33 @@
+---
+import { APP_DATA } from "@utils/constants";
+
+const year = new Date().getFullYear();
+---
+
+<footer>
+    <span>&copy; {year} {APP_DATA.author}</span>
+    <span>Bringing <em>{APP_DATA.name}</em> to life</span>
+</footer>
+
+<style>
+    footer {
+        height: var(--footer-height);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        background-color: #111;
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+
+    em {
+        font-style: normal;
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+</style>

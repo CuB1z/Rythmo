@@ -19,6 +19,7 @@ const AVAILABLE_ROUTES = {
 const APP_DATA = {
     name: "Rythmo",
     description: "Rythmo is a platform that helps you to organize your study time and keep track of your progress.",
+    author: "Bit Forge",
 }
 
 export {
