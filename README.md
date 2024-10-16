@@ -14,5 +14,5 @@ Students App developed in Astro framework for educational purposes.
 | Juan Ramírez   | [@Jrambla5](https://github.com/Jrambla5)                 | [Juan Ramírez](https://www.linkedin.com/in/juan-ram%C3%ADrez-blanco-1440a723a/) |
 | Hugo Sánchez   | TBD                                                      | TBD                                                                             |
 | Jorge Ramírez  | [@jorgeramirezgayo](https://github.com/jorgeramirezgayo) | ----                                                                            |
-| Alejandro Rico | TBD                                                      | TBD                                                                             |
+| Alejandro Rico | [@ALEJANDR0-RIC0](https://github.com/ALEJANDR0-RIC0)     | TBD                                                                             |
 | Olga Somalo    | [@olga-ssf](https://github.com/olga-ssf)                 | [Olga Somalo](https://www.linkedin.com/in/olga-somalo-serrano-88620331b/)       |
