@@ -12,9 +12,11 @@
   "dependencies": {
     "@astrojs/react": "^3.6.2",
     "@astrojs/vue": "^4.5.2",
+    "@supabase/supabase-js": "^2.45.6",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
     "astro": "^4.15.9",
+    "bcrypt": "^5.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "stylelint-config-astro": "^1.0.4",
