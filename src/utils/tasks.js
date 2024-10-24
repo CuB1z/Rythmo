@@ -1,6 +1,23 @@
 import { v4 as uuid } from 'uuid'
 
 /**
+ * Retrieve all tasks from the server using a specific key.
+ * 
+ * @param {string} key
+ * @returns {{ ok: boolean, data: object }}
+*/
+async function retrieveTasks(key) {
+    const url = `http://localhost:4321/api/tasks?key=${key}`
+    const response = await fetch(url)
+    const data = await response.json()
+
+    return {
+        ok: response.ok,
+        data: data
+    }
+}
+
+/**
  * Add a new task to the tasks array of a specific key.
  * 
  * @param {object} data
@@ -105,4 +122,4 @@ function moveTask(data, sourceKey, destinationKey, taskId) {
     }
 }
 
-export { addTask, removeTask, editTask, moveTask }
+export { retrieveTasks, addTask, removeTask, editTask, moveTask }
