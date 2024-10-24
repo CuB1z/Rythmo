@@ -4,15 +4,17 @@ import Tasks from "@components/react/Tasks/Tasks";
 import Calendar from "@components/react/Calendar/Calendar";
 import { APP_DATA } from "@utils/constants";
 import { retrieveTasks } from "@utils/tasks";
+import { getCurrentUser } from "@lib/supabase";
 
-const response = await retrieveTasks("key");
-const data = response.data;
+const { data, error } = await getCurrentUser();
+
+// If there is an error, it means the user is not logged in
+if (error) {
+    return Astro.redirect("/denied")
+}
 ---
 
 <Layout title={APP_DATA.name}>
-    <Tasks
-        client:load
-        userData={data}
-    />
+    <Tasks client:load />
     <Calendar client:load />
 </Layout>

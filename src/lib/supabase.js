@@ -36,3 +36,37 @@ export const loginUser = async (email, password) => {
 
     return { data, error }
 }
+
+/**
+ * Logout a user in Supabase
+ * 
+ * @returns {Promise<{data: any, error: any}>}
+ */
+export const logoutUser = async () => {
+    const { data, error } = await supabase.auth.signOut()
+
+    return { data, error }
+}
+
+/**
+ * Get the current logged in user
+ * 
+ * @returns {Promise<{data: any, error: any}>}
+ */
+export const getCurrentUser = async () => {
+    const {data, error} = await supabase.auth.getUser()
+
+    return {data, error}
+}
+
+/**
+ * Retrieve tasks from Supabase
+ * 
+ * @returns {Promise<{data: any, error: any}>}
+ */
+export const retrieveTasks = async () => {
+    const { data, error } = await supabase.from("Task").select("*")
+
+    console.log(data)
+    return { data, error }
+}

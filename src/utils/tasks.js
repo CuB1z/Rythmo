@@ -3,11 +3,10 @@ import { v4 as uuid } from 'uuid'
 /**
  * Retrieve all tasks from the server using a specific key.
  * 
- * @param {string} key
  * @returns {{ ok: boolean, data: object }}
 */
-async function retrieveTasks(key) {
-    const url = `http://localhost:4321/api/tasks?key=${key}`
+async function retrieveTasks() {
+    const url = `http://localhost:4321/api/tasks`
     const response = await fetch(url)
     const data = await response.json()
 

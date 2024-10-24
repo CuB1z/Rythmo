@@ -1,18 +1,36 @@
 import styles from "@styles/Tasks/Tasks.module.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import SingleTask from "@components/react/Tasks/SingleTask.jsx"
 import Modal from "@components/react/Modal.jsx"
 import TaskForm from "@components/react/Tasks/TaskForm.jsx"
 import Button from "@components/react/Button.jsx"
 
-import { addTask, removeTask, editTask, moveTask } from "@utils/tasks.js"
+import { retrieveTasks, addTask, removeTask, editTask, moveTask } from "@utils/tasks.js"
 
 // Fake data
-export default function Tasks({ userData }) {
-    const [data, setData] = useState(userData)
+export default function Tasks() {
+    const [data, setData] = useState({
+        to_do: { title: "To Do", tasks: [] },
+        ongoing: { title: "Ongoing", tasks: [] },
+        completed: { title: "Completed", tasks: [] }
+    })
     const [parentKey, setParentKey] = useState("")
     const [showModal, setShowModal] = useState(false)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await retrieveTasks()
+
+            if (response.ok) {
+                console.log(response)
+            } else {
+                console.error("Failed to retrieve tasks")
+            }
+        }
+
+        fetchData()
+    }, [])
 
     // Handle onclick event to add a new task ==================================
     const handleAddTask = (event) => {
