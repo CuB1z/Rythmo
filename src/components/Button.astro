@@ -15,7 +15,7 @@ const { name, link, type, buttonType } = Astro.props;
             {name}
         </a>
     ) : (
-        <button type={buttonType} class={`btn ${type}`}>
+        <button type={buttonType || "button"} class={`btn ${type}`}>
             {name}
         </button>
     )

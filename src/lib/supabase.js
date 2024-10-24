@@ -5,4 +5,11 @@ export const supabase = createClient(
     import.meta.env.SUPABASE_KEY,
 );
 
-export { supabase }
+export const registerUser = async (email, password) => {
+    const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+    })
+    
+    return { data, error }
+}
