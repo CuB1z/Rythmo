@@ -7,47 +7,54 @@ import SocialButton from "@components/forms/SocialButton.astro";
 import Button from "@components/Button.astro";
 import RelatedLink from "@components/forms/RelatedLink.astro";
 ---
-
-<form>
-    <FormGroup
-        label="Email"
-        type="email"
-        id="email"
-        placeholder="Type your mail"
-    />
-    <FormGroup
-        label="Username"
-        type="text"
-        id="username"
-        placeholder="Type your username"
-    />
-    <FormGroup
-        label="Password"
-        type="password"
-        id="password"
-        placeholder="Type your password"
-    />
-    <Button type="special" name="Register" buttonType="submit" />
-    <RelatedLink
-        text1="Already have an account?"
-        link="/login"
-        text2="Log in"
-    />
-    <hr />
-    <div class="social-buttons">
-        <SocialButton>
-            <GoogleLogo />
-        </SocialButton>
-        <SocialButton>
-            <AppleLogo />
-        </SocialButton>
-        <SocialButton>
-            <GitHubLogo />
-        </SocialButton>
-    </div>
-</form>
+<div class="form-container">
+    <form>
+        <FormGroup
+            label="Email"
+            type="email"
+            id="email"
+            placeholder="Type your mail"
+        />
+        <FormGroup
+            label="Username"
+            type="text"
+            id="username"
+            placeholder="Type your username"
+        />
+        <FormGroup
+            label="Password"
+            type="password"
+            id="password"
+            placeholder="Type your password"
+        />
+        <Button type="special" name="Register" buttonType="submit" />
+        <RelatedLink
+            text1="Already have an account?"
+            link="/login"
+            text2="Log in"
+        />
+        <hr />
+        <div class="social-buttons">
+            <SocialButton>
+                <GoogleLogo />
+            </SocialButton>
+            <SocialButton>
+                <AppleLogo />
+            </SocialButton>
+            <SocialButton>
+                <GitHubLogo />
+            </SocialButton>
+        </div>
+    </form>
+</div>
 
 <style>
+    .form-container {
+        width: 100%;
+        max-width: 490px;
+        margin: 0 auto;
+        padding: 1rem;
+    }
     .social-buttons {
         display: flex;
         justify-content: center;
