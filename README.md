@@ -26,7 +26,7 @@ Follow these steps to get the application up and running:
 ## Credits 👨‍💻
 |      Name      |                           Github                         |                                   LinkedIn                                      |
 | -------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Daniel Santos  | [@danisntoss](https://github.com/danisntoss)             | [Daniel Santos](https://www.linkedin.com/in/danisantos15/)                      |
+| Daniel Santos  | [@danisntoss](https://github.com/danisntoss)             | [Daniel Santos](https://www.linkedin.com/in/danisntoss/)                      |
 | Diego Sánchez  | [@CuB1z](https://github.com/CuB1z)                       | [Diego Sánchez](https://www.linkedin.com/in/cub1z/)                             |
 | David Pimentel | [@daaaviid-03](https://github.com/daaaviid-03)           | [David Pimentel](https://www.linkedin.com/in/david-pimentel-montes/)            |
 | Juan Ramírez   | [@Jrambla5](https://github.com/Jrambla5)                 | [Juan Ramírez](https://www.linkedin.com/in/juan-ram%C3%ADrez-blanco-1440a723a/) |
