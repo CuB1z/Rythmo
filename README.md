@@ -1,9 +1,9 @@
 # Rythmo 🚀
 
-## Description 📝
-Students App developed in Astro framework for educational purposes.
-- University: Rey Juan Carlos University
-- Subject: Software Processes
+## What is Rythmo? 🤔
+Rythmo is a web application that allows students to manage their time and tasks in a more efficient way. It is designed to help students organize their daily routines and improve their productivity.
+
+As part of Software Process, we have developed this project using the Scrum methodology. We have divided the project into sprints, each one with its own goals and tasks. We have also used Jira to manage the project and Miro to create the wireframes and mockups.
 
 ## Getting Started 🚀
 
