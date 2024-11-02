@@ -65,8 +65,32 @@ export const getCurrentUser = async () => {
  * @returns {Promise<{data: any, error: any}>}
  */
 export const retrieveTasks = async () => {
-    const { data, error } = await supabase.from("Task").select("*")
+    const res = await supabase.from("Task").select("*")
 
-    console.log(data)
-    return { data, error }
+    return { data: res.data, error: res.error }
+}
+
+/**
+ * Insert a new task in Supabase
+ * 
+ * @param {string} name
+ * @param {string} tag
+ * @returns {Promise<{data: any, error: any}>}
+ */
+export const insertTask = async (name, tag) => {
+    const userId = await (await supabase.auth.getUser()).data.user.id
+
+    const res = await supabase.from("Task").insert([
+        {
+            name: name,
+            tag: tag,
+            user_id: userId,
+        }
+    ])
+
+    if (res.error) {
+        return { data: null, error: res.error }
+    }
+
+    return await retrieveTasks()
 }

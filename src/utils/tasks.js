@@ -1,4 +1,21 @@
-import { v4 as uuid } from 'uuid'
+const API_TASKS = 'http://localhost:4321/api/tasks'
+
+/**
+ * Parse the response from the server and return the data in the correct format.
+ * 
+ * @param {object} response
+ * @returns {object}
+ */
+function parseTasks(response, data) {
+    response.data.forEach(task => {
+        const taskData = { id: task.id, tag: task.tag, name: task.name }
+        const key = task.status.toLowerCase()
+
+        data[key].tasks.push(taskData)
+    })
+
+    return data
+}
 
 /**
  * Retrieve all tasks from the server using a specific key.
@@ -6,40 +23,62 @@ import { v4 as uuid } from 'uuid'
  * @returns {{ ok: boolean, data: object }}
 */
 async function retrieveTasks() {
-    const url = `http://localhost:4321/api/tasks`
+    const url = API_TASKS
     const response = await fetch(url)
-    const data = await response.json()
+    const parsedResponse = await response.json()
 
-    return {
-        ok: response.ok,
-        data: data
+    let data = {
+        to_do: { title: "To Do", tasks: [] },
+        ongoing: { title: "Ongoing", tasks: [] },
+        completed: { title: "Completed", tasks: [] }
     }
+
+    if (parsedResponse.error) {
+        return { ok: false, data }
+    }
+
+    data = parseTasks(parsedResponse, data)
+    return { ok: true, data: data }
 }
 
 /**
  * Add a new task to the tasks array of a specific key.
  * 
- * @param {object} data
- * @param {string} key 
  * @param {string} name 
  * @param {string} tag 
  * @returns {{ ok: boolean, data: object }}
 */
-function addTask(data, _, key, name, tag) {
+async function addTask(name, tag) {
     const newTask = {
-        id: uuid(),
         tag: tag ? tag : "AD",
         name: name ? name : "Provide a task name"
     }
 
-    try {
-        data[key].tasks.push(newTask)
-        const updatedData = { ...data }
-        return { ok: true, data: updatedData }
-    } catch (error) {
-        console.error(error)
+    const response = await fetch(API_TASKS, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: newTask.name,
+            tag: newTask.tag
+        })
+    })
+
+    const parsedResponse = await response.json()
+
+    if (parsedResponse.error) {
         return { ok: false, data }
     }
+
+    let data = {
+        to_do: { title: "To Do", tasks: [] },
+        ongoing: { title: "Ongoing", tasks: [] },
+        completed: { title: "Completed", tasks: [] }
+    }
+
+    data = parseTasks(parsedResponse, data)
+    return { ok: true, data: data }
 }
 
 /**

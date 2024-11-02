@@ -6,7 +6,13 @@ import Modal from "@components/react/Modal.jsx"
 import TaskForm from "@components/react/Tasks/TaskForm.jsx"
 import Button from "@components/react/Button.jsx"
 
-import { retrieveTasks, addTask, removeTask, editTask, moveTask } from "@utils/tasks.js"
+import {
+    retrieveTasks,
+    addTask,
+    removeTask,
+    editTask,
+    moveTask
+} from "@utils/tasks.js"
 
 // Fake data
 export default function Tasks() {
@@ -15,44 +21,33 @@ export default function Tasks() {
         ongoing: { title: "Ongoing", tasks: [] },
         completed: { title: "Completed", tasks: [] }
     })
-    const [parentKey, setParentKey] = useState("")
     const [showModal, setShowModal] = useState(false)
 
+    // Fetch data from the API ==================================================
     useEffect(() => {
         const fetchData = async () => {
             const response = await retrieveTasks()
-
-            if (response.ok) {
-                console.log(response)
-            } else {
-                console.error("Failed to retrieve tasks")
-            }
+            setData(response.data)
         }
 
         fetchData()
     }, [])
 
     // Handle onclick event to add a new task ==================================
-    const handleAddTask = (event) => {
-        const id = event.target.id
-        setParentKey(id)
+    const handleAddTask = () => {
         setShowModal(true)
     }
 
     // Add a new task to the selected list =====================================
-    const onAdd = (data, parentKey, _, taskName, taskTag) => {
-        const response = addTask(data, _, parentKey, taskName, taskTag)
+    const onAdd = async (taskName, taskTag) => {
+        const response = await addTask(taskName, taskTag)
 
-        if (response.ok) {
-            setData(response.data)
-        } else {
-            console.error("Failed to add a new task")
-        }
+        if (response.ok) setData(response.data)
     }
 
     // Handle submit event to add a new task ===================================
-    const handleSubmit = (data, parentKey, _, taskName, taskTag) => {
-        onAdd(data, parentKey, _, taskName, taskTag)
+    const handleSubmit = (taskName, taskTag) => {
+        onAdd(taskName, taskTag)
         setShowModal(false)
     }
 
@@ -128,7 +123,7 @@ export default function Tasks() {
                             <div className={styles.add_task}>
                                 {
                                     key === "to_do" &&
-                                    <Button id={key} onClick={(event) => handleAddTask(event)}>Add Task</Button>
+                                    <Button id={key} onClick={handleAddTask}>Add Task</Button>
                                 }
                             </div>
                         </section>
@@ -143,8 +138,6 @@ export default function Tasks() {
                     setShow={setShowModal}
                 >
                     <TaskForm
-                        data={data}
-                        parentKey={parentKey}
                         task={{ name: "", tag: "" }}
                         onSubmit={handleSubmit}
                         onCancel={() => setShowModal(false)}
