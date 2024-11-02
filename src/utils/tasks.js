@@ -62,7 +62,7 @@ async function addTask(name, tag) {
     const parsedResponse = await response.json()
 
     if (parsedResponse.error) {
-        return { ok: false, data }
+        return { ok: false, data: {} }
     }
 
     let data = {
@@ -78,8 +78,6 @@ async function addTask(name, tag) {
 /**
  * Remove a task from the tasks array of a specific key.
  * 
- * @param {object} data
- * @param {string} key
  * @param {string} taskId
  * @returns {{ ok: boolean, data: object }}
 */
@@ -93,7 +91,7 @@ async function removeTask(taskId) {
     const parsedResponse = await response.json()
 
     if (parsedResponse.error) {
-        return { ok: false, data }
+        return { ok: false, data: {} }
     }
 
     let data = {
@@ -109,30 +107,32 @@ async function removeTask(taskId) {
 /**
  * Edit a task from the tasks array of a specific key.
  * 
- * @param {object} data
- * @param {string} key
  * @param {string} taskId
  * @param {string} name
  * @param {string} tag
  * @returns {{ ok: boolean, data: object }}
 */
-function editTask(data, key, taskId, name, tag) {
-    try {
-        const updatedTasks = data[key].tasks.map(task => {
-            if (task.id === taskId) {
-                task.name = name
-                task.tag = tag
-            }
-            return task
-        })
+async function editTask(taskId, name, tag) {
+    const response = await fetch(API_TASKS, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: taskId, name, tag })
+    })
 
-        data[key].tasks = updatedTasks
-        const updatedData = { ...data }
-        return { ok: true, data: updatedData }
-    } catch (error) {
-        console.error(error)
-        return { ok: false, data }
+    const parsedResponse = await response.json()
+
+    if (parsedResponse.error) {
+        return { ok: false, data: {} }
     }
+
+    let data = {
+        to_do: { title: "To Do", tasks: [] },
+        ongoing: { title: "Ongoing", tasks: [] },
+        completed: { title: "Completed", tasks: [] }
+    }
+
+    data = parseTasks(parsedResponse, data)
+    return { ok: true, data: data }
 }
 
 /**

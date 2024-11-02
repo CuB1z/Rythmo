@@ -45,7 +45,7 @@ export default function Tasks() {
     }
 
     // Handle submit event to add a new task ===================================
-    const handleSubmit = (taskName, taskTag) => {
+    const handleSubmit = (_, taskName, taskTag) => {
         onAdd(taskName, taskTag)
         setShowModal(false)
     }
@@ -57,8 +57,8 @@ export default function Tasks() {
     }
 
     // Edit a task from the selected list ======================================
-    const onEdit = (data, parentKey, id, taskName, taskTag) => {
-        const response = editTask(data, parentKey, id, taskName, taskTag)
+    const onEdit = async (id, taskName, taskTag) => {
+        const response = await editTask(id, taskName, taskTag)
         if (response.ok) setData(response.data)
     }
 

@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react"
 import Button from "@components/react/Button.jsx"
 
-export default function TaskForm({ task, onSubmit, onCancel }) {
+export default function TaskForm({ data, task, parentKey, onSubmit, onCancel }) {
 
     // Create refs for the input fields
     const taskNameRef = useRef(null)
@@ -34,7 +34,7 @@ export default function TaskForm({ task, onSubmit, onCancel }) {
         event.preventDefault()
         const taskNameValue = taskNameRef.current.value
         const taskTagValue = taskTagRef.current.value
-        onSubmit(taskNameValue, taskTagValue)
+        onSubmit(task.id, taskNameValue, taskTagValue)
     }
 
     return (

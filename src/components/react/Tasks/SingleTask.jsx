@@ -25,8 +25,8 @@ export default function SingleTask({ data, task, parentKey, onDelete, onEdit, on
     const handleDelete = () => onDelete(task.id)
 
     // Handle editing a task
-    const handleSubmit = (data, parentKey, id, taskName, taskTag) => {
-        onEdit(data, parentKey, id, taskName, taskTag)
+    const handleSubmit = (id, taskName, taskTag) => {
+        onEdit(id, taskName, taskTag)
         setShowModal(false)
     }
 

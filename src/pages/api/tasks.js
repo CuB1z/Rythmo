@@ -1,4 +1,9 @@
-import { retrieveTasks, insertTask, removeTask } from "@lib/db/Task"
+import {
+    retrieveTasks,
+    insertTask,
+    removeTask,
+    updateTask
+} from "@lib/db/Task"
 
 export const GET = async () => {
     const res = await retrieveTasks()
@@ -22,6 +27,15 @@ export const DELETE = async ({ request }) => {
     const res = await removeTask(id);
 
     console.log("DELETE: ", id)
+    console.log(res)
+    return new Response(JSON.stringify(res));
+}
+
+export const PATCH = async ({ request }) => {
+    const { id, name, tag } = await request.json();
+    const res = await updateTask(id, name, tag);
+    
+    console.log("PATCH: ", id)
     console.log(res)
     return new Response(JSON.stringify(res));
 }
