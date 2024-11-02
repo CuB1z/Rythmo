@@ -1,4 +1,5 @@
-const API_TASKS = 'http://localhost:4321/api/tasks'
+import { SERVER_CONFIG } from "./constants"
+const API_TASKS = `${SERVER_CONFIG.url}${SERVER_CONFIG.api}/tasks`
 
 /**
  * Parse the response from the server and return the data in the correct format.
@@ -138,31 +139,35 @@ async function editTask(taskId, name, tag) {
 /**
  * Move a task from one key to another key.
  * 
- * @param {object} data
  * @param {string} sourceKey
  * @param {string} destinationKey
  * @param {string} taskId
  * @returns {{ ok: boolean, data: object }}
  */
-function moveTask(data, sourceKey, destinationKey, taskId) {
-
+async function moveTask(sourceKey, destinationKey, taskId) {
     // Prevent moving a task to the same list
     if (sourceKey === destinationKey) return { ok: false, data }
 
-    try {
-        const task = data[sourceKey].tasks.find(task => task.id === taskId)
-        const updatedSourceTasks = data[sourceKey].tasks.filter(task => task.id !== taskId)
-        const updatedDestinationTasks = [...data[destinationKey].tasks, task]
+    const response = await fetch(API_TASKS, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: taskId, status: destinationKey.toUpperCase() })
+    })
 
-        data[sourceKey].tasks = updatedSourceTasks
-        data[destinationKey].tasks = updatedDestinationTasks
+    const parsedResponse = await response.json()
 
-        const updatedData = { ...data }
-        return { ok: true, data: updatedData }
-    } catch (error) {
-        console.error(error)
-        return { ok: false, data }
+    if (parsedResponse.error) {
+        return { ok: false, data: {} }
     }
+
+    let data = {
+        to_do: { title: "To Do", tasks: [] },
+        ongoing: { title: "Ongoing", tasks: [] },
+        completed: { title: "Completed", tasks: [] }
+    }
+
+    data = parseTasks(parsedResponse, data)
+    return { ok: true, data: data }
 }
 
 export { retrieveTasks, addTask, removeTask, editTask, moveTask }

@@ -63,9 +63,9 @@ export default function Tasks() {
     }
 
     // Move a task from one list to another ====================================
-    const onMove = (data, fromKey, id) => {
+    const onMove = async (fromKey, id) => {
         const toKey = fromKey === "to_do" ? "ongoing" : "completed"
-        const response = moveTask(data, fromKey, toKey, id)
+        const response = await moveTask(fromKey, toKey, id)
 
         if (response.ok) setData(response.data)
     }

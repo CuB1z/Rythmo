@@ -1,3 +1,8 @@
+const SERVER_CONFIG = {
+    url: import.meta.env.URL || "http://localhost:4321",
+    api: "/api",
+}
+
 const AVAILABLE_ROUTES = {
     home: {
         path: "/",
@@ -23,6 +28,7 @@ const APP_DATA = {
 }
 
 export {
+    SERVER_CONFIG,
     AVAILABLE_ROUTES,
     APP_DATA,
 }

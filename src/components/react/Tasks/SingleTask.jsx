@@ -18,7 +18,7 @@ export default function SingleTask({ data, task, parentKey, onDelete, onEdit, on
 
     // Handle moving a task on click
     const handleMove = () => {
-        onMove(data, parentKey, task.id)
+        onMove(parentKey, task.id)
     }
 
     // Handle deleting a task on click
