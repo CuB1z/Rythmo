@@ -41,7 +41,6 @@ export default function Tasks() {
     // Add a new task to the selected list =====================================
     const onAdd = async (taskName, taskTag) => {
         const response = await addTask(taskName, taskTag)
-
         if (response.ok) setData(response.data)
     }
 
@@ -54,23 +53,13 @@ export default function Tasks() {
     // Remove a task from the selected list ====================================
     const onDelete = (data, parentKey, id) => {
         const response = removeTask(data, parentKey, id)
-
-        if (response.ok) {
-            setData(response.data)
-        } else {
-            console.error("Failed to delete a task")
-        }
+        if (response.ok) setData(response.data)
     }
 
     // Edit a task from the selected list ======================================
     const onEdit = (data, parentKey, id, taskName, taskTag) => {
         const response = editTask(data, parentKey, id, taskName, taskTag)
-
-        if (response.ok) {
-            setData(response.data)
-        } else {
-            console.error("Failed to edit a task")
-        }
+        if (response.ok) setData(response.data)
     }
 
     // Move a task from one list to another ====================================
@@ -78,11 +67,7 @@ export default function Tasks() {
         const toKey = fromKey === "to_do" ? "ongoing" : "completed"
         const response = moveTask(data, fromKey, toKey, id)
 
-        if (response.ok) {
-            setData(response.data)
-        } else {
-            console.error("Failed to move a task")
-        }
+        if (response.ok) setData(response.data)
     }
 
     return (

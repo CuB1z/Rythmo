@@ -1,4 +1,4 @@
-import { retrieveTasks, insertTask } from "@lib/supabase"
+import { retrieveTasks, insertTask } from "@lib/db/Task"
 
 export const GET = async () => {
     const res = await retrieveTasks()
