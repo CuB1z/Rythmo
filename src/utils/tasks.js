@@ -23,8 +23,7 @@ function parseTasks(response, data) {
  * @returns {{ ok: boolean, data: object }}
 */
 async function retrieveTasks() {
-    const url = API_TASKS
-    const response = await fetch(url)
+    const response = await fetch(API_TASKS)
     const parsedResponse = await response.json()
 
     let data = {
@@ -56,13 +55,8 @@ async function addTask(name, tag) {
 
     const response = await fetch(API_TASKS, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            name: newTask.name,
-            tag: newTask.tag
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: newTask.name, tag: newTask.tag })
     })
 
     const parsedResponse = await response.json()
@@ -89,16 +83,27 @@ async function addTask(name, tag) {
  * @param {string} taskId
  * @returns {{ ok: boolean, data: object }}
 */
-function removeTask(data, key, taskId) {
-    try {
-        const updatedTasks = data[key].tasks.filter(task => task.id !== taskId)
-        data[key].tasks = updatedTasks
-        const updatedData = { ...data }
-        return { ok: true, data: updatedData }
-    } catch (error) {
-        console.error(error)
+async function removeTask(taskId) {
+    const response = await fetch(API_TASKS, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: taskId })
+    })
+
+    const parsedResponse = await response.json()
+
+    if (parsedResponse.error) {
         return { ok: false, data }
     }
+
+    let data = {
+        to_do: { title: "To Do", tasks: [] },
+        ongoing: { title: "Ongoing", tasks: [] },
+        completed: { title: "Completed", tasks: [] }
+    }
+
+    data = parseTasks(parsedResponse, data)
+    return { ok: true, data: data }
 }
 
 /**

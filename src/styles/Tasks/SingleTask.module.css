@@ -28,6 +28,7 @@
     }
 
     .task_actions {
+        min-width: 65px;
         display: flex;
         gap: 20px;
         flex-direction: column;

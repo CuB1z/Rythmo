@@ -22,7 +22,7 @@ export default function SingleTask({ data, task, parentKey, onDelete, onEdit, on
     }
 
     // Handle deleting a task on click
-    const handleDelete = () => onDelete(data, parentKey, task.id)
+    const handleDelete = () => onDelete(task.id)
 
     // Handle editing a task
     const handleSubmit = (data, parentKey, id, taskName, taskTag) => {

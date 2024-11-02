@@ -51,8 +51,8 @@ export default function Tasks() {
     }
 
     // Remove a task from the selected list ====================================
-    const onDelete = (data, parentKey, id) => {
-        const response = removeTask(data, parentKey, id)
+    const onDelete = async (id) => {
+        const response = await removeTask(id)
         if (response.ok) setData(response.data)
     }
 

@@ -35,3 +35,19 @@ export const insertTask = async (name, tag) => {
 
     return await retrieveTasks()
 }
+
+/**
+ * Remove a task from Supabase
+ * 
+ * @param {string} taskId
+ * @returns {Promise<{data: any, error: any}>}
+ */
+export const removeTask = async (taskId) => {
+    const res = await supabase.from("Task").delete().eq("id", taskId)
+
+    if (res.error) {
+        return { data: null, error: res.error }
+    }
+
+    return await retrieveTasks()
+}
