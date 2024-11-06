@@ -1,6 +1,7 @@
 ---
 import Rythmo from "@components/Rythmo.astro";
 import Button from "@components/Button.astro";
+import ThemeButton from "./ThemeButton.astro";
 ---
 
 <nav>
@@ -8,6 +9,9 @@ import Button from "@components/Button.astro";
         <Rythmo scale="2rem" />
     </a>
     <ul class="nav_links">
+        <li>
+            <ThemeButton />
+        </li>
         <li>
             <Button name="Log in" link="/login" type="primary" />
         </li>
@@ -27,8 +31,9 @@ import Button from "@components/Button.astro";
         justify-content: space-between;
         align-items: center;
         color: #333;
-        background-color: #fff;
+        background-color:  var(--bg-navbar-color);
     }
+    
 
     ul {
         display: flex;
