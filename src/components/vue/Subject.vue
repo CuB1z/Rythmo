@@ -433,6 +433,8 @@ export default {
 
 .form-group input,
 .form-group textarea {
+  background: var(--subject-color);
+  color: var(--p-color);
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #ccc;
