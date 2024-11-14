@@ -348,7 +348,7 @@ export default {
   padding: 1rem;
   border: 1px solid #eaeaea;
   border-radius: 12px;
-  background: var(--note-card-color);
+  background: var(--card-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
@@ -390,7 +390,7 @@ export default {
   width: 100%;
   height: 100%;
   padding: 1rem;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--subject-modal-color);
 }
 
 .modal-content {
@@ -399,7 +399,7 @@ export default {
   max-width: 500px;
   padding: 1.25rem;
   border-radius: 8px;
-  background: var(--color);
+  background: var(--card-color);
 }
 
 .modal-close {
@@ -433,7 +433,7 @@ export default {
 
 .form-group input,
 .form-group textarea {
-  background: var(--subject-color);
+  background: var(--subject-modal-color);
   color: var(--p-color);
   width: 100%;
   padding: 0.75rem;

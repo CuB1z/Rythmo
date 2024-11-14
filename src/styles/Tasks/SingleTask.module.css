@@ -3,7 +3,7 @@
     justify-content: space-between;
     padding: 0.5rem;
     border-radius: 3px;
-    background-color: #ecf6f7;
+    background-color: var(--card-color);
     border: 1px solid #b8d8dd;
     transition: all 0.3s ease;
 
@@ -17,13 +17,13 @@
         .tag {
             font-size: 1rem;
             font-weight: 600;
-            color: #333;
+            color: var(--h-color);
         }
 
         .name {
             font-size: 1rem;
             font-weight: 400;
-            color: #666;
+            color: var(--p-color);
         }
     }
 
