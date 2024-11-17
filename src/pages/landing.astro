@@ -7,24 +7,31 @@ import { APP_DATA } from "@utils/constants"
 ---
 
 <Layout title={APP_DATA.name}>
-	<Rythmo text="Welcome to" />
-	<div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2rem;">
-		<p style="font-size: 25px;">{APP_DATA.description}</p>
-		<Button name="Start Rythmo" link="/register" type="secondary" />
+	<div style="align-items: center;">
+		<div style="height:60vh; text-align: center; display: flex; flex-direction:column; align-items: center; gap: 2rem; justify-content: center;">
+			<Rythmo text="Welcome to" />
+			<p style="font-size: 25px;">{APP_DATA.description}</p>
+			<Button name="Start Rythmo" link="/register" type="secondary" />
+		</div>
+		<Example 
+			title="Organize your subjects"
+			description="Keep all your subjects organized and keep notes of lessons, exercises or whatever you need about the subject."
+			img="../../public/img/img1.png"
+		/> 
+		<Example 
+			title="Work smarter"
+			description="Keep track of your tasks. Don't overwork or leave anything undone."
+			img="../../public/img/img2.png"
+		/> 
+		<Example 
+			title="Don't forget any deadlines"
+			description="Write down all your deadlines and exam dates on the calendar and use its weekly view to know what you have to do each day."
+			img="../../public/img/img3.png"
+		/>
+
+		<div style="height:100vh; text-align: center; display: flex; flex-direction:column;justify-content: center; align-items: center; gap: 2rem;">
+			<h1 style="font-size: 40px;">Start now and discover your full potential </h1>
+			<Button name="Sing in" link="/register" type="secondary" />
+		</div>
 	</div>
-	<Example 
-		title="Organize your subjects"
-		description="Keep all your subjects organized and keep notes of lessons, exercises or whatever you need about the subject."
-		img="../../public/img/img1.png"
-	/> 
-	<Example 
-		title="Work smarter"
-		description="Keep track of your tasks. Don't overwork or leave anything undone."
-		img="../../public/img/img2.png"
-	/> 
-	<Example 
-		title="Don't forget any deadlines"
-		description="Write down all your deadlines and exam dates on the calendar and use its weekly view to know what you have to do each day."
-		img="../../public/img/img3.png"
-	/> 
 </Layout>
