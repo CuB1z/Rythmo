@@ -43,12 +43,15 @@ export default function Calendar() {
     const dates = [];
 
     while (date.getMonth() === month) {
-      const formattedDate = date.toISOString().split("T")[0];
+      const formattedDate = new Date(
+          date.getTime() - date.getTimezoneOffset() * 60000 ).toISOString().split("T")[0];
+
       dates.push({
         date: formattedDate,
         day: date.getDate(),
         events: calendarData.filter((event) => event.date === formattedDate),
       });
+
       date.setDate(date.getDate() + 1);
     }
 
