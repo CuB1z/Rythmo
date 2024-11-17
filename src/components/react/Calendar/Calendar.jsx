@@ -1,24 +1,40 @@
-import styles from '@styles/Calendar/Calendar.module.css';
-import { useState, useEffect } from 'react';
-import { fake_data as initialData } from '@utils/fake_calendar';
-import MonthlyView from '@components/react/Calendar/MonthlyView.jsx';
-import WeeklyView from '@components/react/Calendar/WeeklyView.jsx';
-import AddEventForm from '@components/react/Calendar/AddEventForm.jsx';
-import Button from '@components/react/Button.jsx';
-
+import styles from "@styles/Calendar/Calendar.module.css";
+import { useState, useEffect } from "react";
+import { retrieveEvents, addEvent, removeEvent} from "@utils/events.js";
+import MonthlyView from "@components/react/Calendar/MonthlyView.jsx";
+import WeeklyView from "@components/react/Calendar/WeeklyView.jsx";
+import AddEventForm from "@components/react/Calendar/AddEventForm.jsx";
+import Button from "@components/react/Button.jsx";
 
 export default function Calendar() {
-  const [calendarData, setCalendarData] = useState(initialData);
+  const [calendarData, setCalendarData] = useState([]);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [newEvent, setNewEvent] = useState({
-    date: '',
-    name: '',
-  });
-  const [viewMode, setViewMode] = useState('month');
+  const [viewMode, setViewMode] = useState("month");
   const [datesForMonth, setDatesForMonth] = useState([]);
   const [datesForWeek, setDatesForWeek] = useState([]);
-  const [selectedWeekStart, setSelectedWeekStart] = useState(null);
 
+  // Cargar eventos desde la API al montar el componente
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await retrieveEvents();
+      console.log("Eventos obtenidos del backend:", response.data);
+      if (response.data) {
+        setCalendarData(response.data);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+  useEffect(() => {
+    const generatedDates = generateDatesForMonth();
+    setDatesForMonth(generatedDates);
+  }, [calendarData]);
+
+
+  // Generar fechas del mes actual
   const generateDatesForMonth = () => {
     const now = new Date();
     const year = now.getFullYear();
@@ -27,108 +43,109 @@ export default function Calendar() {
     const dates = [];
 
     while (date.getMonth() === month) {
-      const formattedDate = date.toLocaleDateString('en-CA');
+      const formattedDate = new Date(
+          date.getTime() - date.getTimezoneOffset() * 60000 ).toISOString().split("T")[0];
+
       dates.push({
         date: formattedDate,
         day: date.getDate(),
-        events: calendarData.find((d) => d.date === formattedDate)?.events || [],
+        events: calendarData.filter((event) => event.date === formattedDate),
       });
+
       date.setDate(date.getDate() + 1);
     }
 
     return dates;
   };
 
-  useEffect(() => {
-    const generatedDates = generateDatesForMonth();
-    setDatesForMonth(generatedDates);
-  }, [calendarData]);
-
   const generateDatesForWeek = (selectedDate) => {
     const date = new Date(selectedDate);
     const dayOfWeek = date.getDay();
     const startOfWeek = new Date(date);
-    startOfWeek.setDate(date.getDate() - ((dayOfWeek + 6) % 7));
+    startOfWeek.setDate(date.getDate() - dayOfWeek);
 
     const dates = [];
     for (let i = 0; i < 7; i++) {
       const current = new Date(startOfWeek);
       current.setDate(startOfWeek.getDate() + i);
-      const formattedDate = current.toLocaleDateString('en-CA');
+      const formattedDate = current.toISOString().split("T")[0];
       dates.push({
         date: formattedDate,
         day: current.getDate(),
-        events: calendarData.find((d) => d.date === formattedDate)?.events || [],
+        events: calendarData.filter((event) => event.date === formattedDate),
       });
     }
 
     return dates;
   };
 
+
+
+
+  useEffect(() => {
+    setDatesForMonth(generateDatesForMonth());
+  }, [calendarData]);
+
+  // Manejar clic en un día
   const handleDayClick = (selectedDate) => {
     const weekDates = generateDatesForWeek(selectedDate);
     setDatesForWeek(weekDates);
-    setSelectedWeekStart(selectedDate);
-    setViewMode('week');
+    setViewMode("week");
   };
 
-  const handleAddNewEvent = (newEvent) => {
-    const formattedDate = newEvent.date;
-    setCalendarData((prevData) => {
-      const updatedData = [...prevData];
-      const dateIndex = updatedData.findIndex((day) => day.date === formattedDate);
-      if (dateIndex !== -1) {
-        updatedData[dateIndex].events.push({
-          id: `${new Date().getTime()}`,
-          name: newEvent.name,
-        });
-      } else {
-        updatedData.push({
-          date: formattedDate,
-          events: [{ id: `${new Date().getTime()}`, name: newEvent.name }],
-        });
+
+
+  // Manejar add de eventos
+  const handleAddNewEvent = async (newEvent) => {
+    try {
+      const response = await addEvent(newEvent.name, newEvent.date);
+
+      if (response.error) {
+        return;
       }
-      console.log(updatedData);
-      return updatedData;
-    });
-    setIsPopupVisible(false);
-  };
-
-  const handleDeleteEvent = (date, eventId) => {
-    setCalendarData((prevData) => {
-      const updatedData = prevData.map((day) => {
-        if (day.date === date) {
-          const filteredEvents = day.events.filter((event) => event.id !== eventId);
-          return { ...day, events: filteredEvents };
-        }
-        return day;
-      });
-      return updatedData;
-    });
-
-    if (viewMode === 'week' && selectedWeekStart) {
-      const updatedWeekDates = generateDatesForWeek(selectedWeekStart);
-      setDatesForWeek(updatedWeekDates);
+      setCalendarData(response.data);
+    } catch (err) {
+      console.error("Error en handleAddNewEvent:", err);
     }
   };
 
-  const currentView = viewMode === 'month'
-      ? <MonthlyView datesForMonth={datesForMonth} handleDayClick={handleDayClick} handleDeleteEvent={handleDeleteEvent} />
-      : <WeeklyView datesForWeek={datesForWeek} handleDeleteEvent={handleDeleteEvent} />;
+
+
+  // Manejar la eliminación de eventos
+  const handleDeleteEvent = async (date, eventId) => {
+    try {
+      const response = await removeEvent(eventId);
+
+      if (response.error) {
+        return;
+      }
+
+      setCalendarData(response.data);
+    } catch (err) {
+      console.error("Error en handleDeleteEvent:", err);
+    }
+  };
+
+
+  // Renderiza vista actual
+  const currentView =
+      viewMode === "month" ? (
+          <MonthlyView
+              datesForMonth={datesForMonth}
+              handleDayClick={handleDayClick}
+              handleDeleteEvent={handleDeleteEvent}
+          />
+      ) : (
+          <WeeklyView datesForWeek={datesForWeek} handleDeleteEvent={handleDeleteEvent} />
+      );
 
   return (
       <div id="calendar-view" className={styles.calendarView}>
         <div id="calendar-buttons" className={styles.calendarButtons}>
-          <Button
-              onClick={() => setViewMode('month')}
-              customClass="primary"
-          >
+          <Button onClick={() => setViewMode("month")} customClass="primary">
             <span>Monthly View</span>
           </Button>
-          <Button
-              onClick={() => setIsPopupVisible(true)}
-              customClass="primary"
-          >
+          <Button onClick={() => setIsPopupVisible(true)} customClass="primary">
             <span>Add Event</span>
           </Button>
         </div>
