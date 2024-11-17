@@ -17,16 +17,16 @@ export default function Calendar() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await retrieveEvents();
-      if (response.ok) {
-        console.log("Eventos cargados en calendarData:", response.data);
+      console.log("Eventos obtenidos del backend:", response.data);
+      if (response.data) {
         setCalendarData(response.data);
-      } else {
-        console.error("Error al cargar eventos:", response);
       }
     };
 
     fetchData();
   }, []);
+
+
 
   useEffect(() => {
     const generatedDates = generateDatesForMonth();
@@ -79,6 +79,7 @@ export default function Calendar() {
 
 
 
+
   useEffect(() => {
     setDatesForMonth(generateDatesForMonth());
   }, [calendarData]);
@@ -86,13 +87,14 @@ export default function Calendar() {
   // Manejar clic en un día
   const handleDayClick = (selectedDate) => {
     const weekDates = generateDatesForWeek(selectedDate);
+    console.log("Semana generada al hacer clic en un día:", weekDates);
     setDatesForWeek(weekDates);
-    setSelectedWeekStart(selectedDate);
     setViewMode("week");
   };
 
 
-  // Manejar la adición de eventos
+
+  // Manejar add de eventos
   const handleAddNewEvent = async (newEvent) => {
     const response = await addEvent(newEvent.name, newEvent.date);
     if (response.ok) {

@@ -24,7 +24,7 @@ export const insertEvent = async (name, date) => {
         {
             name: name,
             date: date,
-            users_id: userId,
+            user_id: userId,
         }
     ]);
 
@@ -52,20 +52,3 @@ export const removeEvent = async (eventId) => {
     return await retrieveEvents();
 };
 
-/**
- * Update an event in Supabase
- *
- * @param {string} eventId
- * @param {string} name
- * @param {string} date
- * @returns {Promise<{data: any, error: any}>}
- */
-export const updateEvent = async (eventId, name, date) => {
-    const res = await supabase.from("Events").update({ name: name, date: date }).eq("id", eventId);
-
-    if (res.error) {
-        return { data: null, error: res.error };
-    }
-
-    return await retrieveEvents();
-};
