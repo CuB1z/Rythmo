@@ -30,7 +30,6 @@ export default function Calendar() {
 
   useEffect(() => {
     const generatedDates = generateDatesForMonth();
-    console.log("Fechas generadas para el mes con eventos:", generatedDates);
     setDatesForMonth(generatedDates);
   }, [calendarData]);
 
@@ -87,7 +86,6 @@ export default function Calendar() {
   // Manejar clic en un día
   const handleDayClick = (selectedDate) => {
     const weekDates = generateDatesForWeek(selectedDate);
-    console.log("Semana generada al hacer clic en un día:", weekDates);
     setDatesForWeek(weekDates);
     setViewMode("week");
   };
@@ -96,26 +94,37 @@ export default function Calendar() {
 
   // Manejar add de eventos
   const handleAddNewEvent = async (newEvent) => {
-    const response = await addEvent(newEvent.name, newEvent.date);
-    if (response.ok) {
+    try {
+      const response = await addEvent(newEvent.name, newEvent.date);
+
+      if (response.error) {
+        return;
+      }
       setCalendarData(response.data);
-    } else {
-      console.error("Error al agregar evento:", response);
+    } catch (err) {
+      console.error("Error en handleAddNewEvent:", err);
     }
   };
+
 
 
   // Manejar la eliminación de eventos
   const handleDeleteEvent = async (date, eventId) => {
-    const response = await removeEvent(eventId);
-    if (response.ok) {
+    try {
+      const response = await removeEvent(eventId);
+
+      if (response.error) {
+        return;
+      }
+
       setCalendarData(response.data);
-    } else {
-      console.error("Error al eliminar evento:", response);
+    } catch (err) {
+      console.error("Error en handleDeleteEvent:", err);
     }
   };
 
-  // Renderizar vista actual
+
+  // Renderiza vista actual
   const currentView =
       viewMode === "month" ? (
           <MonthlyView
