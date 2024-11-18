@@ -24,9 +24,17 @@ export const POST = async ({ request }) => {
     }))
 }
 
-export const GET = async ({ request }) => {
+export const GET = async (req) => {
+    const provider = req.url.searchParams.get('provider')
+    let data = {}
+    let error = null
+
     // Login the user with Google
-    const { data, error } = await loginUserWithGoogle()
+    if (provider === 'google') {
+        const response = await loginUserWithGoogle()
+        data = response.data
+        error = response.error
+    }
 
     // If there's an error, return the error
     if (error) {

@@ -1,0 +1,42 @@
+---
+import Layout from "@layouts/Layout.astro"
+---
+
+<Layout title="Authenticating..." />
+
+<script>
+    // Function to parse URL fragment
+    function parseFragment(fragment) {
+        const params = new URLSearchParams(fragment)
+        return {
+            accessToken: params.get("access_token"),
+            refreshToken: params.get("refresh_token"),
+        }
+    }
+
+    // Function to handle authentication response
+    async function handleAuthResponse() {
+        const fragment = window.location.hash.substring(1)
+        const tokens = parseFragment(fragment)
+
+        // Use the access token to authenticate the user and activate the subscriber
+        const response = await fetch("/auth/activate-subscriber", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${tokens.accessToken}`,
+            },
+            body: JSON.stringify({
+                accessToken: tokens.accessToken,
+                refreshToken: tokens.refreshToken,
+            }),
+        })
+
+        const result = await response.json()
+        if (result.ok) window.location.href = "/main"
+        else console.error("Failed to activate subscriber:", result.message)
+    }
+
+    // Call the function to handle the authentication response
+    handleAuthResponse()
+</script>

@@ -1,15 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
+import { SERVER_CONFIG } from "@utils/constants";
 
 export const supabase = createClient(
     import.meta.env.SUPABASE_URL,
     import.meta.env.SUPABASE_KEY,
 );
-
-supabase.auth.onAuthStateChange((event, session) => {
-    console.log('onAuthStateChange')
-    console.log(event)
-    console.log(session)
-})
 
 /**
  * Register a new user with email and password in Supabase
@@ -43,12 +38,16 @@ export const loginUser = async (email, password) => {
     return { data, error }
 }
 
+/**
+ * Login a user with Google in Supabase
+ * 
+ * @returns {Promise<{data: any, error: any}>}
+ */
 export const loginUserWithGoogle = async () => {
-    console.log('loginUserWithGoogle')
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-            redirectTo: "http://localhost:4321/api/auth",
+            redirectTo: `${SERVER_CONFIG.url}${SERVER_CONFIG.authRoute}?provider=google`,
         }
     })
       

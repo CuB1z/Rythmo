@@ -1,6 +1,7 @@
 const SERVER_CONFIG = {
     url: import.meta.env.URL || "http://localhost:4321",
     api: "/api",
+    authRoute: "/auth/check",
 }
 
 const AVAILABLE_ROUTES = {

@@ -1,9 +1,6 @@
 ---
-import AppleLogo from "@components/icons/Apple.astro";
 import GoogleLogo from "@components/icons/Google.astro";
-import GitHubLogo from "@components/icons/Github.astro";
 import FormGroup from "@components/forms/FormGroup.astro";
-import SocialButton from "@components/forms/SocialButton.astro";
 import RelatedLink from "@components/forms/RelatedLink.astro";
 import Button from "@components/Button.astro";
 ---
@@ -29,31 +26,23 @@ import Button from "@components/Button.astro";
         />
         <hr />
         <div class="social-buttons">
-            <SocialButton>
-                <GoogleLogo />
-            </SocialButton>
-            <SocialButton>
-                <AppleLogo />
-            </SocialButton>
-            <SocialButton>
-                <GitHubLogo />
-            </SocialButton>
+            <button id="google" class="social-login-button">
+                <GoogleLogo/>
+            </button>
         </div>
     </form>
-    <button id="google">Login with Google</button>
 </div>
 
 <script>
     const $googleButton = document.getElementById("google");
 
-    $googleButton.addEventListener("click", async () => {
-        const response = await fetch("http://localhost:4321/api/login")
+    $googleButton.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const baseUri = window.location.origin
+        const response = await fetch(`${baseUri}/api/login?provider=google`)
         const data = await response.json()
-        console.log(data)
 
-        if (response.ok) {
-            window.location.replace(data.url)
-        }
+        if (response.ok) window.location.replace(data.url)
     })
 </script>
 
@@ -72,21 +61,22 @@ import Button from "@components/Button.astro";
         gap: 2rem;
     }
 
-    .login-button {
-        width: 100%;
-        padding: 0.75rem;
+    .social-login-button {
+        min-width: 50px;
+        min-height: 50px;
+        background-color: white;
         border: none;
-        border-radius: 8px;
-        background: linear-gradient(270deg, #ff00ff, #ff69b4, #ff1493, #ff00ff);
-        background-size: 400% 400%;
-        color: white;
-        font-size: 1rem;
-        font-weight: bold;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        transition: all 0.3s;
 
         &:hover {
-            animation: pinkGradient 3s ease infinite;
+            filter: contrast(0.8);
         }
     }
 
