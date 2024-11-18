@@ -34,10 +34,55 @@ const { title, description } = Astro.props;
         --accent-color-light: #ff69b40f;
         --bg-image: url('/bg.png');
         --bg-overlay-color: #eee;
+        --bg-navbar-color: #ffffff;
+        --rythmo-color: #000000;
+        --subject-color: #fff;
+        --h-color: #333;
+        --p-color: #666;
+        --card-color: #fff;
+        --social-button-color: #e1e1e1;
+        --calendar-hover-event: #ecf6f7;
+        --notes-container-color: #fff;
+        
 
         /* Sizes */
         --navbar-height: 60px;
         --footer-height: 100px;
+    }
+
+    html.dark {
+        /* Colors Dark Mode*/
+        --bg-color: #353535;
+        --text-color: #e3e3e3;
+        --accent-color: #e50a77;
+        --accent-color-hover: #ff69b4;
+        --accent-color-light: #ff69b40f;
+        --bg-image: url('/bg.png');
+        --bg-overlay-color: #232323;
+        --bg-navbar-color: #191919;
+        --rythmo-color: #fff;
+        --subject-color: #191919;
+        --subject-modal-color: #19191995;
+        --h-color: #fff;
+        --p-color: #bcbcbc;
+        --card-color: #101010;
+        --social-button-color: #373636;
+        --calendar-hover-event: #2e3434;
+        --notes-container-color: #191919;
+
+
+
+
+        /* Sizes */
+        --navbar-height: 60px;
+        --footer-height: 100px;
+    }
+    nav.dark {
+        color: #ad5c5c;
+        background-color: #e14545;
+    }
+    .dark .nav-links a {
+        color: #161616;
     }
 
     * {
@@ -102,7 +147,7 @@ const { title, description } = Astro.props;
         flex-direction: column;
         gap: 10px;
         border-radius: 12px;
-        background-color: #fff;
+        background-color: var(--card-color);
     }
 
     label {
@@ -113,6 +158,8 @@ const { title, description } = Astro.props;
     }
 
     input {
+        background-color: var(--input-color);
+        color: var(--p-color);
         width: 100%;
         padding: 0.75rem;
         margin-bottom: 1rem;

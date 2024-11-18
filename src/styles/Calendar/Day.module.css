@@ -1,5 +1,5 @@
 .day {
-    background-color: white;
+    background-color: var(--card-color);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     border: 1px solid transparent;
@@ -19,7 +19,7 @@
 }
 
 .day:hover {
-    background-color: #ecf6f7;
+    background-color: var(--calendar-hover-event);
     border: 1px solid #b8d8dd;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     cursor: pointer;
@@ -42,10 +42,10 @@
 }
 
 .event {
-    background-color: #f6ffff;
+    background-color: var(--calendar-hover-event);
     border: 1px solid #b8d8dd;
     transition: all 0.3s ease;
-    color: #333;
+    color: var(--p-color);
     border-radius: 4px;
     padding: 1px 2px 1px 10px;
     width: 100%;

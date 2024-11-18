@@ -13,13 +13,13 @@
         flex-direction: column;
         gap: 20px;
         border-radius: 5px;
-        background-color: #fff;
+        background-color: var(--card-color);
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
         .h2 {
             font-size: 1.2rem;
             font-weight: 500;
-            color: #333;
+            color: var(--h-color);
             display: flex;
             justify-content: space-between;
         }
@@ -32,7 +32,7 @@
             gap: 10px;
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: #333 transparent;
+            scrollbar-color: var(--h-color) transparent;
 
             .empty {
                 height: 100%;
@@ -46,13 +46,14 @@
                 .empty_text {
                     font-size: 1.1rem;
                     font-weight: 400;
-                    color: #333;
+                    color: var(--p-color);
                     letter-spacing: 1px;
                 }
             }
         }
 
         .add_task {
+            background-color: var(--card-color);
             min-height: 40px;
             display: flex;
             justify-content: flex-end;
