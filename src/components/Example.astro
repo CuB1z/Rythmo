@@ -1,0 +1,53 @@
+---
+interface Props{
+    title: string;
+    description: string;
+    img: string;
+}
+
+const { title, description, img } = Astro.props
+
+---
+<div class="example">
+    <div class="description">
+        <h1>{title}</h1>
+        <p>{description}</p>
+    </div>
+    <div class="imgBox">
+        <img src={img} class="imgEx">
+    </div>
+</div>	
+
+<style>
+    .imgBox{
+        border-radius: 20px;
+        background: linear-gradient(270deg, #ff00ff, #ff69b4, #ff1493, #ff00ff);
+        padding: 1em;     
+        align-items: left;   
+    }
+
+    .imgEx{
+        max-width: 700px;
+        height: auto;
+    }
+
+    .example{
+        display: flex; 
+        gap: 2rem;
+        padding-top: 2rem;
+        margin-top: 10rem;
+    }
+
+    .description{
+        padding-top: 4em;
+        align-items: top;
+    }
+    
+    h1{
+        font-size: 3em
+    }
+
+    p{
+        font-size: 1.6em;
+    }
+</style>
