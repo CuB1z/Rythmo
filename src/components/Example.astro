@@ -3,12 +3,13 @@ interface Props{
     title: string;
     description: string;
     img: string;
+    reverse?: boolean;
 }
 
-const { title, description, img } = Astro.props
-
+const { title, description, img, reverse } = Astro.props
 ---
-<div class="example">
+
+<div class={`example ${reverse ? 'reverse' : ''}`}>
     <div class="description">
         <h1>{title}</h1>
         <p>{description}</p>
@@ -33,9 +34,14 @@ const { title, description, img } = Astro.props
 
     .example{
         display: flex; 
+        justify-content: space-between;
         gap: 2rem;
         padding-top: 2rem;
         margin-top: 10rem;
+
+        &.reverse{
+            flex-direction: row-reverse;
+        }
     }
 
     .description{

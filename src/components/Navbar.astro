@@ -2,6 +2,12 @@
 import Rythmo from "@components/Rythmo.astro";
 import Button from "@components/Button.astro";
 import ThemeButton from "./ThemeButton.astro";
+import LogOutButton from "./LogOutButton.astro";
+
+import { getCurrentUser } from "@lib/supabase";
+
+const { error } = await getCurrentUser();
+const loggedIn = !error;
 ---
 
 <nav>
@@ -12,12 +18,10 @@ import ThemeButton from "./ThemeButton.astro";
         <li style="display: flex; justify-content: center;">
             <ThemeButton />
         </li>
-        <li>
-            <Button name="Log in" link="/login" type="primary" />
-        </li>
-        <li>
-            <Button name="Sign up" link="/register" type="secondary" />
-        </li>
+        {loggedIn && <li><Button name="Dashboard" link="/main" type="primary" /></li>}
+        {loggedIn && <li><LogOutButton /></li>}
+        {!loggedIn && <li><Button name="Log in" link="/login" type="primary" /></li>}
+        {!loggedIn && <li><Button name="Sign up" link="/register" type="secondary" /></li>}
     </ul>
 </nav>
 

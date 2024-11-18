@@ -28,6 +28,7 @@ const { title, description } = Astro.props;
     :root {
         /* Colors */
         --bg-color: #f9f9f9;
+        --border-color: #eee;
         --text-color: #333;
         --accent-color: #e50a77;
         --accent-color-hover: #ff69b4;
@@ -51,6 +52,7 @@ const { title, description } = Astro.props;
     html.dark {
         /* Colors Dark Mode*/
         --bg-color: #1c1d21;
+        --border-color: #303237;
         --text-color: #e3e3e3;
         --accent-color: #e50a77;
         --accent-color-hover: #ff69b4;
@@ -71,10 +73,7 @@ const { title, description } = Astro.props;
         --navbar-height: 60px;
         --footer-height: 100px;
     }
-    nav.dark {
-        color: #ad5c5c;
-        background-color: #e14545;
-    }
+
     .dark .nav-links a {
         color: #161616;
     }

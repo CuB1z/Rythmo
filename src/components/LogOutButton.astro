@@ -1,0 +1,45 @@
+<button id="logout-button" type="button">Log Out</button>
+
+<style>
+    button {
+        align-items: center;
+        border-radius: 50px;
+        border: 1px solid transparent;
+        padding: 5px 10px;
+        display: inline-flex;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.25rem;
+        min-height: 38px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    button {
+        background-color: var(--accent-color);
+        color: #fff;
+    }
+    
+    button:hover {
+        background-color: var(--accent-color-hover);
+    }
+</style>
+
+<script>
+    const $button = document.querySelector("#logout-button")
+
+    if ($button) {
+        $button.addEventListener("click", async (e) => {
+            e.preventDefault()
+            console.log("Logging out...")
+            const baseUri = window.location.origin
+            const response = await fetch(`${baseUri}/api/logout`)
+            const data = await response.json()
+
+            if (response.ok) window.location.replace(baseUri)
+            else console.error("Failed to log out:", data.message)
+        })
+    }
+</script>

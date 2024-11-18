@@ -1,0 +1,152 @@
+---
+import Rythmo from "@components/Rythmo.astro"
+import Button from "@components/Button.astro"
+import Example from "@components/Example.astro"
+import Clock from "@components/icons/Clock.astro"
+import Atom from "@components/icons/Atom.astro"
+import Calendar from "@components/icons/Calendar.astro"
+---
+
+<div class="container">
+    <div class="intro-section">
+        <div class="intro-content">
+            <Rythmo text="Discover a new way of studying with" />
+            <p class="intro-text">New way to organize and keep track of your progress</p>
+            <Button name="Start Rythmo" link="/register" type="secondary" />
+        </div>
+    </div>
+    <div class="features-section">
+        <div class="feauture">
+            <h1>Organize your subjects</h1>
+            <div class="icon">
+                <Atom />
+            </div>
+        </div>
+        <div class="feauture">
+            <h1>Keeping track of your progress</h1>
+            <div class="icon">
+                <Clock />
+            </div>
+        </div>
+        <div class="feauture">
+            <h1>Don't forget any deadlines</h1>
+            <div class="icon">
+                <Calendar />
+            </div>
+        </div>
+    </div>
+    <Example 
+        title="Organize your subjects"
+        description="Keep all your subjects organized and keep notes of lessons, exercises or whatever you need about the subject."
+        img="/img/img1.png"
+    /> 
+    <Example 
+        title="Work smarter"
+        description="Keep track of your tasks. Don't overwork or leave anything undone."
+        img="/img/img2.png"
+        reverse
+    /> 
+    <Example 
+        title="Don't forget any deadlines"
+        description="Write down all your deadlines and exam dates on the calendar and use its weekly view to know what you have to do each day."
+        img="/img/img3.png"
+    />
+
+    <div class="cta-section">
+        <h1 class="cta-heading">Start now and discover your <strong class="accent-text">full potential</strong> </h1>
+        <Button name="Sign in" link="/register" type="secondary" />
+        <Button link="/main" type="primary" name="Preview Main Page" />
+        <Button link="/subjects" type="primary" name="Preview Subjects Page" />
+    </div>
+</div>
+
+<style>
+    .container {
+        width: 100%;
+        padding: 0 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .intro-section {
+        width: 100%;
+        min-height: 60vh;
+        margin-top: 4rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        justify-content: center;
+    }
+
+    .intro-content {
+        width: 100%;
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+    }
+
+    .intro-text {
+        font-size: 25px;
+        padding: 1em;
+    }
+
+    .cta-section {
+        height: 100vh;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .cta-heading {
+        font-size: 50px;
+        max-width: 40vw;
+    }
+
+    .accent-text {
+        color: var(--accent-color);
+    }
+
+    .features-section {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 5rem;
+        margin-top: 4rem;
+    }
+
+    .feauture {
+        width: 100%;
+        max-width: 300px;
+        aspect-ratio: 1/1;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(117, 117, 117, 0.1);
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .icon {
+            --size: 50px;
+            width: var(--size);
+            height: var(--size);
+        }
+    }
+</style>

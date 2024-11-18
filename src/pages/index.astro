@@ -1,41 +1,8 @@
 ---
 import Layout from "@layouts/Layout.astro"
-import Rythmo from "@components/Rythmo.astro"
-import Button from "@components/Button.astro"
+import Landing from "@components/Landing.astro"
 import { APP_DATA } from "@utils/constants"
-import Example from "@components/Example.astro"
 ---
 <Layout title={APP_DATA.name}>
-	<div style="align-items: center;">
-		<div style="height:60vh; margin-top:4rem; text-align: center; display: flex; flex-direction:column; align-items: center; gap: 2rem; justify-content: center;">
-			<div style="max-width: 50vw;">
-				<Rythmo text="Discover a new way of studying with" />
-				<p style="font-size: 25px; padding:1em;">New way to organize and keep track of your progress</p>
-				<Button name="Start Rythmo" link="/register" type="secondary" />
-		
-			</div>
-		</div>
-		<Example 
-			title="Organize your subjects"
-			description="Keep all your subjects sorganized and keep notes of lessons, exercises or whatever you need about the subject."
-			img="/img/img1.png"
-		/> 
-		<Example 
-			title="Work smarter"
-			description="Keep track of your tasks. Don't overwork or leave anything undone."
-			img="/img/img2.png"
-		/> 
-		<Example 
-			title="Don't forget any deadlines"
-			description="Write down all your deadlines and exam dates on the calendar and use its weekly view to know what you have to do each day."
-			img="/img/img3.png"
-		/>
-
-		<div style="height:100vh; text-align: center; display: flex; flex-direction:column;justify-content: center; align-items: center; gap: 2rem;">
-			<h1 style="font-size: 50px; max-width: 40vw;">Start now and discover your <strong style="color: var(--accent-color);">full potential</strong> </h1>
-			<Button name="Sing in" link="/register" type="secondary" />
-			<Button link="/main" type="primary" name="Preview Main Page" />
-			<Button link="/subjects" type="primary" name="Preview Subjects Page" />
-		</div>
-	</div>
+	<Landing />
 </Layout>
