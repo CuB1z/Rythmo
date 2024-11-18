@@ -5,6 +5,12 @@ export const supabase = createClient(
     import.meta.env.SUPABASE_KEY,
 );
 
+supabase.auth.onAuthStateChange((event, session) => {
+    console.log('onAuthStateChange')
+    console.log(event)
+    console.log(session)
+})
+
 /**
  * Register a new user with email and password in Supabase
  * 
@@ -34,6 +40,18 @@ export const loginUser = async (email, password) => {
         password: password,
     })
 
+    return { data, error }
+}
+
+export const loginUserWithGoogle = async () => {
+    console.log('loginUserWithGoogle')
+    const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+            redirectTo: "http://localhost:4321/api/auth",
+        }
+    })
+      
     return { data, error }
 }
 
