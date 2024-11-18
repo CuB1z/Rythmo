@@ -8,14 +8,17 @@ import { APP_DATA } from "@utils/constants"
 
 <Layout title={APP_DATA.name}>
 	<div style="align-items: center;">
-		<div style="height:60vh; text-align: center; display: flex; flex-direction:column; align-items: center; gap: 2rem; justify-content: center;">
-			<Rythmo text="Welcome to" />
-			<p style="font-size: 25px;">{APP_DATA.description}</p>
-			<Button name="Start Rythmo" link="/register" type="secondary" />
+		<div style="height:60vh; margin-top:4rem; text-align: center; display: flex; flex-direction:column; align-items: center; gap: 2rem; justify-content: center;">
+			<div style="max-width: 50vw;">
+				<Rythmo text="Discover a new way of studying with" />
+				<p style="font-size: 25px; padding:1em;">New way to organize and keep track of your progress</p>
+				<Button name="Start Rythmo" link="/register" type="secondary" />
+		
+			</div>
 		</div>
 		<Example 
 			title="Organize your subjects"
-			description="Keep all your subjects organized and keep notes of lessons, exercises or whatever you need about the subject."
+			description="Keep all your subjects sorganized and keep notes of lessons, exercises or whatever you need about the subject."
 			img="../../public/img/img1.png"
 		/> 
 		<Example 
@@ -30,7 +33,7 @@ import { APP_DATA } from "@utils/constants"
 		/>
 
 		<div style="height:100vh; text-align: center; display: flex; flex-direction:column;justify-content: center; align-items: center; gap: 2rem;">
-			<h1 style="font-size: 40px;">Start now and discover your full potential </h1>
+			<h1 style="font-size: 50px; max-width: 40vw;">Start now and discover your <strong style="color: var(--accent-color);">full potential</strong> </h1>
 			<Button name="Sing in" link="/register" type="secondary" />
 		</div>
 	</div>
