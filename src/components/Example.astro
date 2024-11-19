@@ -28,7 +28,7 @@ const { title, description, img, reverse } = Astro.props
     }
 
     .imgEx{
-        max-width: 700px;
+        max-width: 45rem;
         height: auto;
     }
 
@@ -55,5 +55,31 @@ const { title, description, img, reverse } = Astro.props
 
     p{
         font-size: 1.6em;
+    }
+
+    @media (max-width: 1024px) {
+
+        .imgBox{
+            align-items: center;   
+        }
+
+        .imgEx{
+            max-width: 100%;
+            height: auto;
+        }
+
+        .example{
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1rem;
+            margin-top: 2rem;
+            &.reverse{
+                flex-direction: column;
+            }
+        }
+
+        .description{
+            text-align: center;
+        }
     }
 </style>
