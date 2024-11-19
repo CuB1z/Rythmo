@@ -314,14 +314,14 @@ export default {
   margin-bottom: 1.25rem;
   padding: 1.5rem;
   border-radius: 12px;
-  background: #fff;
+  background: var(--subject-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .subjects-container h1 {
   width: 100%;
   margin-bottom: 1.25rem;
-  color: #333;
+  color: var(--h-color);
   font-size: 1.5rem;
 }
 
@@ -330,14 +330,14 @@ export default {
   margin-bottom: 1.25rem;
   padding: 1.5rem;
   border-radius: 12px;
-  background: #fff;
+  background: var(--notes-container-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .notes-container h1 {
   width: fit-content;
   margin-bottom: 1.25rem;
-  color: #333;
+  color: var(--h-color);
   font-size: 1.5rem;
   cursor: pointer;
 }
@@ -386,7 +386,7 @@ export default {
   padding: 1rem;
   border: 1px solid #eaeaea;
   border-radius: 12px;
-  background: #fff;
+  background: var(--subject-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
@@ -399,12 +399,12 @@ export default {
 
 .subject-card h3 {
   margin-bottom: 0.75rem;
-  color: #333;
+  color: var(--h-color);
   font-size: 1.25rem;
 }
 
 .subject-card p {
-  color: #666;
+  color: var(--p-color);
 }
 
 .notes-grid {
@@ -420,21 +420,21 @@ export default {
   padding: 1rem;
   border: 1px solid #eaeaea;
   border-radius: 12px;
-  background: #fff;
+  background: var(--card-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
 .note-card h3 {
   margin-bottom: 0.75rem;
-  color: #333;
+  color: var(--h-color);
   font-size: 1.25rem;
 }
 
 .note-card p {
   overflow: hidden;
   max-height: 3.75rem;
-  color: #666;
+  color: var(--p-color);
   font-size: 0.875rem;
   line-height: 1.4;
 }
@@ -448,7 +448,7 @@ export default {
 .note-card .metadata {
   padding-top: 1rem;
   border-top: 1px solid #eee;
-  color: #999;
+  color: var(--p-color);
   font-size: 0.75rem;
 }
 
@@ -462,7 +462,7 @@ export default {
   width: 100%;
   height: 100%;
   padding: 1rem;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--subject-modal-color);
 }
 
 .modal-content {
@@ -471,7 +471,7 @@ export default {
   max-width: 500px;
   padding: 1.25rem;
   border-radius: 8px;
-  background: white;
+  background: var(--card-color);
 }
 
 .modal-close {
@@ -515,7 +515,7 @@ export default {
   display: flex;
   width: fit-content;
   margin-bottom: 0.5rem;
-  color: #666;
+  color: var(--p-color);
   font-weight: 300;
   cursor: pointer;
 }
