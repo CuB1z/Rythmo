@@ -2,8 +2,8 @@ import { createClient } from "@supabase/supabase-js";
 import { SERVER_CONFIG } from "@utils/constants";
 
 export const supabase = createClient(
-    import.meta.env.SUPABASE_URL,
-    import.meta.env.SUPABASE_KEY,
+    import.meta.env.PUBLIC_SUPABASE_URL,
+    import.meta.env.PUBLIC_SUPABASE_KEY,
 );
 
 /**
@@ -18,7 +18,7 @@ export const registerUser = async (email, password) => {
         email: email,
         password: password,
     })
-    
+
     return { data, error }
 }
 
@@ -50,7 +50,7 @@ export const loginUserWithGoogle = async () => {
             redirectTo: `${SERVER_CONFIG.url}${SERVER_CONFIG.authRoute}?provider=google`,
         }
     })
-      
+
     return { data, error }
 }
 
@@ -71,7 +71,7 @@ export const logoutUser = async () => {
  * @returns {Promise<{data: any, error: any}>}
  */
 export const getCurrentUser = async () => {
-    const {data, error} = await supabase.auth.getUser()
+    const { data, error } = await supabase.auth.getUser()
 
-    return {data, error}
+    return { data, error }
 }
