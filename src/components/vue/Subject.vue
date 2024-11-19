@@ -31,7 +31,7 @@
             <p>{{ note.content }}</p>
           </div>
           <div>
-            <div class="metadata">Actualizado el {{ note.updated }}</div>
+            <div class="metadata">Actualizado el {{ note.created_at }}</div>
           </div>
         </div>
         <p v-if="selectedSubject.notes.length === 0">Prueba a crear una nota.</p>
@@ -95,7 +95,7 @@
           </div>
           <div class="modal-buttons">
             <button type="submit" class="submit-btn">{{ modalMode === 'create' ? 'Crear' : 'Guardar' }}</button>
-            <button @click="deleteNote(index)" class="delete-btn">Eliminar</button>
+            <button @click="deleteNote" class="delete-btn">Eliminar</button>
           </div>
         </form>
       </div>
@@ -104,36 +104,25 @@
 </template>
 
 <script>
+
+import {
+  retrieveSubjects,
+  addSubject,
+  editSubject,
+  removeSubject
+} from "@utils/subjects.js";
+
+import {
+  retrieveNotes,
+  addNote,
+  editNote,
+  removeNote
+} from "@utils/notes.js";
+
 export default {
   data() {
     return {
-      subjects: [
-        {
-          name: 'Procesos de software 🔥',
-          notes: [
-            {
-              title: 'Clase 1',
-              content: 'Metodologías ágiles',
-              updated: '2024-10-01 10:00:00'
-            },
-            {
-              title: 'Clase 2',
-              content: 'Scrum',
-              updated: '2024-10-02 12:30:00'
-            }
-          ]
-        },
-        {
-          name: 'Sistemas operativos',
-          notes: [
-            {
-              title: 'Clase 1',
-              content: 'Comandos de linux',
-              updated: '2024-10-01 11:00:00'
-            }
-          ]
-        }
-      ],
+      subjects: [],
       selectedSubject: null,
       showNoteModal: false,
       showSubjectModal: false,
@@ -143,13 +132,37 @@ export default {
       currentNote: {
         title: '',
         content: '',
-        updated: ''
+        created_at: ''
       },
       newSubjectName: '',
       editingIndex: null
     };
   },
   methods: {
+    async fetchNotes() {
+      const notesResponse = await retrieveNotes();
+      const subjectsResponse = await retrieveSubjects();
+
+      const notes = notesResponse.data;
+      const subjects = subjectsResponse.data;
+
+      const subjectsWithNotes = subjects.map(subject => {
+        const filteredNotes = notes.filter(note => note.subject_id === subject.id);
+
+        return {
+          ...subject,
+          notes: filteredNotes.map(note => ({
+            id: note.id,
+            subject_id: note.subject_id,
+            title: note.name,
+            content: note.content,
+            created_at: note.created_at
+          }))
+        };
+      });
+
+      this.subjects = subjectsWithNotes;
+    },
     openSubject(index) {
       this.selectedSubject = this.subjects[index];
     },
@@ -159,52 +172,108 @@ export default {
       if (mode === 'edit') {
         this.editingIndex = index;
         this.currentNote = { ...this.selectedSubject.notes[index] };
-      } else {
-        this.currentNote = { title: '', content: '', updated: '' };
+      } 
+      else {
+        this.currentNote = { title: '', content: '', created_at: '' };
+        this.editingIndex = null;
       }
     },
     closeModal() {
       this.showNoteModal = false;
-      this.currentNote = { title: '', content: '', updated: '' };
+      this.editingIndex = null;
+      this.currentNote = { title: '', content: '', created_at: '' };
     },
-    handleSubmit() {
+    async handleSubmit() {
       const now = new Date();
       const timezoneOffset = now.getTimezoneOffset() * 60000;
       const localDate = new Date(now - timezoneOffset);
       const formattedDate = localDate.toISOString().slice(0, 19).replace('T', ' ');  // Format "YYYY-MM-DD HH:MM:SS"
       this.currentNote.updated = formattedDate;
 
+      // Add note
       if (this.modalMode === 'create') {
-        this.selectedSubject.notes.push({ ...this.currentNote });
-      } else if (this.modalMode === 'edit' && this.editingIndex !== null) {
-        this.selectedSubject.notes[this.editingIndex] = { ...this.currentNote };
+        const subjectsResponse = await addNote(this.selectedSubject.id, this.currentNote.title, this.currentNote.content);
+
+        if (subjectsResponse.ok) {
+          const newNote = {
+            id: subjectsResponse.data.id,
+            subject_id: this.selectedSubject.id,
+            title: this.currentNote.title,
+            content: this.currentNote.content,
+            created_at: formattedDate,
+          };
+
+          this.selectedSubject.notes.push(newNote);
+        };
+      } 
+      // Edit note
+      else if (this.modalMode === 'edit' && this.editingIndex !== null) {
+        if (this.editingIndex === null) return;
+
+        const index = this.editingIndex;
+        const noteId = this.selectedSubject.notes[index].id;
+
+        const subjectsResponse = await editNote(noteId, this.currentNote.title, this.currentNote.content);
+
+        if (subjectsResponse.ok) {
+          this.selectedSubject.notes[this.editingIndex] = { ...this.currentNote };
+        };
       }
       this.closeModal();
     },
-    deleteNote(index) {
-      this.selectedSubject.notes.splice(index, 1);
-      this.closeModal();
+    async deleteNote() {
+      if (this.editingIndex === null) return;
+
+      const index = this.editingIndex;
+      const noteId = this.selectedSubject.notes[index].id;
+
+      console.log(this.selectedSubject.notes);
+      const subjectsResponse = await removeNote(noteId);
+      console.log(this.selectedSubject.notes);
+
+      if (subjectsResponse.ok) {
+        this.selectedSubject.notes.splice(index, 1);
+        console.log(this.selectedSubject.notes);
+        this.closeModal();
+      };
     },
-    addSubject() {
+    async addSubject() {
       if (this.newSubjectName) {
-        this.subjects.push({
-          name: this.newSubjectName,
-          notes: []
-        });
-        this.closeSubjectModal();
+        const subjectsResponse = await addSubject(this.newSubjectName);
+
+        if (subjectsResponse.ok) {
+          this.subjects.push({
+            id: subjectsResponse.data.id,
+            name: this.newSubjectName,
+            notes: []
+          });
+          this.closeSubjectModal();
+        };
       }
     },
-    editSubject() {
-      this.selectedSubject.name = this.editSubjectName;
-      this.closeEditSubjectModal();
-    },
-    deleteSubject() {
-      const subjectIndex = this.subjects.indexOf(this.selectedSubject);
-      if (subjectIndex > -1) {
-        this.subjects.splice(subjectIndex, 1);
-        this.selectedSubject = null;
+    async editSubject() {
+      if (this.editSubjectName) {
+        const subjectsResponse = await editSubject(this.selectedSubject.id, this.editSubjectName);
+
+        if (subjectsResponse.ok) {
+          this.selectedSubject.name = this.editSubjectName;
+          this.closeEditSubjectModal();
+        };
+
       }
-      this.closeEditSubjectModal();
+    },
+    async deleteSubject() {
+      const subjectsResponse = await removeSubject(this.selectedSubject.id);
+
+      if (subjectsResponse.ok) {
+        const subjectIndex = this.subjects.indexOf(this.selectedSubject);
+
+        if (subjectIndex > -1) {
+          this.subjects.splice(subjectIndex, 1);
+          this.selectedSubject = null;
+        }
+        this.closeEditSubjectModal();
+      };
     },
     openSubjectModal() {
       this.showSubjectModal = true;
@@ -220,6 +289,9 @@ export default {
     closeEditSubjectModal() {
       this.showEditSubjectModal = false;
     },
+  },
+  created() {
+    this.fetchNotes();
   },
   updated() {
     this.subjects.forEach(subject => {
@@ -242,14 +314,14 @@ export default {
   margin-bottom: 1.25rem;
   padding: 1.5rem;
   border-radius: 12px;
-  background: var(--subject-color);
+  background: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .subjects-container h1 {
   width: 100%;
   margin-bottom: 1.25rem;
-  color: var(--h-color);
+  color: #333;
   font-size: 1.5rem;
 }
 
@@ -258,14 +330,14 @@ export default {
   margin-bottom: 1.25rem;
   padding: 1.5rem;
   border-radius: 12px;
-  background: var(--notes-container-color);
+  background: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .notes-container h1 {
   width: fit-content;
   margin-bottom: 1.25rem;
-  color: var(--h-color);
+  color: #333;
   font-size: 1.5rem;
   cursor: pointer;
 }
@@ -314,7 +386,7 @@ export default {
   padding: 1rem;
   border: 1px solid #eaeaea;
   border-radius: 12px;
-  background: var(--subject-color);
+  background: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
@@ -327,12 +399,12 @@ export default {
 
 .subject-card h3 {
   margin-bottom: 0.75rem;
-  color: var(--h-color);
+  color: #333;
   font-size: 1.25rem;
 }
 
 .subject-card p {
-  color: var(--p-color);
+  color: #666;
 }
 
 .notes-grid {
@@ -348,21 +420,21 @@ export default {
   padding: 1rem;
   border: 1px solid #eaeaea;
   border-radius: 12px;
-  background: var(--card-color);
+  background: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
 .note-card h3 {
   margin-bottom: 0.75rem;
-  color: var(--h-color);
+  color: #333;
   font-size: 1.25rem;
 }
 
 .note-card p {
   overflow: hidden;
   max-height: 3.75rem;
-  color: var(--p-color);
+  color: #666;
   font-size: 0.875rem;
   line-height: 1.4;
 }
@@ -376,7 +448,7 @@ export default {
 .note-card .metadata {
   padding-top: 1rem;
   border-top: 1px solid #eee;
-  color: var(--p-color);
+  color: #999;
   font-size: 0.75rem;
 }
 
@@ -390,7 +462,7 @@ export default {
   width: 100%;
   height: 100%;
   padding: 1rem;
-  background: var(--subject-modal-color);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
@@ -399,7 +471,7 @@ export default {
   max-width: 500px;
   padding: 1.25rem;
   border-radius: 8px;
-  background: var(--card-color);
+  background: white;
 }
 
 .modal-close {
@@ -433,8 +505,6 @@ export default {
 
 .form-group input,
 .form-group textarea {
-  background: var(--subject-modal-color);
-  color: var(--p-color);
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #ccc;
@@ -445,7 +515,7 @@ export default {
   display: flex;
   width: fit-content;
   margin-bottom: 0.5rem;
-  color: var(--p-color);
+  color: #666;
   font-weight: 300;
   cursor: pointer;
 }

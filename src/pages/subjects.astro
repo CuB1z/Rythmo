@@ -1,6 +1,14 @@
 ---
-import Layout from "@layouts/Layout.astro"
-import Subject from "@components/vue/Subject.vue"
+import Layout from "@layouts/Layout.astro";
+import Subject from "@components/vue/Subject.vue";
+import { getCurrentUser } from "@lib/supabase";
+
+const { data, error } = await getCurrentUser();
+
+// If there is an error, it means the user is not logged in
+if (error) {
+    return Astro.redirect("/denied")
+}
 ---
 
 <Layout title="Subjects">
