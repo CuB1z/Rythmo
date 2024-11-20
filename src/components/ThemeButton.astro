@@ -21,11 +21,25 @@
         transform: rotate(15deg);
       }
     }
-    .sun { fill: black; }
-    .moon { fill: transparent; }
+    .sun { 
+      opacity: 1;
+      fill: black; 
+    }
+
+    .moon {
+      opacity: 0;
+      fill: transparent;
+    }
   
-    :global(.dark) .sun { fill: transparent; }
-    :global(.dark) .moon { fill: white; }
+    :global(.dark) .sun { 
+      opacity: 0;
+      fill: transparent; 
+    }
+
+    :global(.dark) .moon { 
+      opacity: 1;
+      fill: white;
+    }
   </style>
 
 <style>

@@ -63,7 +63,7 @@ const { title, description } = Astro.props;
         --subject-color: #191919;
         --subject-modal-color: #19191995;
         --h-color: #fff;
-        --p-color: #bcbcbc;
+        --p-color: #ccc;
         --card-color: #27292e;
         --social-button-color: #373636;
         --calendar-hover-event: #2e3434;
@@ -147,7 +147,7 @@ const { title, description } = Astro.props;
         display: block;
         margin-bottom: 0.5rem;
         font-weight: bold;
-        color: #666;
+        color: var(--p-color);
     }
 
     input {
@@ -167,5 +167,9 @@ const { title, description } = Astro.props;
         height: 1px;
         background: #eee;
         margin-bottom: 1rem;
+    }
+
+    svg path {
+        stroke: var(--text-color);
     }
 </style>

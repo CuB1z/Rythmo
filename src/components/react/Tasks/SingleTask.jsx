@@ -5,6 +5,8 @@ import { useState } from "react"
 import Modal from "@components/react/Modal.jsx"
 import TaskForm from "./TaskForm"
 import Button from "@components/react/Button.jsx"
+import Trash from "@components/react/icons/Trash.jsx"
+import Edit from "@components/react/icons/Edit.jsx"
 
 export default function SingleTask({ data, task, parentKey, onDelete, onEdit, onMove }) {
     const [showModal, setShowModal] = useState(false)
@@ -46,13 +48,13 @@ export default function SingleTask({ data, task, parentKey, onDelete, onEdit, on
                             onClick={handleEdit}
                             customClass="tertiary"
                         >
-                            <img src="/edit.svg" alt="Edit Icon" />
+                            <Edit />
                         </Button>
                         <Button
                             onClick={handleDelete}
                             customClass="tertiary"
                         >
-                            <img src="/trash.svg" alt="Delete Icon" />
+                            <Trash />
                         </Button>
                     </div>
                     <div className={styles.inline}>

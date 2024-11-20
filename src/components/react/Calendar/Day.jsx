@@ -1,5 +1,6 @@
 import styles from "@styles/Calendar/Day.module.css";
 import Button from "@components/react/Button.jsx";
+import Trash from "@components/react/icons/Trash.jsx";
 
 export default function Day({ day, handleDayClick, handleDeleteEvent, isWeekView }) {
     // Add a click handler to the day div if handleDayClick is passed
@@ -22,11 +23,7 @@ export default function Day({ day, handleDayClick, handleDeleteEvent, isWeekView
                                 handleDeleteEvent(day.date, event.id);
                             }}
                         >
-                            <img
-                                src="/trash.svg"
-                                alt="Delete Icon"
-                                className={styles.deleteIcon}
-                            />
+                            <Trash />
                         </Button>
                     </div>
                 ))}
