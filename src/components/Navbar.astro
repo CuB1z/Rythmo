@@ -4,10 +4,16 @@ import Button from "@components/Button.astro";
 import ThemeButton from "./ThemeButton.astro";
 import LogOutButton from "./LogOutButton.astro";
 
+import { generateAvatarUrl } from "@utils/avatars";
 import { getCurrentUser } from "@lib/supabase";
 
-const { error } = await getCurrentUser();
+const { data, error } = await getCurrentUser();
 const loggedIn = !error;
+
+console.log(data);
+
+const avatar_url = data.user?.user_metadata.avatar_url || generateAvatarUrl(data.user?.email);
+const name = data.user?.user_metadata.name;
 ---
 
 <nav>
@@ -18,7 +24,7 @@ const loggedIn = !error;
         <li style="display: flex; justify-content: center;">
             <ThemeButton />
         </li>
-        {loggedIn && <li><Button name="Dashboard" link="/main" type="primary" /></li>}
+        {loggedIn && <li><a href="/profile"><img src={avatar_url} alt={`${name} profile picture`} /></a></li>}
         {loggedIn && <li><LogOutButton /></li>}
         {!loggedIn && <li><Button name="Log in" link="/login" type="primary" /></li>}
         {!loggedIn && <li><Button name="Sign up" link="/register" type="secondary" /></li>}
@@ -44,5 +50,16 @@ const loggedIn = !error;
         list-style-type: none;
         gap: 15px;
         padding-right: 20px;
+    }
+
+    img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        transition: all 0.3s;
+
+        &:hover {
+            box-shadow: 0 0 8px var(--accent-color-hover);
+        }
     }
 </style>

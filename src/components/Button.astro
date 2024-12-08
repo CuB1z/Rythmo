@@ -1,6 +1,6 @@
 ---
 interface Props {
-    name: string;
+    name?: string;
     link?: string;
     type?: "primary" | "secondary" | "special";
     buttonType?: "button" | "submit" | "reset";
@@ -12,11 +12,11 @@ const { name, link, type, buttonType } = Astro.props;
 {
     link ? (
         <a href={link} class={`btn ${type}`}>
-            {name}
+            { name ? name : <slot /> }
         </a>
     ) : (
         <button type={buttonType || "button"} class={`btn ${type}`}>
-            {name}
+            { name ? name : <slot /> }
         </button>
     )
 }

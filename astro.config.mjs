@@ -6,5 +6,8 @@ import vue from '@astrojs/vue';
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), vue()],
-  output: "server"
+  output: "server",
+  image: {
+    remotePatterns: [{ protocol: 'https' }]
+  }
 });

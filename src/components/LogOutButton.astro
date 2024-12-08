@@ -1,14 +1,22 @@
-<button id="logout-button" type="button">Log Out</button>
+---
+import LogOut from "@components/icons/LogOut.astro"
+---
+
+<button id="logout-button" type="button">
+    <LogOut />
+</button>
 
 <style>
     button {
-        align-items: center;
+        --size: 40px;
+        width: var(--size);
+        height: var(--size);
         border-radius: 50px;
         border: 1px solid transparent;
         padding: 5px 10px;
-        display: inline-flex;
+        display: flex;
+        align-items: center;
         justify-content: center;
-        flex-shrink: 0;
         font-size: 1rem;
         font-weight: 500;
         line-height: 1.25rem;
