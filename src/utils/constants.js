@@ -1,5 +1,7 @@
+const uri = import.meta.env.DEV ? "http://localhost:4321" : "https://rythmost.vercel.app"
+
 const SERVER_CONFIG = {
-    url: import.meta.env.PUBLIC_HOST || "http://localhost:4321",
+    url: uri,
     api: "/api",
     authRoute: "/auth/check",
 }
