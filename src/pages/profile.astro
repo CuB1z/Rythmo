@@ -1,9 +1,217 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import Navbar from "@components/Navbar.astro";
+import Button from "@components/Button.astro";
+
+import { getCurrentUser } from "@lib/supabase";
+import { generateAvatarUrl } from "@utils/avatars";
+
+import { retrieveTasks } from "@utils/tasks";
+import { retrieveEvents } from "@utils/events";
+import { retrieveNotes } from "@utils/notes";
+import { retrieveSubjects } from "@utils/subjects";
+
+// Get the current user
+const { data, error } = await getCurrentUser();
+
+// If there is an error, it means the user is not logged in
+if (error) {
+    return Astro.redirect("/denied")
+}
+
+// Retrieve metadata
+const username = data.user.user_metadata.name;
+const email = data.user.email;
+const avatar = data.user.user_metadata.avatar_url || generateAvatarUrl(email);
+
+// Retrieve user data
+const tasks = await retrieveTasks();
+const events = await retrieveEvents();
+const subjects = await retrieveSubjects();
+
+console.log(tasks);
 ---
 
 <Layout title="Profile">
-  <Navbar />
-  <h1>Profile</h1>
+  <div class="content">
+    <div class="user-data">
+      <h1>Hello, {username || email.split("@")[0]}</h1>
+      <img src={avatar} alt={`Avatar for ${username || email}`} />
+      <Button link="/main" name="Go to Dashboard" type="primary" />
+    </div>
+    <div class="user-info">
+      <h2>Info</h2>
+      <div class="info-content">
+        <div class="info-section">
+          <h3>Username</h3>
+          <p>{username || email}</p>
+        </div>
+        <div class="info-section">
+          <h3>Email</h3>
+          <p>{email}</p>
+        </div>
+      </div>
+    </div>
+    <div class="user-stats">
+      <h2>Stats</h2>
+      <div class="stats-section">
+        <h3>Tasks</h3>
+        <div class="stats-content">
+          {
+            Object.keys(tasks.data).map((key) => (
+              <div class="stat">
+                <p>{tasks.data[key].title}</p>
+                <p>{tasks.data[key].tasks.length}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="stats-section">
+        <h3>Events</h3>
+        <div class="stats-content">
+          <div class="stat single">
+            <p>{events.data.length}</p>
+        </div>
+      </div>
+      <div class="stats-section">
+        <h3>Subjects</h3>
+        <div class="stats-content">
+          <div class="stat single">
+            <p>{subjects.data.length}</p>
+          </div>
+        </div>
+      </div>
+  </div>
 </Layout>
+
+<style>
+  .content {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 50vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 64px;
+    padding: 32px 48px;
+    border-radius: 8px;
+    border: 1.5px solid var(--accent-color);
+    box-shadow: 0 0 20px var(--accent-color);
+  }
+
+  .user-data {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .user-info {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .info-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+
+  .info-section {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .user-stats {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .stats-section {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  .stats-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 48px;
+  }
+
+  .stat {
+    min-width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+
+    p {
+      font-weight: 700;
+      color: var(--text-color);
+    }
+
+    &.single p {
+      font-size: 2rem;
+    }
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+  }
+
+  h2 {
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent-color);
+    margin-bottom: 32px;
+  }
+
+  h3 {
+    width: 100%;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-color);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  img {
+    --size: 100px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+  }
+</style>

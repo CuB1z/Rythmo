@@ -2,6 +2,8 @@
 import Layout from "@layouts/Layout.astro";
 import Tasks from "@components/react/Tasks/Tasks";
 import Calendar from "@components/react/Calendar/Calendar";
+import Button from "@components/Button.astro";
+
 import { APP_DATA } from "@utils/constants";
 import { getCurrentUser } from "@lib/supabase";
 
@@ -14,6 +16,19 @@ if (error) {
 ---
 
 <Layout title={APP_DATA.name}>
+    <div class="btn-container">
+        <Button link="/subjects" name="Go to my Notes" type="primary" />
+    </div>
     <Tasks client:load />
     <Calendar client:load />
 </Layout>
+
+<style>
+    .btn-container {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 1rem;
+        margin-top: 1rem;
+    }
+</style>
