@@ -26,6 +26,7 @@ const APP_DATA = {
     name: "Rythmo",
     description: "Rythmo is a platform that helps you to organize your study time and keep track of your progress.",
     author: "Bit Forge",
+    repository: "https://github.com/CuB1z/Rythmo"
 }
 
 export {
