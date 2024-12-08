@@ -1,5 +1,5 @@
 const SERVER_CONFIG = {
-    url: import.meta.env.URL || "http://localhost:4321",
+    url: import.meta.env.PUBLIC_HOST || "http://localhost:4321",
     api: "/api",
     authRoute: "/auth/check",
 }
