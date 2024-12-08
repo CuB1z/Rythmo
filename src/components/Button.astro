@@ -2,7 +2,7 @@
 interface Props {
     name?: string;
     link?: string;
-    type?: "primary" | "secondary" | "special";
+    type?: "primary" | "secondary" | "special" | "squared";
     buttonType?: "button" | "submit" | "reset";
 }
 
@@ -34,6 +34,7 @@ const { name, link, type, buttonType } = Astro.props;
         font-weight: 500;
         line-height: 1.25rem;
         min-height: 38px;
+        cursor: pointer;
         transition: all 0.2s ease;
     }
 
@@ -54,6 +55,21 @@ const { name, link, type, buttonType } = Astro.props;
 
     .btn.secondary:hover {
         background-color: var(--accent-color-light);
+    }
+
+    .btn.squared {
+        --size: 40px;
+        width: var(--size);
+        height: var(--size);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #33333354;
+        border-radius: 8px;
+    }
+
+    .btn.squared:hover {
+        background-color: #333333bf;
     }
 
     .btn.special {
