@@ -13,6 +13,7 @@ import Calendar from "@components/icons/Calendar.astro"
             <Rythmo text="Discover a new way of studying with" />
             <p class="intro-text">New way to organize and keep track of your progress</p>
             <Button name="Start Rythmo" link="/register" type="secondary" />
+            <Button name="Access Dashboard" link="/main" type="primary" />
         </div>
     </div>
     <div class="features-section">
@@ -54,9 +55,6 @@ import Calendar from "@components/icons/Calendar.astro"
 
     <div class="cta-section">
         <h1 class="cta-heading">Start now and discover your <strong class="accent-text">full potential</strong> </h1>
-        <Button name="Sign in" link="/register" type="secondary" />
-        <Button link="/main" type="primary" name="Preview Main Page" />
-        <Button link="/subjects" type="primary" name="Preview Subjects Page" />
     </div>
 </div>
 
@@ -97,7 +95,7 @@ import Calendar from "@components/icons/Calendar.astro"
     }
 
     .cta-section {
-        height: 100vh;
+        padding: 200px 0;
         text-align: center;
         display: flex;
         flex-direction: column;
