@@ -47,7 +47,7 @@ export const loginUserWithGoogle = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-            redirectTo: `${"https://rythmost.vercel.app/"}${SERVER_CONFIG.authRoute}?provider=google`,
+            redirectTo: `${SERVER_CONFIG.url}${SERVER_CONFIG.authRoute}?provider=google`,
         }
     })
 
