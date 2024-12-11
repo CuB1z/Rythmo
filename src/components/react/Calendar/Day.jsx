@@ -16,6 +16,7 @@ export default function Day({ day, handleDayClick, handleDeleteEvent, isWeekView
                 {day.events.map(event => (
                     <div key={event.id} className={styles.event}>
                         <span>{event.name}</span>
+                        <span>{event.subject}</span>
                         <Button
                             customClass="tertiary"
                             onClick={(e) => {

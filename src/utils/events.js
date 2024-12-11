@@ -8,10 +8,18 @@ export const retrieveEvents = async () => {
     return await response.json();
 };
 
-export const addEvent = async (name, date) => {
+export const addFilter = async (subject) => {
+    const response = await fetch(API_EVENTS, {
+        method: "GET",
+        body: JSON.stringify({ subject }),
+    });
+    return await response.json();
+};
+
+export const addEvent = async (name, date, subject) => {
     const response = await fetch(API_EVENTS, {
         method: "POST",
-        body: JSON.stringify({ name, date }),
+        body: JSON.stringify({ name, date, subject }),
     });
     return await response.json();
 };

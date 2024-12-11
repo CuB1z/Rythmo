@@ -10,8 +10,8 @@ export const GET = async () => {
 };
 
 export const POST = async ({ request }) => {
-    const { name, date } = await request.json();
-    const res = await insertEvent(name, date);
+    const { name, date, subject } = await request.json();
+    const res = await insertEvent(name, date, subject);
     return new Response(JSON.stringify(res));
 };
 

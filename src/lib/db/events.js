@@ -1,4 +1,5 @@
 import { supabase } from "@lib/supabase";
+import Subjects from "src/pages/subjects.astro";
 
 /**
  * Retrieve events from Supabase
@@ -15,15 +16,17 @@ export const retrieveEvents = async () => {
  *
  * @param {string} name
  * @param {string} date
+ * @param {string} subject
  * @returns {Promise<{data: any, error: any}>}
  */
-export const insertEvent = async (name, date) => {
+export const insertEvent = async (name, date, subject) => {
     const userId = (await supabase.auth.getUser()).data.user.id; //  ID del usuario autenticado
 
     const res = await supabase.from("Events").insert([
         {
             name: name,
             date: date,
+            subject: subject,
             user_id: userId,
         }
     ]);

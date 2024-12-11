@@ -3,12 +3,12 @@ import Modal from '@components/react/Modal.jsx';
 import Button from '@components/react/Button.jsx';
 
 const AddEventForm = ({ show, setShow, onAddEvent }) => {
-    const [newEvent, setNewEvent] = useState({ date: '', name: '' });
+    const [newEvent, setNewEvent] = useState({ date: '', name: '', subject: '' });
 
     const handleSubmit = (e) => {
         e.preventDefault();
         onAddEvent(newEvent);
-        setNewEvent({ date: '', name: '' });
+        setNewEvent({ date: '', name: '' , subject: ''});
         setShow(false);
     };
 
@@ -30,6 +30,15 @@ const AddEventForm = ({ show, setShow, onAddEvent }) => {
                         type="text"
                         value={newEvent.name}
                         onChange={(e) => setNewEvent({ ...newEvent, name: e.target.value })}
+                        required
+                    />
+                </label>
+                <label>
+                    <span>Subject</span>
+                    <input
+                        type="text"
+                        value={newEvent.subject}
+                        onChange={(e) => setNewEvent({ ...newEvent, subject: e.target.value })}
                         required
                     />
                 </label>
