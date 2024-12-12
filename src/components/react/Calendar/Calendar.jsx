@@ -134,6 +134,10 @@ export default function Calendar() {
     setFilterSubject(subject); // Añadido
   };
 
+  const handleDeleteFilter = () => {
+    setFilterSubject(null);
+  }
+
   const currentView =
     viewMode === "month" ? (
       <MonthlyView
@@ -156,6 +160,9 @@ export default function Calendar() {
         </Button>
         <Button onClick={() => setIsFilterPopupVisible(true)} customClass="primary">
           <span>Add Filter</span>
+        </Button>
+        <Button onClick={handleDeleteFilter} customClass="primary">
+          <span>Remove Filter</span>
         </Button>
         <Button onClick={() => setIsPopupVisible(true)} customClass="primary">
           <span>Add Event</span>
