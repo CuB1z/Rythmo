@@ -1,69 +1,59 @@
 .timerContainer {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Espaciado entre el temporizador y los botones */
     padding: 10px 20px;
     border-radius: 50px;
-    background-color: #ff007a;
-    color: white;
-    font-size: 1.2rem;
+    background-color: var(--accent-color);
+    color: #fff;
     font-weight: bold;
+    font-size: 1.2rem;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.timerContainer:hover {
-    background-color: #e60070;
 }
 
 .timer {
-    margin: 0;
-    padding: 0;
-    font-size: 1.5rem;
+    font-size: 2rem;
+    margin-bottom: 10px;
 }
 
 .buttons {
     display: flex;
     gap: 10px;
-    margin-top: 10px;
     justify-content: center;
 }
 
 .button {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-    border: none;
-    border-radius: 5px;
-    background-color: white;
-    color: #ff007a;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.button:hover {
-    background-color: #ffe4ee;
-}
-
-.button:active {
-    background-color: #ffd6e2;
-}
-.pomodoro_container {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-}
-
-.pomodoro_container .btn {
-    min-width: 150px;
-    margin-right: 10px;
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    border-radius: 50px;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    display: inline-flex;
     justify-content: center;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    min-height: 38px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
+.button.primary {
+    background-color: var(--accent-color);
+    color: #fff;
+}
 
-.pomodoro_timer {
-    text-align: center;
+.button.primary:hover {
+    background-color: var(--accent-color-hover);
+}
+
+.button.secondary {
+    border: 1px solid var(--accent-color);
+    background-color: transparent;
+    color: var(--accent-color);
+}
+
+.button.secondary:hover {
+    background-color: var(--accent-color-light);
 }
