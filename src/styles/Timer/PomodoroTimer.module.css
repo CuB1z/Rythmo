@@ -1,0 +1,69 @@
+.timerContainer {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background-color: #ff007a;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.timerContainer:hover {
+    background-color: #e60070;
+}
+
+.timer {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    color: #ff007a;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #ffe4ee;
+}
+
+.button:active {
+    background-color: #ffd6e2;
+}
+.pomodoro_container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.pomodoro_container .btn {
+    min-width: 150px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.pomodoro_timer {
+    text-align: center;
+}

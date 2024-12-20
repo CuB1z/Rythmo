@@ -5,6 +5,8 @@ import SingleTask from "@components/react/Tasks/SingleTask.jsx"
 import Modal from "@components/react/Modal.jsx"
 import TaskForm from "@components/react/Tasks/TaskForm.jsx"
 import Button from "@components/react/Button.jsx"
+import PomodoroTimer from "@components/react/Timer/PomodoroTimer.jsx"
+
 
 import {
     retrieveTasks,
@@ -72,6 +74,10 @@ export default function Tasks() {
 
     return (
         <>
+            <div className={styles.pomodoro_container}>
+                <PomodoroTimer/>
+            </div>
+
             <div className={styles.task_container}>
                 {
                     Object.keys(data).map((key) => (
@@ -96,10 +102,12 @@ export default function Tasks() {
                                         )
                                     ) : (
                                         <li className={styles.empty}>
-                                            <p className={styles.empty_text}>No tasks {data[key].title.toLowerCase()}</p>
+                                            <p className={styles.empty_text}>No
+                                                tasks {data[key].title.toLowerCase()}</p>
                                             {
                                                 key === "to_do" &&
-                                                <p className={styles.empty_text}>Click on the button below to add a new task</p>
+                                                <p className={styles.empty_text}>Click on the button below to add a new
+                                                    task</p>
                                             }
                                         </li>
                                     )
@@ -123,7 +131,7 @@ export default function Tasks() {
                     setShow={setShowModal}
                 >
                     <TaskForm
-                        task={{ name: "", tag: "" }}
+                        task={{name: "", tag: ""}}
                         onSubmit={handleSubmit}
                         onCancel={() => setShowModal(false)}
                     />
