@@ -643,7 +643,7 @@ export default {
 .star-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-top: 0.5rem;
 }
 
 .star-shape {
