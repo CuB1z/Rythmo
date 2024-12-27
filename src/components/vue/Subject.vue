@@ -5,9 +5,15 @@
       <h1>Asignaturas</h1>
       <button class="quick-note-btn" @click="openSubjectModal">+ Nueva asignatura</button>
       <div class="subjects-grid">
-        <div class="subject-card" v-for="(subject, index) in subjects" :key="index">
+        <div class="subject-card" v-for="(subject, index) in subjects" :key="index"
+          :class="['subject-card', subject.color || 'default-color']">
           <div class="subject-content" @click="openSubject(index)">
-            <h3>{{ subject.name }}</h3>
+            <div class="subject-title-container">
+              <h3>{{ subject.name }}</h3>
+              <div @click.stop="toggleSubjectFavorite(index)" class="star-container">
+                <div :class="['star-shape', subject.isFavorite ? 'star-filled' : 'star-empty']"></div>
+              </div>
+            </div>
             <p>{{ subject.notes.length }} notas</p>
           </div>
         </div>
@@ -25,9 +31,15 @@
       <h1 @click="openEditSubjectModal">{{ selectedSubject.name }}</h1>
       <button class="quick-note-btn" @click="openModal('create')">+ Nueva nota rápida</button>
       <div class="notes-grid">
-        <div class="note-card" v-for="(note, index) in selectedSubject.notes" :key="index">
+        <div class="note-card" v-for="(note, index) in selectedSubject.notes" :key="index"
+          :class="['note-card', note.color || 'default-color']">
           <div @click="openModal('edit', index)" class="note-content">
-            <h3>{{ note.title }}</h3>
+            <div class="note-title-container">
+              <h3>{{ note.title }}</h3>
+              <div @click.stop="toggleNoteFavorite(selectedSubjectIndex, index)" class="star-container">
+                <div :class="['star-shape', note.isFavorite ? 'star-filled' : 'star-empty']"></div>
+              </div>
+            </div>
             <p>{{ note.content }}</p>
           </div>
           <div>
@@ -50,6 +62,15 @@
             <label for="subjectName">Nombre de la asignatura:</label>
             <input type="text" id="subjectName" v-model="newSubjectName" required>
           </div>
+          <div class="color-picker">
+            <p class="color-picker-text">Selecciona un color:</p>
+            <div class="color-options">
+              <div v-for="color in availableColors" :key="color"
+                :class="['color-square', `${color}`, { selected: newSubjectColor === color }]"
+                @click="selectColor(color, true)">
+              </div>
+            </div>
+          </div>
           <div class="modal-buttons">
             <button type="submit" class="submit-btn">Crear</button>
           </div>
@@ -68,6 +89,15 @@
           <div class="form-group">
             <label for="editSubjectName">Nuevo nombre de la asignatura:</label>
             <input type="text" id="editSubjectName" v-model="editSubjectName" required>
+          </div>
+          <div class="color-picker">
+            <p class="color-picker-text">Selecciona un color:</p>
+            <div class="color-options">
+              <div v-for="color in availableColors" :key="color"
+                :class="['color-square', `${color}`, { selected: newSubjectColor === color }]"
+                @click="selectColor(color, true)">
+              </div>
+            </div>
           </div>
           <div class="modal-buttons">
             <button type="submit" class="submit-btn">Guardar</button>
@@ -92,6 +122,15 @@
           <div class="form-group">
             <label for="content">Contenido:</label>
             <textarea id="content" v-model="currentNote.content" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="noteColor">Selecciona un color:</label>
+            <div class="color-options">
+              <div v-for="color in availableColors" :key="color"
+                :class="['color-square', `${color}`, { selected: currentNote.color === color }]"
+                @click="selectColor(color)">
+              </div>
+            </div>
           </div>
           <div class="modal-buttons">
             <button type="submit" class="submit-btn">{{ modalMode === 'create' ? 'Crear' : 'Guardar' }}</button>
@@ -124,6 +163,7 @@ export default {
     return {
       subjects: [],
       selectedSubject: null,
+      selectedSubjectIndex: null,
       showNoteModal: false,
       showSubjectModal: false,
       showEditSubjectModal: false,
@@ -135,6 +175,8 @@ export default {
         created_at: ''
       },
       newSubjectName: '',
+      newSubjectColor: 'default-color',
+      availableColors: ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'gray', 'default-color'],
       editingIndex: null
     };
   },
@@ -151,30 +193,54 @@ export default {
 
         return {
           ...subject,
+          isFavorite: false,
           notes: filteredNotes.map(note => ({
             id: note.id,
             subject_id: note.subject_id,
             title: note.name,
             content: note.content,
-            created_at: note.created_at
+            created_at: note.created_at,
+            isFavorite: false
           }))
         };
       });
 
-      this.subjects = subjectsWithNotes;
+      this.subjects = subjectsWithNotes.sort((a, b) => b.isFavorite - a.isFavorite);
+    },
+    toggleSubjectFavorite(index) {
+      this.subjects[index].isFavorite = !this.subjects[index].isFavorite;
+      this.subjects.sort((a, b) => b.isFavorite - a.isFavorite);
+    },
+    toggleNoteFavorite(subjectIndex, noteIndex) {
+      const note = this.subjects[subjectIndex].notes[noteIndex];
+      if (!note) return;
+
+      note.isFavorite = !note.isFavorite;
+
+      this.subjects[subjectIndex].notes.sort(
+        (a, b) => b.isFavorite - a.isFavorite || Date.parse(b.updated) - Date.parse(a.updated)
+      );
+    },
+    selectColor(color, forSubject = false) {
+      if (forSubject) {
+        this.newSubjectColor = color;
+      } else {
+        this.currentNote.color = color;
+      }
     },
     openSubject(index) {
       this.selectedSubject = this.subjects[index];
+      this.selectedSubjectIndex = index;
     },
     openModal(mode, index = null) {
       this.modalMode = mode;
       this.showNoteModal = true;
+
       if (mode === 'edit') {
         this.editingIndex = index;
         this.currentNote = { ...this.selectedSubject.notes[index] };
-      } 
-      else {
-        this.currentNote = { title: '', content: '', created_at: '' };
+      } else {
+        this.currentNote = { title: '', content: '', color: 'default-color', created_at: '' };
         this.editingIndex = null;
       }
     },
@@ -200,12 +266,13 @@ export default {
             subject_id: this.selectedSubject.id,
             title: this.currentNote.title,
             content: this.currentNote.content,
+            color: this.currentNote.color,
             created_at: formattedDate,
           };
 
           this.selectedSubject.notes.push(newNote);
         };
-      } 
+      }
       // Edit note
       else if (this.modalMode === 'edit' && this.editingIndex !== null) {
         if (this.editingIndex === null) return;
@@ -216,9 +283,14 @@ export default {
         const subjectsResponse = await editNote(noteId, this.currentNote.title, this.currentNote.content);
 
         if (subjectsResponse.ok) {
-          this.selectedSubject.notes[this.editingIndex] = { ...this.currentNote };
+          this.selectedSubject.notes[this.editingIndex] = {
+            ...this.currentNote,
+            color: this.currentNote.color || 'default-color',
+            created_at: this.selectedSubject.notes[this.editingIndex].created_at, // Preserva el timestamp original
+          };
         };
       }
+
       this.closeModal();
     },
     async deleteNote() {
@@ -245,6 +317,7 @@ export default {
           this.subjects.push({
             id: subjectsResponse.data.id,
             name: this.newSubjectName,
+            color: this.newSubjectColor,
             notes: []
           });
           this.closeSubjectModal();
@@ -257,9 +330,9 @@ export default {
 
         if (subjectsResponse.ok) {
           this.selectedSubject.name = this.editSubjectName;
+          this.selectedSubject.color = this.newSubjectColor;
           this.closeEditSubjectModal();
         };
-
       }
     },
     async deleteSubject() {
@@ -294,8 +367,9 @@ export default {
     this.fetchNotes();
   },
   updated() {
+    this.subjects.sort((a, b) => b.isFavorite - a.isFavorite);
     this.subjects.forEach(subject => {
-      subject.notes.sort((a, b) => Date.parse(b.updated) - Date.parse(a.updated));
+      subject.notes.sort((a, b) => b.isFavorite - a.isFavorite || Date.parse(b.updated) - Date.parse(a.updated));
     });
   }
 };
@@ -462,7 +536,7 @@ export default {
   width: 100%;
   height: 100%;
   padding: 1rem;
-  background: var(--subject-modal-color);
+  background: #5c5c5c59;
 }
 
 .modal-content {
@@ -556,12 +630,152 @@ export default {
   transition: 300ms;
 }
 
+.subject-title-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.note-title-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.star-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.star-shape {
+  width: 1.5rem;
+  height: 1.5rem;
+  clip-path: polygon(50% 0%,
+      61% 35%,
+      98% 35%,
+      68% 57%,
+      79% 91%,
+      50% 70%,
+      21% 91%,
+      32% 57%,
+      2% 35%,
+      39% 35%);
+}
+
+.star-filled {
+  background-color: #f2bb03;
+}
+
+.star-empty {
+  background-color: lightgray;
+}
+
+.color-picker {
+  margin-top: 1rem;
+}
+
+.color-picker-text {
+  margin-bottom: 0.5rem;
+}
+
+.color-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.color-square {
+  height: 2rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.color-square.selected {
+  border-color: black;
+}
+
+/* Clases para colores */
+.red {
+  background-color: #f8cecc;
+}
+
+.blue {
+  background-color: #dae8fc;
+}
+
+.green {
+  background-color: #d5e8d4;
+}
+
+.yellow {
+  background-color: #fff2cc;
+}
+
+.purple {
+  background-color: #e1d5e7;
+}
+
+.orange {
+  background-color: #ffe6cc;
+}
+
+.gray {
+  background-color: #f5f5f5;
+}
+
+.default-color {
+  background-color: white;
+}
+
 @media (min-width: 576px) {
   .subjects-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .notes-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark .red {
+  background-color: #b85450;
+}
+
+html.dark .blue {
+  background-color: #6c8ebf;
+}
+
+html.dark .green {
+  background-color: #82b366;
+}
+
+html.dark .yellow {
+  background-color: #d6b656;
+}
+
+html.dark .purple {
+  background-color: #9673a6;
+}
+
+html.dark .orange {
+  background-color: #d79b00;
+}
+
+html.dark .gray {
+  background-color: #666666;
+}
+
+html.dark .default-color {
+  background-color: var(--bg-color);
+}
+
+html.dark .color-square.selected {
+  border-color: white;
 }
 </style>
