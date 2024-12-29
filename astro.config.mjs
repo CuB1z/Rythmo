@@ -9,6 +9,8 @@ export default defineConfig({
   output: "server",
   adapter: vercelServerless(),
   image: {
-    remotePatterns: [{ protocol: 'https' }]
+    remotePatterns: [
+      { protocol: 'https', hostname: 'lh3.googleusercontent.com' }
+    ]
   }
 });

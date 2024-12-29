@@ -19,7 +19,6 @@ export default function Calendar() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await retrieveEvents();
-      console.log("Eventos obtenidos del backend:", response.data);
       if (response.data) {
         setCalendarData(response.data);
       }
